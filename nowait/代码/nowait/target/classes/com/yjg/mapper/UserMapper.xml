@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yjg.mapper.UserMapper">
+	<!-- 查询 -->
+	<select id="selectUser" parameterType="user" resultType="user">
+		SELECT * FROM tb_user WHERE userName = #{userName}
+	</select>
+	
+	<select id="selectAdmin" parameterType="admin" resultType="admin">
+		SELECT * FROM tb_admin WHERE adminName = #{adminName}
+	</select>
+	
+	<!-- 插入 -->
+	<insert id="insert" parameterType="user">
+		INSERT INTO tb_user(userName,pwd,trueName,card,phone,createDate) 
+		VALUES(#{userName},#{pwd},#{trueName},#{card},#{phone},now())
+	</insert>
+	
+</mapper>
