@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.yjg.mapper.WxUserMapper">
+    <resultMap type="com.yjg.entity.WxUser" id="wxUserMap">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="openid" property="openid" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="createDate" property="createDate" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    
+    <!-- 查询所有微信用户-->
+    <select id="selectAllWxUser" resultMap="wxUserMap">
+        SELECT id, openid, phone, createDate FROM tb_wxuser
+    </select>
+    
+    <!-- 根据id查询微信用户 -->
+    <select id="selectWxUserById" resultMap="wxUserMap" parameterType="java.lang.Integer">
+        SELECT id, openid, phone, createDate FROM tb_wxuser WHERE id = #{id}
+    </select>
+    
+    
+    <!-- 根据openid和phone查询微信用户个数 -->
+    <select id="selectWxUserByOpenidOrPhone" resultType="int">
+        SELECT COUNT(*) FROM tb_wxuser 
+        WHERE openid = #{openid}
+        OR phone = #{phone}
+    </select>
+    
+    <!-- 根据微信用户id删除微信用户 -->
+    <delete id="deleteWxUserById" parameterType="java.lang.Integer">
+       DELETE FROM tb_wxuser WHERE id = #{id}
+    </delete>
+    
+    <!-- 根据多个id删除多个对应的微信用户 -->
+    <delete id="deleteWxUserByIds" parameterType="Integer[]">
+       DELETE FROM tb_wxuser 
+       <where>
+            id
+            <foreach collection="id" item="id2" open="in(" close=")" separator=",">
+                #{id2}
+            </foreach>
+       </where>
+    </delete>
+    
+    <insert id="insertWxUser">
+        INSERT INTO tb_wxuser (openid,phone,createDate) VALUES (#{openid},#{phone},NOW())
+    </insert>
+    
+</mapper>

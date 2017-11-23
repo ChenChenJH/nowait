@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.yjg.mapper.FeedbackMapper">
+    <resultMap type="com.yjg.entity.Feedback" id="feedbackMap">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+		<result column="wxuserId" property="wxuserId" jdbcType="INTEGER"/>
+		<result column="info" property="info" jdbcType="VARCHAR"/>
+		<result column="createDate" property="createDate" jdbcType="TIMESTAMP"/>
+		<result column="isRead" property="isRead" jdbcType="CHAR"/>
+	</resultMap>
+	
+	<!-- 查询所有用户反馈 -->
+	<select id="selectAllFeedback" resultMap="feedbackMap">
+		SELECT f.id, f.info, f.createDate, f.isRead, 
+		w.openid "wxUser.openid"
+		FROM tb_feedback f
+		INNER JOIN tb_wxuser w
+		ON f.wxuserId = w.id
+	</select>
+	
+	<!-- 查询所有的未读用户反馈 -->
+    <select id="selectAllFeedbackByIsRead" resultMap="feedbackMap">
+        SELECT f.id, f.info, f.createDate, f.isRead, 
+        w.openid "wxUser.openid"
+        FROM tb_feedback f
+        INNER JOIN tb_wxuser w
+        ON f.wxuserId = w.id
+        WHERE f.isRead = '未讀'
+    </select>
+	
+	<!-- 根据微信id查询用户反馈 -->
+	<select id="selectFeedbackById" resultMap="feedbackMap" parameterType="java.lang.Integer">
+		SELECT f.id, f.info, f.createDate, f.isRead, 
+		w.openid "wxUser.openid"
+        FROM tb_feedback f
+        INNER JOIN tb_wxuser w
+        ON f.wxuserId = w.id
+        WHERE f.id = #{id}
+	</select>
+	
+	<!-- 根据id修改用户反馈读写状态 -->
+    <update id="updateFeedbackIsReadById">
+        UPDATE tb_feedback SET isRead=#{isRead} WHERE id = #{id}
+    </update>
+    
+    <!-- 把全部未读的用户反馈标为已读 -->
+    <update id="updateFeedbackIsRead" >
+        UPDATE tb_feedback SET isRead='已讀' WHERE isRead ='未讀'
+    </update>
+	
+	<!-- 根据id把用户反馈删除 -->
+	<delete id="deleteFeedbackById" parameterType="java.lang.Integer">
+	   DELETE FROM tb_feedback WHERE id = #{id}
+	</delete>
+    
+    <!-- 根据多个id删除多个对应的用户反馈 -->
+    <delete id="deleteFeedbackByIds" parameterType="Integer[]">
+       DELETE FROM tb_feedback 
+       <where>
+            id
+            <foreach collection="id" item="i" open="in(" close=")" separator=",">
+                #{i}
+            </foreach>
+       </where>
+    </delete>
+	
+</mapper>
