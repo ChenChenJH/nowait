@@ -19,7 +19,8 @@
 <!-- 新 Bootstrap 核心 CSS 文件 -->
 <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
 <!-- bookstrap表单验证 css -->
-<link href="css/bootstrapValidator.min.css" rel="stylesheet" type="text/css">
+<link href="css/bootstrapValidator.min.css" rel="stylesheet"
+	type="text/css">
 <!-- bookstarp验证表单 -->
 <script src="js/bootstrapValidator.min.js"></script>
 
@@ -56,6 +57,11 @@
 }
 </style>
 <body>
+	<script type="text/javascript">
+		if (top.location != self.location) {
+			top.location = self.location;
+		}
+	</script>
 	<div>
 		<h1 class="title">排隊不用等後台管理</h1>
 		<img src="images/head.png" width="100%" height="200">
@@ -99,8 +105,7 @@
 			<div class="form-group text-center">
 				<div class="col-sm-1"></div>
 				<input type="button" class="btn btn-success col-sm-9" id="login"
-					 value="登錄" /> <a class="btn text-center"
-					href="register.jsp">註冊</a>
+					value="登錄" /> <a class="btn text-center" href="register.jsp">註冊</a>
 			</div>
 		</form>
 	</div>
@@ -110,7 +115,7 @@
 		</ul>
 	</div>
 	<!-- 登录js -->
- <script src="js/login.js"  type="text/javascript"></script> 
+	<script src="js/login.js" type="text/javascript"></script>
 </body>
 
 </html>

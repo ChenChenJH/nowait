@@ -15,7 +15,7 @@
     <title>頁腳</title>
 
     <!-- 新 Bootstrap 核心 CSS 文件 -->
-    <link href="../css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
 
 </head>
 <body>
