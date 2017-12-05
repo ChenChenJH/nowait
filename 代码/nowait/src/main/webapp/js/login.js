@@ -48,7 +48,7 @@
                pwd: {
                     validators: {
                         notEmpty: {
-                            message: '密码不能为空'
+                            message: '密碼不能为空'
                         }
                     }
                 }

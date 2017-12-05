@@ -19,13 +19,12 @@
 </head>
 
 <body>
-<ol class="breadcrumb">
-    管理員：
-    <li><a href="index/mainFrame.jsp">首頁</a></li>
-    <li class="active">商家管理</li>
-    <li class="active">操作成功</li>
-</ol>
-<h2 class="text-center">操作成功</h2>
-<div class="text-center"><a href="user/list" class="btn btn-success">點擊返回列表</a></div>
+<h2 class="text-center">注册成功</h2>
+<div class="text-center"><h1>正在前往登录页面....</h1></div>
+<script>
+	window.onload = function(){
+		setTimeout("location.href='login.jsp'",2000);
+	}
+</script>
 </body>
 </html>

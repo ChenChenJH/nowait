@@ -70,7 +70,7 @@
 				class="list-group-item" style="border-Radius: 0px;"> 微信用戶管理 </a>
 		</c:if>
 		<c:if test="${sessionScope.type =='管理員' }">
-			<a href="mainFrame/userManager/user_list.jsp" target="mainFrame"
+			<a href="user/list" target="mainFrame"
 				class="list-group-item">商家管理</a>
 		</c:if>
 		<a href="mainFrame/restaurantManager/restaurantList.jsp"

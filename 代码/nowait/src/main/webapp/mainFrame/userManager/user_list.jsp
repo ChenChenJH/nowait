@@ -6,6 +6,7 @@
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -19,7 +20,6 @@
     <script src="js/jquery.js"></script>
 
 </head>
-
 <body>
 <ol class="breadcrumb">
     管理員：
@@ -27,7 +27,7 @@
     <li class="active">商家管理</li>
     <li class="active">商家列表</li>
 </ol>
-<form action="mainFrame/userManager/success.jsp" target="mainFrame" >
+<form action="user/deleteMore" target="mainFrame" method="post">
     <table class="table table-hover">
         <thead>
         <tr>
@@ -38,34 +38,24 @@
             <th class="text-center">單行操作</th>
         </tr>
         </thead>
+        <c:forEach items="${userList}" var="user">
         <tr>
-            <td><input type="checkbox" name="checkBox"></td>
-            <td class="text-center">chen</td>
-            <td class="text-center">陈</td>
-            <td class="text-center">440883199606012315</td>
+        	<td><input type="checkbox" name="checkBox" value="${user.id}"></td>
+            <td class="text-center">${user.userName}</td>
+            <td class="text-center">${user.trueName}</td>
+            <td class="text-center">${user.card}</td>
             <td class="text-center">
                 <div class="btn-group">
-                    <a class="btn btn-default" href="mainFrame/userManager/user_detail.jsp" target="mainFrame" >詳情</a>
-                    <a class="btn btn-default" href="mainFrame/userManager/success.jsp" target="mainFrame" onclick="onedelete()">刪除</a>
+                    <a class="btn btn-default" href="user/Detail?id=${user.id}" target="mainFrame" >詳情</a>
+                    <a class="btn btn-default" href="user/delete?id=${user.id}" target="mainFrame" onclick="return confirm('确定要删除吗？')">刪除</a>
                 </div>
             </td>
         </tr>
-        <tr>
-            <td><input type="checkbox" name="checkBox"></td>
-            <td class="text-center">wang</td>
-            <td class="text-center">王小锤</td>
-            <td class="text-center">440883199606011524</td>
-            <td class="text-center">
-                <div class="btn-group">
-                    <a class="btn btn-default" href="mainFrame/userManager/user_detail.jsp" target="mainFrame" >詳情</a>
-                    <a class="btn btn-default" href="mainFrame/userManager/success.jsp" target="mainFrame" onclick="onedelete()">刪除</a>
-                </div>
-            </td>
-        </tr>
+        </c:forEach>
         <tfoot>
         <tr>
             <th colspan="5" class="text-center">
-                <input type="submit" class="btn btn-danger" value="批量删除" onclick="checkdelete()" >
+                <input type="submit" class="btn btn-danger" value="批量删除" onclick="return checkdelete()" >
                 <a class="btn btn-info" href="mainFrame/userManager/user_insert.jsp" target="mainFrame">添加商家</a>
             </th>
         </tr>
@@ -122,13 +112,10 @@
         initTableCheckbox();
         /* 按钮删除操作 */
     });
-    function onedelete(){
-        if (!confirm("確定要刪除？")) {  window.event.returnValue = false;  }
-    }
 
     function checkdelete(){
         if (!confirm("確認刪除所有被選項？")) {
-            window.event.returnValue = false;
+            return false;
         }
         else{
             var checkflag = false; //false:未选中复选框  true:选中至少一个
@@ -141,7 +128,7 @@
             }
             if(!checkflag){
                 alert("未選中用戶,請選擇後再執行批量刪除");
-                window.event.returnValue = false;
+                return false;
             }
         }
     }

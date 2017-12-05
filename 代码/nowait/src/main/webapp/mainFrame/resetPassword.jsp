@@ -55,7 +55,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="rePwd" class="col-sm-2 control-label">重複新密碼</label>
+                    <label for="rePwd" class="col-sm-2 control-label">确认新密碼</label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control" id="rePwd" placeholder="请再次輸入新密碼">
                     </div>

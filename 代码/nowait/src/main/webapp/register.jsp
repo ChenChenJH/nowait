@@ -17,38 +17,104 @@
     <!-- 新 Bootstrap 核心 CSS 文件 -->
     <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-     <script src="js/jquery.min.js"></script>
-
+<script src="https://code.jquery.com/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrapValidator.min.js"></script>
+<link href="css/bootstrapValidator.min.css" rel="stylesheet" />
 </head>
-<script>
-    function register(){
-        var username = document.getElementById("username").value;
-        var password = document.getElementById("password").value;
-        var repassword = document.getElementById("repassword").value;
-        var name = document.getElementById("name").value;
-        var idCard = document.getElementById("idCard").value;
-        var phone = document.getElementById("phone").value;
-        if(username == '' || username ==null){
-            alert('用戶名不能為空');
-            window.event.returnValue = false;
-        }else if(password == '' || password ==null){
-            alert('密碼不能為空');
-            window.event.returnValue = false;
-        }else if(repassword != password){
-            alert('兩次輸入的密碼不一致，請重新輸入');
-            window.event.returnValue = false;
-        }else if(name == '' || name ==null){
-            alert('姓名不能為空');
-            window.event.returnValue = false;
-        }else if(idCard == '' || idCard ==null){
-            alert('身份證不能為空');
-            window.event.returnValue = false;
-        }else if(phone == '' || phone ==null){
-            alert('手機號碼不能為空');
-            window.event.returnValue = false;
+<script type="text/javascript">
+	$(function () {
+    $('#myform').bootstrapValidator({message: 'This value is not valid',
+       feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+        	userName: {
+                validators: {
+                    notEmpty: {
+                        message: '登录名不能为空'
+                    },
+                    callback: {
+                    	message: '登录名已存在',
+                    	callback: function (value, validator) {
+                    		var res = true;
+                    		$.ajax({
+                    			  url: 'user/isExist',
+                    			  type: 'get',
+                    			  data: {userName:value},
+                    			  async: false,
+                    			  success: function (data) {
+									if (data == 'true') {
+										res = false;
+									}
+                    			  }
+                    			});
+                    		return res;
+                    }
+                   }
+                }
+            },
+        	pwd: {
+                 validators: {
+                     notEmpty: {
+                         message: '密码不能为空'
+                     },
+                     stringLength: {
+                         min: 6,
+                         max: 18,
+                         message: '密码长度必须在6到18位之间'
+                     }
+                 }
+            },
+            repassword: {
+                validators: {
+                    notEmpty: {
+                        message: '确认密码不能为空'
+                    },
+                    identical: {
+                    	 field: 'pwd',
+                    	 message: '确认密码与密码不相同'
+                 	}
+                }
+           	},
+        	trueName: {
+                message: '真实姓名验证失败',
+                validators: {
+                    notEmpty: {
+                        message: '真实姓名不能为空'
+                    }
+                }
+            },
+            card: {
+                validators: {
+                    notEmpty: {
+                        message: '身份证不能为空'
+                    },
+                    regexp: {
+                        regexp: /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/,
+                        message: '身份证格式错误'
+                    }
+                }
+            },
+            phone: {
+                validators: {
+                    notEmpty: {
+                        message: '手机号不能为空'
+                    },
+                    regexp: {
+                        regexp: /^1[34578]\d{9}$/,
+                        message: '手机号格式错误'
+                    }
+                }
+            },
+            
         }
-    }
+    });
+});
 </script>
+
 <style>
     .title {
         color: azure;      /*字体颜色*/
@@ -80,41 +146,41 @@
 <body>
 <div><h1 class="title">排隊不用等後台管理</h1><img src="images/head.png" width="100%" height="200"></div>
 <div class="center-in-center">
-    <form class="form-horizontal" role="form" action="#" method="POST">
+    <form class="form-horizontal" role="form" id="myform" action="user/register" method="POST">
         <div class="form-group">
-            <label for="username" class="col-sm-3 control-label">用戶名</label>
+            <label for="username" class="col-sm-3 control-label">登录名</label>
             <div class="col-sm-9">
-                <input type="text" class="form-control" id="username" placeholder="請輸入用戶名">
+                <input type="text" class="form-control" id="username" name="userName" placeholder="請輸入登录名">
             </div>
         </div>
         <div class="form-group">
             <label for="password" class="col-sm-3 control-label">密碼</label>
             <div class="col-sm-9">
-                <input type="password" class="form-control" id="password" placeholder="請輸入密碼">
+                <input type="password" class="form-control" id="password" name="pwd" placeholder="請輸入密碼">
             </div>
         </div>
         <div class="form-group">
             <label for="repassword" class="col-sm-3 control-label">確認密碼</label>
             <div class="col-sm-9">
-                <input type="password" class="form-control" id="repassword" placeholder="請再次輸入密碼">
+                <input type="password" class="form-control" id="repassword" name="repassword" placeholder="請再次輸入密碼">
             </div>
         </div>
         <div class="form-group">
             <label for="name" class="col-sm-3 control-label">姓名</label>
             <div class="col-sm-9">
-                <input type="text" class="form-control" id="name" placeholder="請輸入真實姓名">
+                <input type="text" class="form-control" id="name" name="trueName" placeholder="請輸入真實姓名">
             </div>
         </div>
         <div class="form-group">
             <label for="idCard" class="col-sm-3 control-label">身份證</label>
             <div class="col-sm-9">
-                <input type="text" class="form-control" id="idCard" placeholder="請輸入身份證號碼">
+                <input type="text" class="form-control" id="idCard" name="card" placeholder="請輸入身份證號碼">
             </div>
         </div>
         <div class="form-group">
             <label for="phone" class="col-sm-3 control-label">手機號碼</label>
             <div class="col-sm-9">
-                <input type="text" class="form-control" id="phone" placeholder="請輸入手機號碼">
+                <input type="text" class="form-control" id="phone" name="phone" placeholder="請輸入手機號碼">
             </div>
         </div>
         <div class="form-group">
@@ -127,7 +193,7 @@
 
         <div class="col-sm-3"></div>
         <div class="form-group text-center">
-            <button type="submit" class="btn btn-success col-sm-8" onclick="register()">註冊</button>
+            <button type="submit" class="btn btn-success col-sm-8">註冊</button>
         </div>
     </form>
 </div>

@@ -2,6 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.yjg.mapper.UserMapper">
+	<!-- 构建用户返回体 -->
+	<resultMap type="User" id="resultUserMap">
+		<result property="id" column="id" />
+		<result property="userName" column="userName" />
+		<result property="pwd" column="pwd" />
+		<result property="trueName" column="trueName" />
+		<result property="card" column="card" />
+	</resultMap>
+	
+	<!-- 查询所有用户 -->
+	<select id="selectUserList" resultMap="resultUserMap">
+		SELECT * FROM tb_user 
+	</select>
+	<!-- 查询某个用户 -->
+	<select id="selectDetailUser" parameterType="Integer" resultType="user">
+		SELECT * FROM tb_user where id = #{id}
+	</select>
+	
 	<!-- 查询 -->
 	<select id="selectUser" parameterType="user" resultType="user">
 		SELECT * FROM tb_user WHERE userName = #{userName}
@@ -11,10 +29,37 @@
 		SELECT * FROM tb_admin WHERE adminName = #{adminName}
 	</select>
 	
+	<!-- 查询是否存在用户 -->
+	<select id="selectExist" parameterType="String" resultType="Integer">
+		SELECT count(*) from tb_user where userName = #{userName}
+	</select>
+	
 	<!-- 插入 -->
 	<insert id="insert" parameterType="user">
 		INSERT INTO tb_user(userName,pwd,trueName,card,phone,createDate) 
 		VALUES(#{userName},#{pwd},#{trueName},#{card},#{phone},now())
 	</insert>
+	
+	<!-- 更新 -->
+	<update id="update" parameterType="user">
+		update tb_user set pwd = #{pwd},trueName = #{trueName},card = #{card},phone = #{phone} where id=#{id}
+	</update>
+	
+	
+	
+	<!-- 删除 -->
+	<delete id="delete" parameterType="Integer">
+		delete from tb_user where id = #{id}
+	</delete>
+	
+	<!-- 查询管理员密码 -->
+	<select id="selectPwd" parameterType="java.util.Map" resultType="Integer">
+		select count(*) from tb_admin where adminName=#{adminName} and pwd = #{pwd}
+	</select>
+	<!-- 更新管理员密码 -->
+	<update id="updatePwd" parameterType="java.util.Map">
+		update tb_admin set pwd = #{pwd} where adminName=#{adminName}
+	</update>
+	
 	
 </mapper>
