@@ -18,12 +18,7 @@
 </head>
 
 <body>
-<h2 class="text-center btn-success">注册成功</h2>
-<div class="text-center "><h1>正在前往登录页面....</h1></div>
-<script>
-	 window.onload = function(){
-		setTimeout("location.href='login.jsp'",4000);
-	} 
-</script>
+<h2 class="text-center">修改成功</h2>
+<div class="text-center"><a href="index/mainFrame.jsp" class="btn btn-success">點擊返回主页</a></div>
 </body>
 </html>

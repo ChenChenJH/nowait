@@ -20,7 +20,7 @@ public interface UserService {
 	public int selectExist(String userName) throws Exception;
 
 	//查看所有商家列表
-	public List selectUserList()throws Exception;
+	public List<User> selectUserList()throws Exception;
 
 	//查询某个用户
 	public User selectDetailUser(Integer id) throws Exception;
@@ -31,10 +31,10 @@ public interface UserService {
 	//删除某个用户
 	public void deleteUser(Integer id)throws Exception;
 
-	//查询某个管理员密码
-	public int selectPwd(String adminName, String pwd)throws Exception;
-
 	//修改管理员密码
-	public void updatePwd(String adminName, String newPwd)throws Exception;
+	public void updateAdminPwd(String adminName, String pwd)throws Exception;
+	
+	//修改用户密码
+	public void updateUserPwd(String userName, String pwd)throws Exception;
 
 }

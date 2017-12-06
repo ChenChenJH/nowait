@@ -13,17 +13,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>註冊頁面</title>
-
-    <!-- 新 Bootstrap 核心 CSS 文件 -->
-    <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
-    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-<script src="https://code.jquery.com/jquery.js"></script>
+    
+<!-- jQuery文件 -->
+<script src="js/jquery.min.js"></script>
+<!-- 新 Bootstrap 核心 CSS 文件 -->
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css">
 <script src="js/bootstrap.min.js"></script>
 <script src="js/bootstrapValidator.min.js"></script>
 <link href="css/bootstrapValidator.min.css" rel="stylesheet" />
 </head>
 <script type="text/javascript">
-	$(function () {
+
+function check() {
     $('#myform').bootstrapValidator({message: 'This value is not valid',
        feedbackIcons: {
             valid: 'glyphicon glyphicon-ok',
@@ -34,51 +35,61 @@
         	userName: {
                 validators: {
                     notEmpty: {
-                        message: '登录名不能为空'
+                        message: '登錄名不能为空'
                     },
-                    callback: {
-                    	message: '登录名已存在',
-                    	callback: function (value, validator) {
+                    stringLength: {
+                        min: 4,
+                         max: 20,
+                         message: '登錄名长度必须在4到20位之间'
+                        },
+                      regexp: {
+                          regexp: /^[a-zA-Z0-9_]+$/,
+                          message: '登錄名只能包含大小写字母、数字和下划线'
+                      },
+                    callback:{
+                    	message: '登錄名已存在',
+                    	callback: function (value,validator) {
                     		var res = true;
                     		$.ajax({
                     			  url: 'user/isExist',
                     			  type: 'get',
                     			  data: {userName:value},
                     			  async: false,
-                    			  success: function (data) {
+                    			  success: function (data){
 									if (data == 'true') {
 										res = false;
 									}
                     			  }
                     			});
                     		return res;
-                    }
-                   }
-                }
-            },
+                    		}
+                  		 }
+                	}
+          	  },
         	pwd: {
                  validators: {
                      notEmpty: {
-                         message: '密码不能为空'
+                         message: '密碼不能为空'
                      },
                      stringLength: {
                          min: 6,
                          max: 18,
-                         message: '密码长度必须在6到18位之间'
-                     }
+                         message: '密碼长度必须在6到18位之间'
+                     },
+                    
                  }
             },
-            repassword: {
-                validators: {
-                    notEmpty: {
-                        message: '确认密码不能为空'
+            repassword :{
+            	validators: {
+            		notEmpty: {
+                        message: '確認密碼不能为空'
                     },
                     identical: {
-                    	 field: 'pwd',
-                    	 message: '确认密码与密码不相同'
-                 	}
+                        field: 'pwd',
+                        message: '两次输入的密碼不一致'
+                    }
                 }
-           	},
+            },
         	trueName: {
                 message: '真实姓名验证失败',
                 validators: {
@@ -108,11 +119,20 @@
                         message: '手机号格式错误'
                     }
                 }
-            },
-            
+            }
         }
     });
-});
+};
+	//重新开启校验
+	 function checkAgain(){
+		        $("#myform").data('bootstrapValidator').destroy();
+		        $('#myform').data('bootstrapValidator', null);
+		        check();
+	 }; 
+	
+	$(function () {
+		check();
+	});
 </script>
 
 <style>
@@ -148,15 +168,17 @@
 <div class="center-in-center">
     <form class="form-horizontal" role="form" id="myform" action="user/register" method="POST">
         <div class="form-group">
-            <label for="username" class="col-sm-3 control-label">登录名</label>
+            <label for="username" class="col-sm-3 control-label">登錄名</label>
             <div class="col-sm-9">
-                <input type="text" class="form-control" id="username" name="userName" placeholder="請輸入登录名">
+                <input type="text" class="form-control" id="username" name="userName"
+                 placeholder="請輸入登錄名" >
             </div>
         </div>
         <div class="form-group">
             <label for="password" class="col-sm-3 control-label">密碼</label>
             <div class="col-sm-9">
-                <input type="password" class="form-control" id="password" name="pwd" placeholder="請輸入密碼">
+                <input type="password" class="form-control" id="password" name="pwd"
+                 placeholder="請輸入密碼" onblur="checkAgain()">
             </div>
         </div>
         <div class="form-group">

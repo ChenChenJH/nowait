@@ -45,19 +45,18 @@
 		update tb_user set pwd = #{pwd},trueName = #{trueName},card = #{card},phone = #{phone} where id=#{id}
 	</update>
 	
-	
-	
 	<!-- 删除 -->
 	<delete id="delete" parameterType="Integer">
 		delete from tb_user where id = #{id}
 	</delete>
+
+	<!-- 更新用户密码 -->
+	<update id="updateUserPwd" parameterType="java.util.Map">
+		update tb_user set pwd = #{pwd} where userName=#{userName}
+	</update>
 	
-	<!-- 查询管理员密码 -->
-	<select id="selectPwd" parameterType="java.util.Map" resultType="Integer">
-		select count(*) from tb_admin where adminName=#{adminName} and pwd = #{pwd}
-	</select>
 	<!-- 更新管理员密码 -->
-	<update id="updatePwd" parameterType="java.util.Map">
+	<update id="updateAdminPwd" parameterType="java.util.Map">
 		update tb_admin set pwd = #{pwd} where adminName=#{adminName}
 	</update>
 	

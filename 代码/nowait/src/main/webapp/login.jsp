@@ -72,7 +72,7 @@
 			<div class="input-group form-group col-sm-10">
 				<span class="input-group-addon "><img src="images/user.png"
 					width="12px"></span> <input type="text" class="form-control"
-					name="name" id="username" placeholder="請輸入用戶名" />
+					name="name" id="username" placeholder="請輸入用戶名"  style="ime-mode:disabled"/>
 			</div>
 			<div class="col-sm-1"></div>
 
@@ -114,8 +114,7 @@
 			<li>Copyright ©2017排隊不用等</li>
 		</ul>
 	</div>
-	<!-- 登录js -->
+	<!-- 登錄js -->
 	<script src="js/login.js" type="text/javascript"></script>
 </body>
-
 </html>

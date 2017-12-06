@@ -45,6 +45,10 @@ public class UserController {
 			UsernamePasswordToken token = new UsernamePasswordToken(
 					loginDTO.getName(), loginDTO.getPwd());
 			
+			/*if(loginDTO.getIsReadme().equals("true")){
+				// 记住我
+				token.setRememberMe(true);
+			}*/
 			try {
 				// 执行登录.
 				currentUser.login(token);
@@ -56,15 +60,10 @@ public class UserController {
 			// 开启session会话，保存登录信息
 			session.setAttribute("name", loginDTO.getName());
 			session.setAttribute("type", loginDTO.getType());
-			
+			session.setAttribute("pwd", loginDTO.getPwd());
 			if (loginDTO.getType().equals("商家")) {
 				// 保存该用户的userId
 				session.setAttribute("userId", (int)shiroSession.getAttribute("userId")); 
-			}
-			
-			if(loginDTO.getIsReadme() != null && loginDTO.getIsReadme() != ""){
-				// 记住我
-				//token.setRememberMe(true);
 			}
 		}
 		return result;
@@ -76,9 +75,7 @@ public class UserController {
 	@ResponseBody
 	public String isExistUser(String userName) throws Exception{
 		String ret = "false";
-		System.out.println(userName);
 		int exist = this.userService.selectExist(userName);
-		System.out.println(exist);
 		if(exist==1){
 			ret = "true";
 		}
@@ -103,7 +100,6 @@ public class UserController {
 	//查询全部
 	@RequestMapping(value="/list")
 	public String listUser(Model model) throws Exception{
-		//System.out.println("来到这里没有？");
 		List<User> userList = this.userService.selectUserList();
 		model.addAttribute("userList",userList);
 		return "/mainFrame/userManager/user_list.jsp";
@@ -112,7 +108,6 @@ public class UserController {
 	//查询某个用户
 	@RequestMapping(value="/Detail")
 	public String detailUser(Model model,Integer id) throws Exception{
-		//System.out.println("来到这里没有？");
 		User user = this.userService.selectDetailUser(id);
 		model.addAttribute("user",user);
 		return "/mainFrame/userManager/user_detail.jsp";
@@ -121,10 +116,6 @@ public class UserController {
 	//修改某个用户
 	@RequestMapping(value="/update")
 	public String updateUser(User user) throws Exception{
-		//System.out.println("来到这里没有？");
-		//System.out.println(user.getTrueName());
-		//System.out.println(user.getPhone());
-		//System.out.println(user.getCard());
 		this.userService.updateUser(user);
 		return "/mainFrame/userManager/success.jsp";
 	}
@@ -132,9 +123,8 @@ public class UserController {
 	//删除某个用户
 	@RequestMapping(value="/delete")
 	public String updateUser(Integer id) throws Exception{
-		//System.out.println("来到这里没有？");
 		this.userService.deleteUser(id);
-		return "/mainFrame/userManager/success.jsp";
+		return "/user/list";
 	}
 	
 	//删除多个用户
@@ -144,28 +134,22 @@ public class UserController {
 			Integer newId = Integer.parseInt(id);
 			this.userService.deleteUser(newId);
 		}
-		return "/mainFrame/userManager/success.jsp";
+		return "/user/list";
 	}
 	
-	//查询原密码是否正确
-	@RequestMapping(value="/selectPwd")
-	@ResponseBody
-	public String selectPwd(String adminName,String pwd)throws Exception{
-		String ret = "false";
-		pwd = MD5Encryption.encrypt(pwd);
-		int res = this.userService.selectPwd(adminName,pwd);
-		if(res==1){
-			ret = "true";
-		}
-		return ret;
-	}
-	
-	//修改自己的密码
+	//修改密码
 	@RequestMapping(value="/updatePwd")
-	public String updatePwd(String adminName,String newPwd)throws Exception{
-		newPwd = MD5Encryption.encrypt(newPwd);
-		this.userService.updatePwd(adminName,newPwd);
-		return "/mainFrame/userManager/success.jsp";
+	public String updatePwd(HttpSession session,String newPwd)throws Exception{
+		String name = (String) session.getAttribute("name");
+		String type = (String) session.getAttribute("type");
+		String pwd = MD5Encryption.encrypt(newPwd);
+		if(type.equals("商家")){
+			userService.updateUserPwd(name, pwd);
+		}else{
+			userService.updateAdminPwd(name, pwd);
+		}
+		session.setAttribute("pwd", newPwd);
+		return "/mainFrame/success.jsp";
 	}
 	
 }

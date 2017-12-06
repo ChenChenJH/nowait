@@ -46,8 +46,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	//查询所有用户列表
-	public List selectUserList() throws Exception {
-		// TODO Auto-generated method stub
+	public List<User> selectUserList() throws Exception {
 		return userMapper.selectUserList();
 	}
 
@@ -69,20 +68,21 @@ public class UserServiceImpl implements UserService {
 	}
 
 	//修改管理员密码
-	public void updatePwd(String adminName,String newPwd) throws Exception {
+	public void updateAdminPwd(String adminName,String newPwd) throws Exception {
 		Map<String, Object> queryMap = new HashMap<String, Object>();
 		queryMap.put("adminName", adminName);
 		queryMap.put("pwd", newPwd);
-		this.userMapper.updatePwd(queryMap);
-		
+		this.userMapper.updateAdminPwd(queryMap);
 	}
 
-	//查询某个管理员密码
-	public int selectPwd(String adminName, String pwd) throws Exception {
-		Map<String,Object> queryMap = new HashMap<String, Object>();
-		queryMap.put("adminName", adminName);
-		queryMap.put("pwd",pwd);
-		return userMapper.selectPwd(queryMap);
+	//修改用户密码
+	public void updateUserPwd(String userName, String newPwd) throws Exception {
+		Map<String, Object> queryMap = new HashMap<String, Object>();
+		queryMap.put("userName", userName);
+		queryMap.put("pwd", newPwd);
+		this.userMapper.updateAdminPwd(queryMap);
 	}
+
+	
 
 }

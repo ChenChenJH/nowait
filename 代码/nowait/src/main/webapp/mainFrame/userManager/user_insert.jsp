@@ -32,10 +32,19 @@
         	userName: {
                 validators: {
                     notEmpty: {
-                        message: '登录名不能为空'
+                        message: '登錄名不能为空'
                     },
+                    stringLength: {
+                        min: 4,
+                         max: 20,
+                         message: '登錄名长度必须在4到20位之间'
+                        },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_]+$/,
+                        message: '登錄名只能包含大小写字母、数字和下划线'
+                        },
                     callback:{
-                    	message: '登录名已存在',
+                    	message: '登錄名已存在',
                     	callback: function (value,validator) {
                     		var res = true;
                     		$.ajax({
@@ -113,7 +122,7 @@
     管理員：
     <li><a href="index/mainFrame.jsp">首頁</a></li>
     <li class="active">商家管理</li>
-    <li><a href="mainFrame/userManager/user_list.jsp">商家列表</a></li>
+    <li><a href="user/list">商家列表</a></li>
     <li class="active">添加商家</li>
 </ol>
 <div class="formBox">
@@ -126,7 +135,8 @@
             <div class="form-group">
                 <label for="username" class="col-sm-2 control-label">登錄名</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="username" name="userName" placeholder="請輸入登錄名">
+                    <input type="text" class="form-control" id="username" name="userName" 
+                    placeholder="請輸入登錄名" >
                 </div>
             </div>
             <div class="form-group">

@@ -1,5 +1,5 @@
 
-	//登录
+	//登錄名
     function login(){
         var username = document.getElementById("username").value;
         var password = document.getElementById("password").value;
@@ -41,7 +41,7 @@
                         },
                     regexp: {
                         regexp: /^[a-zA-Z0-9_]+$/,
-                        message: '用户名只能包含大写、小写、数字和下划线'
+                        message: '用户名只能包含大小写字母、数字和下划线'
                         }
                     }
                 },

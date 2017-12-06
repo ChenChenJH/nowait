@@ -76,13 +76,6 @@
 		<a href="mainFrame/restaurantManager/restaurantList.jsp"
 			target="mainFrame" class="list-group-item"> 餐廳管理</a>
 
-		<!--<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="list-group-item" >
-        餐廳信息管理<span class="glyphicon glyphicon-chevron-down pull-right"></span>
-    </a>
-    <div id="collapseOne" class="panel-collapse collapse out">
-        <a href="../mainFrame/restaurantManager/restaurantList.html" target="mainFrame" class="list-group-item sonMenu" style="border-Radius:0px;">餐廳門店信息</a>
-        <a href="../mainFrame/restaurantManager/orderList.html" target="mainFrame" class="list-group-item sonMenu" style="border-Radius:0px;">餐廳排隊訂單</a>
-    </div>-->
 		<c:if test="${sessionScope.type =='管理員' }">
 			<a href="feedback/getAllFeedback"
 				target="mainFrame" class="list-group-item"

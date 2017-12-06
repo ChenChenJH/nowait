@@ -81,7 +81,7 @@ $(function () {
 		管理員：
 		<li><a href="index/mainFrame.jsp">首頁</a></li>
 		<li class="active">商家管理</li>
-		<li><a href="mainFrame/userManager/user_list.jsp">商家列表</a></li>
+		<li><a href="user/list">商家列表</a></li>
 		<li class="active">詳情</li>
 	</ol>
 	<form class="form-horizontal" id="myform" role="form" action="user/update" target="mainFrame"  method="POST">
