@@ -18,13 +18,7 @@
 </head>
 
 <body>
-<ol class="breadcrumb">
-    管理員：
-    <li><a href="index/mainFrame.jsp">首頁</a></li>
-    <li class="active">商家管理</li>
-    <li class="active">操作成功</li>
-</ol>
-<h2 class="text-center">操作成功</h2>
-<div class="text-center"><a href="user/list?row=${param.row}" class="btn btn-success">點擊返回列表</a></div>
+<h2 class="text-center">修改成功</h2>
+<div class="text-center"><a href="index/mainFrame.jsp" class="btn btn-success">點擊返回主页</a></div>
 </body>
 </html>

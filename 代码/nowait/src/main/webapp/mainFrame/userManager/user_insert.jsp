@@ -132,6 +132,7 @@
         </div>
         <div class="panel-body">
         <form class="form-horizontal" id="myform" role="form" action="user/add" method="POST">
+        	<input type="hidden" name="row" value="${param.row}" />
             <div class="form-group">
                 <label for="username" class="col-sm-2 control-label">登錄名</label>
                 <div class="col-sm-9">

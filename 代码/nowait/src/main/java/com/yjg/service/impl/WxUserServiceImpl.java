@@ -17,61 +17,79 @@ public class WxUserServiceImpl implements WxUserService {
     private WxUserMapper wxUserMapper;
     
     /**
-     * 获取所有微信用户
+     * 根據起始行獲得7個微信用戶
+     * @param row
      * @return List<WxUser>
      */
-    public List<WxUser> getAllWxUser() {
+    public List<WxUser> getAllWxUser(int row) throws Exception{
         // TODO Auto-generated method stub
-        return wxUserMapper.selectAllWxUser();
+        return wxUserMapper.selectAllWxUser(row);
+    }
+    
+    /**
+     * 獲取微信用戶個數
+     * @return int
+     */
+    public int getAllWxUserCount() throws Exception{
+        // TODO Auto-generated method stub
+        int n = 0;
+        try{
+            n = wxUserMapper.selectAllWxUserCount();
+        }catch(Exception e){
+            //查詢爲空
+        }
+        return n;
     }
 
     /**
-     * 根据id获取微信用户
+     * 根據id獲取微信用戶
      * @param id
      * @return WxUser
      */
-    public WxUser getWxUserById(int id) {
+    public WxUser getWxUserById(int id) throws Exception{
         // TODO Auto-generated method stub
         return wxUserMapper.selectWxUserById(id);
     }
 
     /**
-     * 根据微信用户id删除微信用户
+     * 根據微信用戶id刪除微信用戶
      * @param openid
      */
-    public void deleteWxUserById(int id) {
+    public void deleteWxUserById(int id) throws Exception{
         // TODO Auto-generated method stub
         wxUserMapper.deleteWxUserById(id);
     }
 
     /**
-     * 根据多个id删除多个对应的微信用户
-     * @param id 微信用户id
+     * 根據多個id刪除多個對應的微信用戶
+     * @param id 微信用戶id
      */
-    public void deleteWxUserByIds(int[] id) {
+    public void deleteWxUserByIds(int[] id) throws Exception{
         // TODO Auto-generated method stub
         wxUserMapper.deleteWxUserByIds(id);
     }
 
-    public void insertWxUser(String openid, String phone) {
+    public void insertWxUser(String openid, String phone) throws Exception{
         // TODO Auto-generated method stub
         wxUserMapper.insertWxUser(openid, phone);
     }
 
     /**
-     * 根据openid和phone获取微信用户个数
-     * @param openid 微信用户openid
-     * @param phone 手机号码
+     * 根據openid和phone獲取微信用戶個數
+     * @param openid 微信用戶openid
+     * @param phone 手機號碼
      */
-    public int getWxUserByOpenidOrPhone(String openid, String phone) {
+    public int getWxUserByOpenidOrPhone(String openid, String phone) throws Exception{
         // TODO Auto-generated method stub
         int n = 0;
         try{
             n = wxUserMapper.selectWxUserByOpenidOrPhone(openid, phone);
         }catch(Exception e){
-            //查询为空
+            //查詢爲空
         }
         return n;
     }
+
+    
 
 }

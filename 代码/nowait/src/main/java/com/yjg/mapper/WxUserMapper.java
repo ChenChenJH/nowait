@@ -8,42 +8,50 @@ import org.springframework.stereotype.Repository;
 import com.yjg.entity.WxUser;
 @Repository
 public interface WxUserMapper {
+    
     /**
-     * 查询所有微信用户
+     * 根據起始行查詢7個微信用戶
+     * @param row
      * @return List<WxUser>
      */
-    List<WxUser> selectAllWxUser();
+    List<WxUser> selectAllWxUser(@Param("row") int row) throws Exception;
     
     /**
-     * 根据单个id查询单个微信用户
-     * @param id 微信用户id
+     * 查詢微信用戶個數
+     * @return int
+     */
+    int selectAllWxUserCount() throws Exception;
+    
+    /**
+     * 根據單個id查詢單個微信用戶
+     * @param id 
      * @return WxUser
      */
-    WxUser selectWxUserById(int id);
+    WxUser selectWxUserById(int id) throws Exception;
     
     /**
-     * 根据openid和phone查询微信用户个数
+     * 根據openid和phone查詢微信用戶個數
      * @param openid 微信用户openid
-     * @param phone 手机号码
+     * @param phone 手機號碼
      */
-    int selectWxUserByOpenidOrPhone(@Param("openid") String openid, @Param("phone") String phone);
+    int selectWxUserByOpenidOrPhone(@Param("openid") String openid, @Param("phone") String phone) throws Exception;
        
     /**
-     * 根据id删除单个微信用户
+     * 根據id刪除單個微信用戶
      * @param id 微信用户id
      */
-    void deleteWxUserById(int id);
+    void deleteWxUserById(int id) throws Exception;
     
     /**
-     * 根据多个id删除多个对应的微信用户
+     * 根據多個id刪除多個對應的微信用戶
      * @param id 微信用户id
      */
-    void deleteWxUserByIds(@Param("id") int[] id);
+    void deleteWxUserByIds(@Param("id") int[] id) throws Exception;
     
     /**
-     * 添加单个用户
+     * 添加單個用戶
      * @param openid 微信用户openid
-     * @param phone 用户手机号码
+     * @param phone 手機號碼
      */
-    void insertWxUser(@Param("openid") String openid,@Param("phone") String phone);
+    void insertWxUser(@Param("openid") String openid,@Param("phone") String phone) throws Exception;
 }

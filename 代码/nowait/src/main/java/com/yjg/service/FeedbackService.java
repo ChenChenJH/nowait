@@ -2,52 +2,66 @@ package com.yjg.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.yjg.entity.Feedback;
 
 public interface FeedbackService {
     
     /**
-     * 获取所有的微信用户反馈
+     * 根據起始行獲取7條微信用戶反饋
+     * @param row 起始行
      * @return List<Feedback>
      */
-    List<Feedback> getAllFeedback();
+    List<Feedback> getAllFeedback(int row) throws Exception;
     
     /**
-     * 获取所有未读的微信用户反馈
+     * 獲取用戶反饋數量
+     * @return int
+     */
+    int getAllFeedbackCount() throws Exception;
+    
+    /**
+     * 根據起始行和讀寫狀態獲取7條微信用戶反饋
+     * @param row 起始行
+     * @param isRead 讀寫狀態
      * @return List<Feedback>
      */
-    List<Feedback> getAllFeedbackByIsRead();
+    List<Feedback> getAllFeedbackByIsRead(int row,String isRead) throws Exception;
+    
+    /**
+     * 根據讀寫狀態獲取用戶數量
+     * @param isRead 讀寫狀態
+     * @return int
+     */
+    int getAllFeedbackCountByIsRead(String isRead) throws Exception;
 
     /**
-     * 根据id段获取的用户反馈
+     * 根據id獲取用戶反饋
      * @param id
      * @return List<Feedback>
      */
-    Feedback getFeedbackById(int id);
+    Feedback getFeedbackById(int id) throws Exception;
     
     /**
-     * 根据id修改用户反馈读写状态
+     * 根據id修改用戶反饋讀寫狀態
      * @param id
      * @param isRead
      */
-    void updateFeedbackIsReadById(int id,String isRead);
+    void updateFeedbackIsReadById(int id,String isRead) throws Exception;
     
     /** 
-     * 把全部用户反馈标为已读
+     * 把全部未讀用戶反饋標為已讀
      */
-    void updateFeedbackIsRead();
+    void updateFeedbackIsRead() throws Exception;
     
     /**
-     * 根据id把用户反馈删除
+     * 根據id刪除用戶反饋
      * @param id
      */
-    void deleteFeedbackById(int id);
+    void deleteFeedbackById(int id) throws Exception;
     
     /**
-     * 根据多个id删除多个对应的用户反馈
+     * 根據多個id刪除多個對應的用戶反饋
      * @param id 
      */
-    void deleteFeedbackByIds(@Param("id") int[] id);
+    void deleteFeedbackByIds(int[] id) throws Exception;
 }

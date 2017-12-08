@@ -18,6 +18,8 @@
     <link href="css/bootstrap.css" rel="stylesheet">
     <!-- jQuery文件 -->
     <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    
 
 </head>
 <body>
@@ -28,6 +30,8 @@
     <li class="active">商家列表</li>
 </ol>
 <form action="user/deleteMore" target="mainFrame" method="post">
+	<!-- 批量删除记住当前页面 -->
+	<input type="hidden" name="row" value="${row}" />
     <table class="table table-hover">
         <thead>
         <tr>
@@ -46,29 +50,74 @@
             <td class="text-center">${user.card}</td>
             <td class="text-center">
                 <div class="btn-group">
-                    <a class="btn btn-default" href="user/Detail?id=${user.id}" target="mainFrame" >詳情</a>
-                    <a class="btn btn-default" href="user/delete?id=${user.id}" target="mainFrame" onclick="return confirm('确定要删除吗？')">刪除</a>
+                    <a class="btn btn-default" href="user/Detail?id=${user.id}&row=${row}" target="mainFrame" >詳情</a>
+                    <a class="btn btn-default" href="user/delete?id=${user.id}&row=${row}" target="mainFrame" onclick="return confirm('确定要删除吗？')">刪除</a>
                 </div>
             </td>
         </tr>
         </c:forEach>
         <tfoot>
+        
+         <tr>
+            <th colspan="4" class="text-center"> 
+	            <div class="btn-group col-6">
+		            <c:choose>
+			            <c:when test="${row != 1}">
+			                <a class="btn btn-default" href="<%=request.getContextPath()%>/user/list?row=1" target="mainFrame">首頁</a>
+                            <a class="btn btn-default" href="<%=request.getContextPath()%>/user/list?row=${row-1}" target="mainFrame">上一頁</a>
+			            </c:when>
+			            <c:otherwise>
+			                <b class="btn btn-default" style="background-color:#D4D4D4;">首頁</b>
+			                <b class="btn btn-default" style="background-color:#D4D4D4;">上一頁</b>
+			            </c:otherwise>
+			        </c:choose>
+			        <c:choose>
+                        <c:when test="${row != page}">
+                            <a class="btn btn-default" href="<%=request.getContextPath()%>/user/list?row=${row+1}" target="mainFrame">下一頁</a>
+                            <a class="btn btn-default" href="<%=request.getContextPath()%>/user/list?row=${page}" target="mainFrame">尾頁</a>
+                        </c:when>
+                        <c:otherwise>
+                            <b class="btn btn-default" style="background-color:#D4D4D4;">下一頁</b>
+                            <b class="btn btn-default" style="background-color:#D4D4D4;">尾頁</b>
+                        </c:otherwise>
+                    </c:choose>
+	                
+	            </div>
+ 
+                <div class="btn-group col-6">
+	               <div class="input-group-btn">
+		                <select id="row" class="form-control" style="width: auto;">
+		                    <c:forEach var = "li" begin="1" end="${page}">
+                                <option <c:if test='${row == li}'>  selected='selected'  </c:if>>${li}</option>
+                            </c:forEach>
+		                </select>
+	                </div>
+	                <span class="input-group-btn">
+	                <a id="jump" class="btn btn-default" href="#" target="mainFrame">跳轉</a>
+	                </span>  
+                </div>
+            </th>
+        </tr>
+        
         <tr>
             <th colspan="5" class="text-center">
                 <input type="submit" class="btn btn-danger" value="批量删除" onclick="return checkdelete()" >
-                <a class="btn btn-info" href="mainFrame/userManager/user_insert.jsp" target="mainFrame">添加商家</a>
+                <a class="btn btn-info" href="mainFrame/userManager/user_insert.jsp?row=${row}" target="mainFrame">添加商家</a>
             </th>
         </tr>
         </tfoot>
     </table>
 </form>
 </body>
-<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
-<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
     $(function(){
+    	 // 按页数跳转
+        $('#jump').click(function(){
+            var row = $('#row option:selected').val();
+            console.log(row);
+            $("#jump").attr("href", "<%=request.getContextPath()%>/user/list?row="+row);
+        });
+    	 
         function initTableCheckbox() {
             var $thr = $('table thead tr');
             /*“全选/反选”复选框*/
@@ -127,7 +176,7 @@
                 }
             }
             if(!checkflag){
-                alert("未選中用戶,請選擇後再執行批量刪除");
+                alert("未選中数据,請選擇後再執行批量刪除");
                 return false;
             }
         }

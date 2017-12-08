@@ -26,6 +26,6 @@
     <li class="active">操作成功</li>
 </ol>
 <h2 class="text-center">操作成功</h2>
-<div class="text-center"><a href="<%=request.getContextPath()%>/wxuser/getAllWxUser" class="btn btn-success">點擊返回列表</a></div>
+<div class="text-center"><a href="<%=request.getContextPath()%>/wxuser/getAllWxUser?row=${param.row}" class="btn btn-success">點擊返回列表</a></div>
 </body>
 </html>

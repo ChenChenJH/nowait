@@ -94,7 +94,7 @@
             <value>
                 /login.jsp = anon
                 /index.jsp = user
-                /success.jsp =anon
+                /register-success.jsp = anon
                 /user/isExist = anon
                 /user/register = anon
                 /index/** = user

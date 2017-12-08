@@ -75,7 +75,7 @@
 		管理員：
 		<li><a href="index/mainFrame.jsp">首頁</a></li>
 		<li class="active">微信用戶管理</li>
-		<li><a href="<%=request.getContextPath()%>/wxuser/getAllWxUser">微信用戶列表</a></li>
+		<li><a href="<%=request.getContextPath()%>/wxuser/getAllWxUser?row=1">微信用戶列表</a></li>
 		<li class="active">添加微信用戶</li>
 	</ol>
 	<div class="formBox">
@@ -87,6 +87,7 @@
 				<form class="form-horizontal" role="form" id="myform"
 					action="<%=request.getContextPath()%>/wxuser/insertWxUser"
 					method="POST">
+					<input type="hidden" name="row" value="${param.row}" />
 					<div class="form-group">
 						<label for="openid" class="col-sm-2 control-label">OpenId</label>
 						<div class="col-sm-9">

@@ -11,9 +11,13 @@
 		<result property="card" column="card" />
 	</resultMap>
 	
+	<!-- 查询用户总数 -->
+	<select id="selectUserCount" resultType="Integer">
+		SELECT COUNT(*) FROM tb_user 
+	</select>
 	<!-- 查询所有用户 -->
-	<select id="selectUserList" resultMap="resultUserMap">
-		SELECT * FROM tb_user 
+	<select id="selectUserList" parameterType="java.util.Map" resultMap="resultUserMap">
+		SELECT * FROM tb_user LIMIT #{start},#{size}
 	</select>
 	<!-- 查询某个用户 -->
 	<select id="selectDetailUser" parameterType="Integer" resultType="user">

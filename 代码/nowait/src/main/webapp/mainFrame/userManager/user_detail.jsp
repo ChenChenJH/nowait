@@ -94,6 +94,7 @@ $(function () {
 		</thead>
 			<tbody class="form-group">
 			<input type="hidden" value="${user.id}" name="id"/>
+			<input type="hidden" name="row" value="${param.row}" />
 			 <tr>
 				<th class="col-sm-3 text-center">登錄名</th>
 				<td class="col-sm-9 text-center"><input type="text" name="userName"
@@ -134,8 +135,8 @@ $(function () {
 			<tbody>
 			<tfoot>
 				<tr>
-					<th colspan="2" class="text-center"><button type="submit" class="btn btn-success">修改</button>
-					 <a class="btn btn-danger" href="user/delete?id=${user.id}" target="mainFrame" onclick="return confirm('确定要删除改商家？')">刪除該商家</a> 
+					<th colspan="2" class="text-center"><button type="submit" class="btn btn-success" onclick="return confirm('确定要修改吗？')">修改</button>
+					 <a class="btn btn-danger" href="user/delete?id=${user.id}&row=${param.row}" target="mainFrame" onclick="return confirm('确定要删除改商家？')">刪除該商家</a> 
 					 <a class="btn btn-info" href="javascript:history.back(-1)" target="mainFrame">返回列表</a></th>
 				</tr>
 			</tfoot>

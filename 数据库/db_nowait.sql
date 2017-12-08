@@ -1,29 +1,29 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : mysql
-Source Server Version : 50045
+Source Server         : localhost
+Source Server Version : 50525
 Source Host           : localhost:3306
 Source Database       : db_nowait
 
 Target Server Type    : MYSQL
-Target Server Version : 50045
+Target Server Version : 50525
 File Encoding         : 65001
 
-Date: 2017-11-27 17:29:18
+Date: 2017-12-08 15:29:02
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for tb_admin
+-- Table structure for `tb_admin`
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_admin`;
 CREATE TABLE `tb_admin` (
-  `id` int(11) NOT NULL auto_increment,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `adminName` varchar(20) NOT NULL,
   `pwd` varchar(50) NOT NULL,
-  PRIMARY KEY  (`id`),
+  PRIMARY KEY (`id`),
   UNIQUE KEY `uk_adminName` (`adminName`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
@@ -34,14 +34,14 @@ INSERT INTO `tb_admin` VALUES ('1', 'admin', '156650ad747cfb25fcb9a7a2f8a02bdc')
 INSERT INTO `tb_admin` VALUES ('2', 'boss', '156650ad747cfb25fcb9a7a2f8a02bdc');
 
 -- ----------------------------
--- Table structure for tb_chainshop
+-- Table structure for `tb_chainshop`
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_chainshop`;
 CREATE TABLE `tb_chainshop` (
-  `id` int(11) NOT NULL auto_increment,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
-  `pic` varchar(200) default NULL,
-  PRIMARY KEY  (`id`),
+  `pic` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`),
   UNIQUE KEY `uk_chainshop_name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
@@ -57,15 +57,15 @@ INSERT INTO `tb_chainshop` VALUES ('6', '圣鼎记自助美食汇', '测试');
 INSERT INTO `tb_chainshop` VALUES ('7', '甜之心', '测试');
 
 -- ----------------------------
--- Table structure for tb_desk
+-- Table structure for `tb_desk`
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_desk`;
 CREATE TABLE `tb_desk` (
-  `id` int(11) NOT NULL auto_increment,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `style` varchar(40) NOT NULL,
-  `info` varchar(40) default NULL,
-  `restId` int(11) default NULL,
-  PRIMARY KEY  (`id`)
+  `info` varchar(40) DEFAULT NULL,
+  `restId` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -120,41 +120,73 @@ INSERT INTO `tb_desk` VALUES ('47', '中桌', '3-4人', '16');
 INSERT INTO `tb_desk` VALUES ('48', '小桌', '1-2人', '16');
 
 -- ----------------------------
--- Table structure for tb_feedback
+-- Table structure for `tb_feedback`
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_feedback`;
 CREATE TABLE `tb_feedback` (
-  `id` int(11) NOT NULL auto_increment,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `wxuserId` int(11) NOT NULL,
-  `info` varchar(200) default NULL,
+  `info` varchar(200) DEFAULT NULL,
   `createDate` datetime NOT NULL,
   `isRead` char(2) NOT NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_feedback
 -- ----------------------------
-INSERT INTO `tb_feedback` VALUES ('1', '1', '还行，下次再来', '2017-11-14 12:14:15', '是');
-INSERT INTO `tb_feedback` VALUES ('2', '2', 'haha', '2017-11-21 10:37:18', '否');
-INSERT INTO `tb_feedback` VALUES ('3', '2', '哈哈', '2017-11-22 13:31:53', '否');
+INSERT INTO `tb_feedback` VALUES ('1', '1', '还行，下次再来', '2017-11-14 12:14:15', '已讀');
+INSERT INTO `tb_feedback` VALUES ('2', '2', 'haha', '2017-11-21 10:37:18', '未讀');
+INSERT INTO `tb_feedback` VALUES ('3', '2', '哈哈', '2017-11-22 13:31:53', '已讀');
+INSERT INTO `tb_feedback` VALUES ('4', '1', '这是测试', '2017-12-07 20:38:02', '未讀');
+INSERT INTO `tb_feedback` VALUES ('5', '1', '这是测试', '2017-12-07 20:38:21', '已讀');
+INSERT INTO `tb_feedback` VALUES ('6', '1', '这是测试', '2017-12-07 20:38:21', '已讀');
+INSERT INTO `tb_feedback` VALUES ('7', '1', '这是测试', '2017-12-07 20:38:21', '未讀');
+INSERT INTO `tb_feedback` VALUES ('8', '1', '这是测试', '2017-12-07 20:38:21', '未讀');
+INSERT INTO `tb_feedback` VALUES ('9', '1', '这是测试', '2017-12-07 20:38:21', '未讀');
+INSERT INTO `tb_feedback` VALUES ('10', '1', '这是测试', '2017-12-07 20:38:21', '未讀');
+INSERT INTO `tb_feedback` VALUES ('11', '1', '这是测试', '2017-12-07 20:38:21', '已讀');
+INSERT INTO `tb_feedback` VALUES ('12', '1', '这是测试', '2017-12-07 20:38:21', '已讀');
+INSERT INTO `tb_feedback` VALUES ('15', '1', '这是测试', '2017-12-07 20:38:21', '未讀');
+INSERT INTO `tb_feedback` VALUES ('17', '1', '这是测试', '2017-12-07 20:38:46', '已讀');
+INSERT INTO `tb_feedback` VALUES ('18', '1', '这是测试', '2017-12-07 20:38:46', '已讀');
+INSERT INTO `tb_feedback` VALUES ('19', '1', '这是测试', '2017-12-07 20:38:47', '已讀');
+INSERT INTO `tb_feedback` VALUES ('20', '1', '这是测试', '2017-12-07 20:38:47', '已讀');
+INSERT INTO `tb_feedback` VALUES ('21', '1', '这是测试', '2017-12-07 20:38:47', '已讀');
+INSERT INTO `tb_feedback` VALUES ('22', '1', '这是测试', '2017-12-07 20:38:47', '已讀');
+INSERT INTO `tb_feedback` VALUES ('23', '1', '这是测试', '2017-12-07 20:38:47', '未讀');
+INSERT INTO `tb_feedback` VALUES ('24', '1', '这是测试', '2017-12-07 20:38:47', '已讀');
+INSERT INTO `tb_feedback` VALUES ('25', '1', '这是测试', '2017-12-07 20:38:47', '未讀');
+INSERT INTO `tb_feedback` VALUES ('26', '1', '这是测试', '2017-12-07 20:38:47', '已讀');
+INSERT INTO `tb_feedback` VALUES ('27', '1', '这是测试', '2017-12-07 20:38:47', '未讀');
+INSERT INTO `tb_feedback` VALUES ('29', '2', '这是测试', '2017-12-07 20:44:55', '已讀');
+INSERT INTO `tb_feedback` VALUES ('30', '2', '这是测试', '2017-12-07 20:44:55', '未讀');
+INSERT INTO `tb_feedback` VALUES ('31', '2', '这是测试', '2017-12-07 20:44:55', '已讀');
+INSERT INTO `tb_feedback` VALUES ('32', '2', '这是测试', '2017-12-07 20:44:55', '已讀');
+INSERT INTO `tb_feedback` VALUES ('34', '2', '这是测试', '2017-12-08 08:37:38', '已讀');
+INSERT INTO `tb_feedback` VALUES ('35', '2', '这是测试', '2017-12-08 08:37:38', '已讀');
+INSERT INTO `tb_feedback` VALUES ('36', '2', '这是测试', '2017-12-08 08:37:38', '已讀');
+INSERT INTO `tb_feedback` VALUES ('37', '2', '这是测试', '2017-12-08 08:37:38', '已讀');
+INSERT INTO `tb_feedback` VALUES ('38', '2', '这是测试', '2017-12-08 08:37:38', '未讀');
+INSERT INTO `tb_feedback` VALUES ('41', '2', '这是测试', '2017-12-08 08:37:38', '未讀');
+INSERT INTO `tb_feedback` VALUES ('42', '2', '这是测试', '2017-12-08 08:37:38', '未讀');
 
 -- ----------------------------
--- Table structure for tb_order
+-- Table structure for `tb_order`
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_order`;
 CREATE TABLE `tb_order` (
-  `id` int(11) NOT NULL auto_increment,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `wxuserId` int(11) NOT NULL,
   `restId` int(11) NOT NULL,
   `restName` varchar(50) NOT NULL,
-  `style` varchar(40) default NULL,
-  `info` varchar(40) default NULL,
-  `waitNo` varchar(40) default NULL,
+  `style` varchar(40) DEFAULT NULL,
+  `info` varchar(40) DEFAULT NULL,
+  `waitNo` varchar(40) DEFAULT NULL,
   `createDate` datetime NOT NULL,
   `isUsage` char(2) NOT NULL,
-  `warnInfo` varchar(100) default NULL,
-  PRIMARY KEY  (`id`)
+  `warnInfo` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -197,27 +229,27 @@ INSERT INTO `tb_order` VALUES ('40', '3', '8', '甜之心(湾仔沙店)', '中�
 INSERT INTO `tb_order` VALUES ('42', '8', '14', '岳阳烧烤(科干店)', '中桌', '3-4人', 'B03', '2017-11-27 17:19:35', '是', '過號不作廢');
 
 -- ----------------------------
--- Table structure for tb_restaurant
+-- Table structure for `tb_restaurant`
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_restaurant`;
 CREATE TABLE `tb_restaurant` (
-  `id` int(11) NOT NULL auto_increment,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
-  `priceInfo` varchar(50) default NULL,
-  `warnInfo` varchar(100) default NULL,
+  `priceInfo` varchar(50) DEFAULT NULL,
+  `warnInfo` varchar(100) DEFAULT NULL,
   `address` varchar(140) NOT NULL,
   `phone` varchar(15) NOT NULL,
   `shopTime` varchar(50) NOT NULL,
-  `status` varchar(20) default NULL,
+  `status` varchar(20) DEFAULT NULL,
   `userId` int(11) NOT NULL,
-  `chainName` varchar(50) default NULL,
-  `coverPic` varchar(200) default NULL,
-  `navPic` varchar(200) default NULL,
-  `lng` decimal(10,6) default NULL,
-  `lat` decimal(10,6) default NULL,
+  `chainName` varchar(50) DEFAULT NULL,
+  `coverPic` varchar(200) DEFAULT NULL,
+  `navPic` varchar(200) DEFAULT NULL,
+  `lng` decimal(10,6) DEFAULT NULL,
+  `lat` decimal(10,6) DEFAULT NULL,
   `createDate` datetime NOT NULL,
   `isOverdue` char(2) NOT NULL,
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -240,41 +272,87 @@ INSERT INTO `tb_restaurant` VALUES ('14', '岳阳烧烤(科干店)', '30', '测�
 INSERT INTO `tb_restaurant` VALUES ('16', 'K立方量贩式KTV(科干店)', '30', '测试', '广东省珠海市金湾区南翔路111号', '(010)1234-1235', '8:00-20:00', '餐廳暫停取號', '1', 'K立方量贩式KTV', '测试', '测试', '113.343470', '22.129130', '2017-11-16 08:35:02', '0');
 
 -- ----------------------------
--- Table structure for tb_user
+-- Table structure for `tb_user`
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_user`;
 CREATE TABLE `tb_user` (
-  `id` int(11) NOT NULL auto_increment,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `userName` varchar(20) NOT NULL,
   `pwd` varchar(50) NOT NULL,
   `trueName` varchar(40) NOT NULL,
   `card` varchar(18) NOT NULL,
   `phone` varchar(11) NOT NULL,
   `createDate` datetime NOT NULL,
-  PRIMARY KEY  (`id`),
+  PRIMARY KEY (`id`),
   UNIQUE KEY `uk_userName` (`userName`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_user
 -- ----------------------------
 INSERT INTO `tb_user` VALUES ('1', 'chen', '156650ad747cfb25fcb9a7a2f8a02bdc', 'chen', '440883199606012315', '13420156312', '2017-11-15 20:30:12');
 INSERT INTO `tb_user` VALUES ('2', 'wang', '156650ad747cfb25fcb9a7a2f8a02bdc', '王小锤', '440883199606011524', '13420156348', '2017-11-15 20:57:10');
+INSERT INTO `tb_user` VALUES ('3', 'test1234', '53387f9299e3455b9b7510d4127d385b', '李四', '440883199606011235', '13420156347', '2017-12-06 12:01:18');
+INSERT INTO `tb_user` VALUES ('4', 'test01', '156650ad747cfb25fcb9a7a2f8a02bdc', '测试', '440883199606011235', '13420156347', '2017-12-07 22:14:53');
+INSERT INTO `tb_user` VALUES ('5', 'test02', '156650ad747cfb25fcb9a7a2f8a02bdc', '测试', '440883199606011235', '13420156347', '2017-12-07 22:15:45');
+INSERT INTO `tb_user` VALUES ('6', 'test03', '156650ad747cfb25fcb9a7a2f8a02bdc', '测试', '440883199606011235', '13420156347', '2017-12-07 22:15:45');
+INSERT INTO `tb_user` VALUES ('7', 'test04', '156650ad747cfb25fcb9a7a2f8a02bdc', '测试', '440883199606011235', '13420156348', '2017-12-07 22:15:45');
+INSERT INTO `tb_user` VALUES ('8', 'test05', '156650ad747cfb25fcb9a7a2f8a02bdc', '测试', '440883199606011235', '13420156349', '2017-12-07 22:15:45');
+INSERT INTO `tb_user` VALUES ('9', 'test06', '156650ad747cfb25fcb9a7a2f8a02bdc', '测试', '440883199606011235', '13420156347', '2017-12-07 22:53:08');
+INSERT INTO `tb_user` VALUES ('10', 'test07', '156650ad747cfb25fcb9a7a2f8a02bdc', '测试', '440883199606011235', '13420156347', '2017-12-07 23:11:07');
+INSERT INTO `tb_user` VALUES ('11', 'test08', '156650ad747cfb25fcb9a7a2f8a02bdc', '测试', '440883199606011235', '13420156347', '2017-12-07 23:11:07');
+INSERT INTO `tb_user` VALUES ('12', 'test10', '156650ad747cfb25fcb9a7a2f8a02bdc', '测试', '440883199606011235', '13420156347', '2017-12-07 23:11:07');
+INSERT INTO `tb_user` VALUES ('13', 'test11', '156650ad747cfb25fcb9a7a2f8a02bdc', '测试', '440883199606011235', '13420156347', '2017-12-07 23:11:07');
+INSERT INTO `tb_user` VALUES ('17', 'test14', '156650ad747cfb25fcb9a7a2f8a02bdc', '测试', '440883199606011235', '13420156347', '2017-12-07 23:12:18');
+INSERT INTO `tb_user` VALUES ('18', 'test15', '156650ad747cfb25fcb9a7a2f8a02bdc', '测试6', '440883199606011235', '13420156347', '2017-12-07 23:12:18');
+INSERT INTO `tb_user` VALUES ('21', 'test16', '156650ad747cfb25fcb9a7a2f8a02bdc', '测试', '440883199606011235', '13420156347', '2017-12-08 08:41:25');
+INSERT INTO `tb_user` VALUES ('22', 'test17', '156650ad747cfb25fcb9a7a2f8a02bdc', '测试', '440883199606011235', '13420156347', '2017-12-08 08:42:05');
+INSERT INTO `tb_user` VALUES ('23', 'test18', '156650ad747cfb25fcb9a7a2f8a02bdc', '测试', '440883199606011235', '13420156347', '2017-12-08 08:42:05');
+INSERT INTO `tb_user` VALUES ('25', 'test27', '156650ad747cfb25fcb9a7a2f8a02bdc', '测试', '440883199606011235', '13420156347', '2017-12-08 08:43:23');
+INSERT INTO `tb_user` VALUES ('26', 'test28', '156650ad747cfb25fcb9a7a2f8a02bdc', '测试', '440883199606011235', '13420156347', '2017-12-08 08:43:23');
+INSERT INTO `tb_user` VALUES ('28', 'test19', '156650ad747cfb25fcb9a7a2f8a02bdc', '测试', '440883199606011235', '13420156347', '2017-12-08 08:43:24');
+INSERT INTO `tb_user` VALUES ('29', 'test26', '156650ad747cfb25fcb9a7a2f8a02bdc', '测试', '440883199606011235', '13420156347', '2017-12-08 08:43:24');
+INSERT INTO `tb_user` VALUES ('30', 'test36', '156650ad747cfb25fcb9a7a2f8a02bdc', '测试', '440883199606011235', '13420156347', '2017-12-08 08:43:24');
+INSERT INTO `tb_user` VALUES ('31', 'test112', '53387f9299e3455b9b7510d4127d385b', '小小鸟', '440883199606011235', '13420156346', '2017-12-08 10:09:39');
+INSERT INTO `tb_user` VALUES ('32', 'test0104', '53387f9299e3455b9b7510d4127d385b', '测试1号', '440883199601231245', '13536401298', '2017-12-08 15:27:15');
 
 -- ----------------------------
--- Table structure for tb_wxuser
+-- Table structure for `tb_wxuser`
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_wxuser`;
 CREATE TABLE `tb_wxuser` (
-  `id` int(11) NOT NULL auto_increment,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `openid` varchar(50) NOT NULL,
   `phone` varchar(11) NOT NULL,
   `createDate` datetime NOT NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_wxuser
 -- ----------------------------
 INSERT INTO `tb_wxuser` VALUES ('1', 'gh_1564612sd', '13420156345', '2017-10-12 12:45:41');
-INSERT INTO `tb_wxuser` VALUES ('8', 'oyYPs0EGJw3rK0vVXXZ-dWgHxv-s', '60147891', '2017-11-27 17:11:49');
+INSERT INTO `tb_wxuser` VALUES ('2', 'oyYPs0EGJw3rK0vVXXZ-dWgHxv-s', '60147891', '2017-11-27 17:11:49');
+INSERT INTO `tb_wxuser` VALUES ('3', 'test123', '13536403516', '2017-12-07 20:32:32');
+INSERT INTO `tb_wxuser` VALUES ('4', 'test1234', '13536403516', '2017-12-07 20:33:22');
+INSERT INTO `tb_wxuser` VALUES ('5', 'test1235', '13536403516', '2017-12-07 20:33:22');
+INSERT INTO `tb_wxuser` VALUES ('6', 'test1236', '13536403516', '2017-12-07 20:33:22');
+INSERT INTO `tb_wxuser` VALUES ('7', 'test1237', '13536403516', '2017-12-07 20:33:22');
+INSERT INTO `tb_wxuser` VALUES ('8', 'test1238', '13536403516', '2017-12-07 20:33:22');
+INSERT INTO `tb_wxuser` VALUES ('9', 'test1239', '13536403516', '2017-12-07 20:33:23');
+INSERT INTO `tb_wxuser` VALUES ('10', 'test12310', '13536403516', '2017-12-07 20:33:23');
+INSERT INTO `tb_wxuser` VALUES ('11', 'test12311', '13536403516', '2017-12-07 20:33:23');
+INSERT INTO `tb_wxuser` VALUES ('12', 'test12345', '13536403516', '2017-12-07 20:33:23');
+INSERT INTO `tb_wxuser` VALUES ('14', 'test2234', '13536403516', '2017-12-07 20:35:01');
+INSERT INTO `tb_wxuser` VALUES ('16', 'test2236', '13536403516', '2017-12-07 20:35:01');
+INSERT INTO `tb_wxuser` VALUES ('17', 'test2237', '13536403516', '2017-12-07 20:35:01');
+INSERT INTO `tb_wxuser` VALUES ('18', 'test2238', '13536403516', '2017-12-07 20:35:01');
+INSERT INTO `tb_wxuser` VALUES ('19', 'test2239', '13536403516', '2017-12-07 20:35:01');
+INSERT INTO `tb_wxuser` VALUES ('20', 'test22310', '13536403516', '2017-12-07 20:35:01');
+INSERT INTO `tb_wxuser` VALUES ('21', 'test22311', '13536403516', '2017-12-07 20:35:02');
+INSERT INTO `tb_wxuser` VALUES ('22', 'test22345', '13536403516', '2017-12-07 20:35:02');
+INSERT INTO `tb_wxuser` VALUES ('24', 'test3234', '13536403516', '2017-12-07 20:35:49');
+INSERT INTO `tb_wxuser` VALUES ('25', 'test3235', '13536403516', '2017-12-07 20:35:49');
+INSERT INTO `tb_wxuser` VALUES ('26', 'test3236', '13536403516', '2017-12-07 20:35:49');
+INSERT INTO `tb_wxuser` VALUES ('30', 'test0012', '13536403518', '2017-12-08 14:44:48');
+INSERT INTO `tb_wxuser` VALUES ('31', 'aa0104', '13536403519', '2017-12-08 14:48:06');

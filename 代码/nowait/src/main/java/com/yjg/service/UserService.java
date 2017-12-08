@@ -19,8 +19,11 @@ public interface UserService {
 	//查询是否存在
 	public int selectExist(String userName) throws Exception;
 
+	//查询商家总数
+	public Integer selectUserCount() throws Exception;
+	
 	//查看所有商家列表
-	public List<User> selectUserList()throws Exception;
+	public List<User> selectUserList(Integer start,Integer size)throws Exception;
 
 	//查询某个用户
 	public User selectDetailUser(Integer id) throws Exception;

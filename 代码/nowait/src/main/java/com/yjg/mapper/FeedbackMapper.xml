@@ -11,26 +11,38 @@
 		<result column="isRead" property="isRead" jdbcType="CHAR"/>
 	</resultMap>
 	
-	<!-- 查询所有用户反馈 -->
-	<select id="selectAllFeedback" resultMap="feedbackMap">
+	<!-- 根據起始行獲取7條微信用戶反饋 -->
+	<select id="selectAllFeedback" resultMap="feedbackMap" parameterType="java.lang.Integer">
 		SELECT f.id, f.info, f.createDate, f.isRead, 
 		w.openid "wxUser.openid"
 		FROM tb_feedback f
 		INNER JOIN tb_wxuser w
 		ON f.wxuserId = w.id
+		LIMIT #{row}, 7
 	</select>
 	
-	<!-- 查询所有的未读用户反馈 -->
+	<!-- 查詢用戶反饋數量 -->
+    <select id="selectAllFeedbackCount" resultType="int">
+        SELECT COUNT(*) FROM tb_feedback
+    </select>
+	
+	<!-- 根據起始行和讀寫狀態查詢7條微信用戶反饋 -->
     <select id="selectAllFeedbackByIsRead" resultMap="feedbackMap">
         SELECT f.id, f.info, f.createDate, f.isRead, 
         w.openid "wxUser.openid"
         FROM tb_feedback f
         INNER JOIN tb_wxuser w
         ON f.wxuserId = w.id
-        WHERE f.isRead = '未讀'
+        WHERE f.isRead = #{isRead}
+        LIMIT #{row}, 7
+    </select>
+    
+    <!-- 根據讀寫狀態查詢用戶數量 -->
+    <select id="selectAllFeedbackCountByIsRead" resultType="int" parameterType="java.lang.String">
+        SELECT COUNT(*) FROM tb_feedback WHERE isRead = #{isRead}
     </select>
 	
-	<!-- 根据微信id查询用户反馈 -->
+	<!-- 根據id查詢用戶反饋 -->
 	<select id="selectFeedbackById" resultMap="feedbackMap" parameterType="java.lang.Integer">
 		SELECT f.id, f.info, f.createDate, f.isRead, 
 		w.openid "wxUser.openid"
@@ -40,22 +52,22 @@
         WHERE f.id = #{id}
 	</select>
 	
-	<!-- 根据id修改用户反馈读写状态 -->
+	<!-- 根據id修改用戶反饋讀寫狀態 -->
     <update id="updateFeedbackIsReadById">
         UPDATE tb_feedback SET isRead=#{isRead} WHERE id = #{id}
     </update>
     
-    <!-- 把全部未读的用户反馈标为已读 -->
-    <update id="updateFeedbackIsRead" >
+    <!-- 把全部未讀用戶反饋標為已讀 -->
+    <update id="updateFeedbackIsRead">
         UPDATE tb_feedback SET isRead='已讀' WHERE isRead ='未讀'
     </update>
 	
-	<!-- 根据id把用户反馈删除 -->
+	<!-- 根據id刪除用戶反饋 -->
 	<delete id="deleteFeedbackById" parameterType="java.lang.Integer">
 	   DELETE FROM tb_feedback WHERE id = #{id}
 	</delete>
     
-    <!-- 根据多个id删除多个对应的用户反馈 -->
+    <!-- 根據多個id刪除多個對應的用戶反饋 -->
     <delete id="deleteFeedbackByIds" parameterType="Integer[]">
        DELETE FROM tb_feedback 
        <where>

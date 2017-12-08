@@ -19,8 +19,11 @@ public interface UserMapper {
 	// 查询是否存在用户
 	public int selectExist(String userName) throws Exception;
 
+	//查询用户总数
+	public Integer selectUserCount() throws Exception;
+	
 	// 查询用户列表
-	public List<User> selectUserList() throws Exception;
+	public List<User> selectUserList(Map<String, Object> queryMap) throws Exception;
 
 	// 查询用户详细信息
 	public User selectDetailUser(Integer id) throws Exception;

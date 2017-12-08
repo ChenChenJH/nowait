@@ -47,5 +47,15 @@ public class TestUserServiceImpl extends AbstractJUnit4SpringContextTests{
 		user.setPhone("13420156348");
 		userService.insert(user);
 	}
+	
+	@Test
+	public void testSelectUserCount() throws Exception{
+		System.out.println(userService.selectUserCount());
+	}
+	
+	@Test
+	public void selectUserList() throws Exception{
+		System.out.println(userService.selectUserList(0, 4).size());
+	}
 
 }

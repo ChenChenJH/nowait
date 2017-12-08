@@ -28,7 +28,7 @@
     管理員：
     <li><a href="index/mainFrame.jsp">首頁</a></li>
     <li class="active">微信用戶管理</li>
-    <li><a href="<%=request.getContextPath()%>/wxuser/getAllWxUser">微信用戶列表</a></li>
+    <li><a href="<%=request.getContextPath()%>/wxuser/getAllWxUser?row=1">微信用戶列表</a></li>
     <li class="active">用戶詳情</li>
 </ol>
 <table class="table">
@@ -49,7 +49,7 @@
     <tfoot>
     <tr>
         <th colspan="2" class="text-center">
-            <a class="btn btn-danger" href="<%=request.getContextPath()%>/wxuser/getWxUserById?id=${wxUser.id}" target="mainFrame" onclick="onedelete()">刪除該用戶</a>
+            <a class="btn btn-danger" href="<%=request.getContextPath()%>/wxuser/deleteWxUserById?id=${wxUser.id}&row=${param.row}" target="mainFrame" onclick="onedelete()">刪除該用戶</a>
             <a class="btn btn-info" href="javascript:history.back(-1)"
                target="mainFrame">返回列表</a>
         </th>

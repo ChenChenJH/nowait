@@ -53,7 +53,7 @@
     管理員：
     <li><a href="index/mainFrame.jsp">首頁</a></li>
     <li class="active">反饋信息管理</li>
-    <li><a href="<%=request.getContextPath()%>/feedback/getAllFeedback">反饋信息列表</a></li>
+    <li><a href="<%=request.getContextPath()%>/feedback/getAllFeedback?row=1">反饋信息列表</a></li>
     <li class="active">詳情</li>
 </ol>
 <table class="table">
@@ -109,8 +109,8 @@
     <tfoot>
     <tr>
         <th colspan="2" class="text-center">
-            <a class="btn btn-danger" href="<%=request.getContextPath()%>/feedback/deleteFeedbackById?id=${feedback.id}" target="mainFrame" onclick="onedelete()">刪除該條反饋</a>
-            <a class="btn btn-info" href="<%=request.getContextPath()%>/feedback/getAllFeedback"
+            <a class="btn btn-danger" href="<%=request.getContextPath()%>/feedback/deleteFeedbackById?id=${feedback.id}&isRead=${feedback.isRead}" target="mainFrame" onclick="onedelete()">刪除該條反饋</a>
+            <a class="btn btn-info" href="<%=request.getContextPath()%>/feedback/getAllFeedback?row=1"
                target="mainFrame">返回列表</a>
         </th>
     </tr>

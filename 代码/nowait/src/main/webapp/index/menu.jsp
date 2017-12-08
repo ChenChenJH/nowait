@@ -15,9 +15,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>菜單</title>
 
-<link
-	href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	rel="stylesheet">
+ <link href="css/bootstrap.css" rel="stylesheet">
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/bootstrap.js"></script>
 </head>
@@ -66,7 +64,7 @@
 	<!--管理員菜單-->
 	<div class="adminMenu">
 		<c:if test="${sessionScope.type =='管理員' }">
-			<a href="wxuser/getAllWxUser" target="mainFrame"
+			<a href="wxuser/getAllWxUser?row=1" target="mainFrame"
 				class="list-group-item" style="border-Radius: 0px;"> 微信用戶管理 </a>
 		</c:if>
 		<c:if test="${sessionScope.type =='管理員' }">
@@ -77,7 +75,7 @@
 			target="mainFrame" class="list-group-item"> 餐廳管理</a>
 
 		<c:if test="${sessionScope.type =='管理員' }">
-			<a href="feedback/getAllFeedback"
+			<a href="feedback/getAllFeedback?row=1"
 				target="mainFrame" class="list-group-item"
 				style="border-Radius: 0px;">反饋信息管理</a>
 		</c:if>

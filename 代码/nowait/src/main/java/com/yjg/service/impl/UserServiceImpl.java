@@ -45,9 +45,17 @@ public class UserServiceImpl implements UserService {
 		return userMapper.selectExist(userName);
 	}
 
+	//查询用户总数
+	public Integer selectUserCount() throws Exception {
+		return userMapper.selectUserCount();
+	}
+	
 	//查询所有用户列表
-	public List<User> selectUserList() throws Exception {
-		return userMapper.selectUserList();
+	public List<User> selectUserList(Integer start,Integer size) throws Exception {
+		Map<String, Object> queryMap = new HashMap<String, Object>();
+		queryMap.put("start", start);
+		queryMap.put("size", size);
+		return userMapper.selectUserList(queryMap);
 	}
 
 	//查询某个用户详细信息
@@ -82,7 +90,4 @@ public class UserServiceImpl implements UserService {
 		queryMap.put("pwd", newPwd);
 		this.userMapper.updateAdminPwd(queryMap);
 	}
-
-	
-
 }

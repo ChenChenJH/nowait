@@ -15,9 +15,7 @@
     <title>頭部</title>
 
     <!-- 新 Bootstrap 核心 CSS 文件 -->
-    <!-- 引入下面文件才有字体图标 -->
-    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-
+    <link href="css/bootstrap.css" rel="stylesheet">
 </head>
 <style>
     .head {

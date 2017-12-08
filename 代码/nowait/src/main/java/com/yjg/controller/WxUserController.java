@@ -20,73 +20,85 @@ public class WxUserController {
     private WxUserService wxUserService;
     
     /**
-     * 获取所有微信用户
+     * 根據起始行查詢7個微信用戶
      * @return List<WxUser>
      */
     @RequestMapping("getAllWxUser")
-    public String getAllWxUser(ModelMap modelMap){
+    public String getAllWxUser(ModelMap modelMap, @RequestParam("row") int row) throws Exception{
         
+        //獲取微信用戶頁數，7個/頁
+        int num = wxUserService.getAllWxUserCount();
+        int page = num / 7;
+        if(num%7 != 0){
+            page++;
+        }
         List<WxUser> wxUsers;
-        wxUsers = wxUserService.getAllWxUser();
+        //獲取第7*(row-1)個起後面7個微信用戶
+        wxUsers = wxUserService.getAllWxUser(7*(row-1));
         modelMap.addAttribute("wxUsers", wxUsers);
+        //當前頁
+        modelMap.addAttribute("row", row);
+        //總頁數
+        modelMap.addAttribute("page", page);
         return "/mainFrame/wechatManager/wechatList.jsp";
         
     }
     
     /**
-     * 根据id获取微信用户
+     * 根據id獲取微信用戶
      * @param id
      * @return WxUser
      */
     @RequestMapping("getWxUserById")
-    public String getWxUserById(ModelMap modelMap,@RequestParam("id") int id){
+    public String getWxUserById(ModelMap modelMap, @RequestParam("id") int id) throws Exception{
         
         WxUser wxUser = wxUserService.getWxUserById(id);
-        System.out.println(wxUser.getCreateDate());
         modelMap.addAttribute("wxUser", wxUser);
         return "/mainFrame/wechatManager/wechatDetail.jsp";
         
     }
    
     /**
-     * 根据id删除单个微信用户
-     * @param id 微信用户id
+     * 根據id刪除單個微信用戶
+     * @param id 
      */
     @RequestMapping("deleteWxUserById")
-    public String deleteWxUserByOpenId(ModelMap modelMap,@RequestParam("id") int id){
+    public String deleteWxUserByOpenId(ModelMap modelMap,@RequestParam("id") int id,int row) throws Exception{
         
         wxUserService.deleteWxUserById(id);
-        return "/mainFrame/wechatManager/successOfManager.jsp";
-        
+        //刷新當前頁
+        return getAllWxUser(modelMap, row);
     }
     
     /**
-     * 根据多个id删除多个对应的微信用户
-     * @param id 微信用户id
+     * 根據多個id刪除多個對應的微信用戶
+     * @param id 
      */
     @RequestMapping("deleteWxUserByIds")
-    public String deleteWxUserByOpenIds(ModelMap modelMap,@RequestParam("checkBox") int[] id){
+    public String deleteWxUserByOpenIds(ModelMap modelMap,@RequestParam("checkBox") int[] id,int row) throws Exception{
         
         wxUserService.deleteWxUserByIds(id);
-        return "/mainFrame/wechatManager/successOfManager.jsp";
+        //刷新當前頁
+        return getAllWxUser(modelMap, row);
         
     }
     
     /**
-     * 添加单个微信用户
-     * @param openid 微信用户openid
-     * @param phone 用户手机号码
+     * 添加單個微信用戶
+     * @param openid 微信用戶openid
+     * @param phone 用户手機號碼
      */
     @RequestMapping("insertWxUser")
-    public String insertWxUser(ModelMap modelMap,@RequestParam("openid") String openid,@RequestParam("phone") String phone){
+    public String insertWxUser(ModelMap modelMap,@RequestParam("openid") String openid,
+    		@RequestParam("phone") String phone,int row) throws Exception{
        
-        //获取数据库中是否存在该openid或者手机号码
+        //查詢數據庫中是否存在該openid或者手機號碼
         int n = wxUserService.getWxUserByOpenidOrPhone(openid, phone);
         if(n>0){
-            return "/mainFrame/wechatManager/failManager.jsp";
+            return "/mainFrame/wechatManager/failManager.jsp?row="+row;
         }
         wxUserService.insertWxUser(openid,phone);
-        return "/mainFrame/wechatManager/successOfManager.jsp";
+        return "/mainFrame/wechatManager/successOfManager.jsp?row="+row;
         
     }
 }

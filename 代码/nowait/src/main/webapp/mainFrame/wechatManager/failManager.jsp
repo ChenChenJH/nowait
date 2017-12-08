@@ -26,6 +26,6 @@
     <li class="active">添加失敗</li>
 </ol>
 <h2 class="text-center">添加失敗！<br>該微信用戶或者手機號碼已被註冊！</h2>
-<div class="text-center"><a href="<%=request.getContextPath()%>/wxuser/getAllWxUser" class="btn btn-success">點擊返回列表</a></div>
+<div class="text-center"><a href="<%=request.getContextPath()%>/wxuser/getAllWxUser?row=${param.row}" class="btn btn-success">點擊返回列表</a></div>
 </body>
 </html>
