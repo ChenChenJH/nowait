@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yjg.mapper.DeskMapper">
+
+	<!-- 插入 -->
+	<insert id="insert" parameterType="desk">
+		INSERT INTO tb_desk(style,info,restId)
+		VALUES(#{style},#{info},#{restId})
+	</insert>
+	<!-- 根据餐厅id查询该餐厅所有餐桌类型 -->
+
+	<select id="deskList" resultType="desk" parameterType="java.lang.Integer">
+		SELECT * FROM tb_desk WHERE restId = #{id}
+	</select>
+
+
+</mapper>

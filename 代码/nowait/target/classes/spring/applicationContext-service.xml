@@ -16,4 +16,5 @@
     
     <!-- 扫描 -->
     <context:component-scan base-package="com.yjg.service.impl"></context:component-scan>
+    <context:component-scan base-package="com.yjg.tools"></context:component-scan>
 </beans>

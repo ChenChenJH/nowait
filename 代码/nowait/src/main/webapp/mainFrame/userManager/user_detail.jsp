@@ -21,7 +21,7 @@
 		color: red;	
 	}
 </style>
-<script src="https://code.jquery.com/jquery.js"></script>
+<script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/bootstrapValidator.min.js"></script>
 <link href="css/bootstrapValidator.min.css" rel="stylesheet" />
@@ -46,6 +46,10 @@ $(function () {
                 validators: {
                     notEmpty: {
                         message: '真实姓名不能为空'
+                    },
+                    regexp: {
+                        regexp: /^[\u4e00-\u9fa5]+$/,
+                        message: '真实姓名只能是汉字'
                     }
                 }
             },

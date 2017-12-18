@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -14,9 +15,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>餐廳門店列表頁面</title>
     <!-- 新 Bootstrap 核心 CSS 文件 -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <!-- jQuery文件 -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/jquery.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 
 </head>
 
@@ -27,12 +28,14 @@
     <li class="active">餐廳信息管理</li>
     <li class="active">餐廳列表</li>
 </ol>
-<form action="successOfResManager.html" target="mainFrame" >
+<form action="restaurant/deleteAll"  method="post" target="mainFrame" >
     <table class="table table-hover">
         <thead>
         <tr>
-            <th><input type="checkbox" id="checkAll" name="checkAll" />全選</th>
+            <th><input type="checkbox" id="checAll" name="ids" />全選</th>
             <th class="text-center">餐厅名</th>
+
+            <th class="text-center">商家姓名</th>
             <th class="text-center">价格简介</th>
            
             <th class="text-center">客服电话</th>
@@ -41,56 +44,72 @@
             <th class="text-center">單行操作</th>
         </tr>
         </thead>
-        <tr>
-            <td><input type="checkbox" name="checkBox"/></td>
-            <td class="text-center">旺角餐廳</td>
-            <td class="text-center">人均30元</td>
-            
-            <td class="text-center">10086</td>
-            <td class="text-center">9:00至23:00</td>
-			<td class="text-center"><a href="orderList.html">查看<a></td>
-            <td class="text-center">
-                <div class="btn-group">
-                    <a class="btn btn-default" href="restaurantDetail.html" target="mainFrame" >詳情</a>
-                    <a class="btn btn-default" href="successOfResManager.html" target="mainFrame" onclick="onedelete()">刪除</a>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td><input type="checkbox" name="checkBox"/></td>
-            <td class="text-center">旺角餐廳</td>
-            <td class="text-center">人均30元</td>
-           
-            <td class="text-center">10086</td>
-            <td class="text-center">9:00至23:00</td>
-			 <td class="text-center"><a href="orderList.html">查看<a></td>
-            <td class="text-center">
-                <div class="btn-group">
-                    <a class="btn btn-default" href="restaurantDetail.html" target="mainFrame" >詳情</a>
-                    <a class="btn btn-default" href="successOfResManager.html" target="mainFrame" onclick="onedelete()">刪除</a>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td><input type="checkbox" name="checkBox"/></td>
-            <td class="text-center">旺角餐廳</td>
-            <td class="text-center">人均30元</td>
-           
-            <td class="text-center">10086</td>
-            <td class="text-center">9:00至23:00</td>
-			 <td class="text-center"><a href="orderList.html">查看<a></td>
-            <td class="text-center">
-                <div class="btn-group">
-                    <a class="btn btn-default" href="restaurantDetail.html" target="mainFrame" >詳情</a>
-                    <a class="btn btn-default" href="successOfResManager.html" target="mainFrame" onclick="onedelete()">刪除</a>
-                </div>
-            </td>
-        </tr>
+        <c:forEach items="${list }" var="item">
+            <tr>
+                <td><input type="checkbox" id="checkBox" name="ids" value="${item.id}"/></td>
+                <td class="text-center">${item.name}</td>
+                <td class="text-center">${item.userTureName}</td>
+                <td class="text-center">${item.priceInfo}</td>
+                <td class="text-center">${item.phone}</td>
+                <td class="text-center">${item.shopTime}</td>
+                <td class="text-center"><a href="order/queryOrderList?id=${item.id}">查看<a></td>
+                <td class="text-center">
+                    <div class="btn-group">
+                        <a class="btn btn-default" href="restaurant/queryRestaurantById?id=${item.id }" target="mainFrame" >詳情</a>
+                        <a class="btn btn-default" href="restaurant/delete?id=${item.id }" target="mainFrame" onclick="onedelete()">刪除</a>
+                    </div>
+                </td>
+            </tr>
+        </c:forEach>
         <tfoot>
         <tr>
-            <th colspan="7" class="text-center">
-                <input type="submit" class="btn btn-danger" value="批量删除" onclick="checkdelete()" >
-                <a class="btn btn-info" href="mainFrame/restaurantManager/addRestaurant.jsp" target="mainFrame">添加餐廳</a>
+            <th colspan="8" class="text-center">
+                <div class="btn-group col-6 ">
+                    <c:choose>
+                        <c:when test="${page.pageNum != 1}">
+                            <a class="btn btn-default" href="<%=request.getContextPath()%>/restaurant/queryRestaurantList?page=${page.firstPage}" target="mainFrame">首頁</a>
+                            <a class="btn btn-default" href="<%=request.getContextPath()%>/restaurant/queryRestaurantList?page=${page.prePage}" target="mainFrame">上一頁</a>
+                        </c:when>
+                        <c:otherwise>
+                            <b class="btn btn-default" style="background-color:#D4D4D4;">首頁</b>
+                            <b class="btn btn-default" style="background-color:#D4D4D4;">上一頁</b>
+                        </c:otherwise>
+                    </c:choose>
+                    <c:choose>
+                        <c:when test="${page.pageNum != page.pages}">
+                            <a class="btn btn-default" href="<%=request.getContextPath()%>/restaurant/queryRestaurantList?page=${page.nextPage}" target="mainFrame">下一頁</a>
+                            <a class="btn btn-default" href="<%=request.getContextPath()%>/restaurant/queryRestaurantList?page=${page.lastPage}" target="mainFrame">尾頁</a>
+                        </c:when>
+                        <c:otherwise>
+                            <b class="btn btn-default" style="background-color:#D4D4D4;">下一頁</b>
+                            <b class="btn btn-default" style="background-color:#D4D4D4;">尾頁</b>
+                        </c:otherwise>
+                    </c:choose>
+
+                </div>
+
+                <div class="btn-group col-6">
+                    <div class="input-group-btn">
+                        <select id="row" class="form-control" style="width: auto;">
+                            <c:forEach var = "li" begin="1" end="${page.pages}">
+                                <option <c:if test='${page.pageNum == li}'>  selected='selected'  </c:if> value="${li}" id="select" name="select">${li}</option>
+                            </c:forEach>
+
+                        </select>
+
+
+                    </div>
+                    <span class="input-group-btn">
+                        <a id="jump" class="btn btn-default" href="javascript:location.href='${pageContext.request.contextPath}/restaurant/queryRestaurantList?page='+$('#row').val();" target="mainFrame" >跳轉</a>
+	                </span>
+                </div>
+            </th>
+        </tr>
+
+        <tr>
+            <th colspan="8" class="text-center">
+                <input type="submit" class="btn btn-danger" onclick="checkdelete()" value="批量删除">
+                <a class="btn btn-info" href="restaurant/addFilter?uId=${uid}" target="mainFrame">添加餐廳</a>
             </th>
         </tr>
         </tfoot>
@@ -147,12 +166,13 @@
     }
 
     function checkdelete(){
-        if (!confirm("確認刪除所有被選項？")) {
-            window.event.returnValue = false;
-        }
-        else{
+
+        if (confirm("確認刪除所有被選項？")==true) {
+
+//       }
+//       else{
             var checkflag = false; //false:未选中复选框  true:选中至少一个
-            var checkboxs = document.getElementsByName("checkBox");
+            var checkboxs = document.getElementsByName("ids");
             for(var i=0;i<checkboxs.length;i++){
                 if(checkboxs[i].checked == true){
                     checkflag = true;
@@ -163,6 +183,7 @@
                 alert("未選中用戶,請選擇後再執行批量刪除");
                 window.event.returnValue = false;
             }
+           // location.href("restaurant/deleteAll?ids="+ids);
         }
     }
 </script>

@@ -13,9 +13,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>頭部</title>
-
+<script src="js/jquery.min.js"></script>
     <!-- 新 Bootstrap 核心 CSS 文件 -->
-    <link href="css/bootstrap.css" rel="stylesheet">
+   <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <style>
     .head {
@@ -48,7 +48,6 @@
     </ul>
 </div>
 </body>
-<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
 <script>
     function exit() {
         if (!confirm("確認退出？")) {  window.event.returnValue = false;  }

@@ -15,6 +15,10 @@
 	<select id="selectUserCount" resultType="Integer">
 		SELECT COUNT(*) FROM tb_user 
 	</select>
+	<!-- 显示用户信息 -->
+	<select id="userList" resultType="user">
+		SELECT * FROM tb_user
+	</select>
 	<!-- 查询所有用户 -->
 	<select id="selectUserList" parameterType="java.util.Map" resultMap="resultUserMap">
 		SELECT * FROM tb_user LIMIT #{start},#{size}

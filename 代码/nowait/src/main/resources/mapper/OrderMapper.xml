@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yjg.mapper.OrderMapper">
+	<!-- 根据餐厅信息查询该餐厅所有订单 -->
+
+	<select id="orderList" resultType="order" parameterType="java.lang.Integer">
+		SELECT * FROM tb_order WHERE restId = #{id}
+	</select>
+	<!--根据订单id查询订单-->
+	<select id="orderById" resultType="order" parameterType="java.lang.Integer">
+		SELECT * FROM tb_order WHERE id = #{id}
+	</select>
+
+	<delete id="deleteOrder" parameterType="java.lang.Integer">
+		DELETE FROM tb_order WHERE id=#{id}
+	</delete>
+
+</mapper>

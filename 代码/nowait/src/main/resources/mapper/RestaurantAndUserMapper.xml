@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yjg.mapper.RestaurantAndUserMapper">
+
+	<select id="listRU" resultType="com.yjg.vo.RestaurantAndUser">
+		SELECT tb_restaurant.*,tb_user.trueName UserTureName FROM tb_restaurant,tb_user WHERE tb_restaurant.userid=tb_user.id
+	</select>
+	<select id="listRuById" resultType="com.yjg.vo.RestaurantAndUser" parameterType="java.lang.Integer">
+		SELECT tb_restaurant.*,tb_user.trueName UserTureName FROM tb_restaurant,tb_user WHERE tb_restaurant.userid=tb_user.id AND tb_restaurant.userid=#{id}
+	</select>
+	<select id="listByRsId" resultType="com.yjg.vo.RestaurantAndUser" parameterType="java.lang.Integer">
+		SELECT tb_restaurant.*,tb_user.trueName UserTureName FROM tb_restaurant,tb_user WHERE tb_restaurant.userid=tb_user.id AND tb_restaurant.id=#{id}
+	</select>
+
+
+</mapper>

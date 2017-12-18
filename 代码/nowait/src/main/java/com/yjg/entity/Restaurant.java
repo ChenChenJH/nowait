@@ -14,7 +14,7 @@ public class Restaurant {
 	private String phone;  //客服电话
 	private String shopTime;  //营业时间
 	private String status;  //餐厅状况
-	private String userId;  //用户id
+	private Integer userId;  //用户id
 	private String chainName;  //连锁店名称
 	private String coverPic;  //餐厅门面图
 	private String navPic;  //餐厅导航图
@@ -95,11 +95,11 @@ public class Restaurant {
 		this.status = status;
 	}
 
-	public String getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 

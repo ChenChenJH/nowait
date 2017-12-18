@@ -15,11 +15,11 @@
     <title>添加商家頁面</title>
     <!-- 新 Bootstrap 核心 CSS 文件 -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/jquery.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/bootstrapValidator.min.js"></script>
+	<link href="css/bootstrapValidator.min.css" rel="stylesheet" />
 </head>
-<script src="https://code.jquery.com/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/bootstrapValidator.min.js"></script>
-<link href="css/bootstrapValidator.min.css" rel="stylesheet" />
 <script type="text/javascript">
 	$(function () {
     $('#myform').bootstrapValidator({message: 'This value is not valid',
@@ -80,6 +80,10 @@
                 validators: {
                     notEmpty: {
                         message: '真实姓名不能为空'
+                    },
+                    regexp: {
+                        regexp: /^[\u4e00-\u9fa5]+$/,
+                        message: '真实姓名只能是汉字'
                     }
                 }
             },

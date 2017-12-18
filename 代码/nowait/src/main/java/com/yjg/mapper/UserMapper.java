@@ -39,5 +39,7 @@ public interface UserMapper {
 
 	//修改用户密码
 	public void updateUserPwd(Map<String, Object> queryMap) throws Exception;
+	
+	public List<User> userList();
 
 }

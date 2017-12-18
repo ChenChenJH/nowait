@@ -1,13 +1,21 @@
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
 <html>
 <head>
+	<base href="<%=basePath%>">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>餐廳訂單列表頁面</title>
     <!-- 新 Bootstrap 核心 CSS 文件 -->
-    <link href="../../css/bootstrap.css" rel="stylesheet">
-    <!-- jQuery文件 -->
-    <script src="../../js/jquery.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/jquery.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -15,7 +23,7 @@
     管理員：
     <li><a href="../../index/mainFrame.html">首頁</a></li>
     <li class="active">餐廳信息管理</li>
-	<li ><a href="restaurantList.html">餐廳列表</a></li>
+    <li ><a href="restaurantList.html">餐廳列表</a></li>
     <li class="active">餐廳排隊列表</li>
 </ol>
 <form action="successOfOrderManager.html" target="mainFrame" >
@@ -31,63 +39,33 @@
             <th class="text-center">單行操作</th>
         </tr>
         </thead>
-        <tr>
-            <td><input type="checkbox" name="checkBox"/></td>
-            <td class="text-center">12343</td>
-            <td class="text-center">旺角餐廳</td>
-            <td class="text-center">0101</td>
-            <td class="text-center">2017-11-18 20:45:01</td>
-            <td class="text-center">是</td>
-            <td class="text-center">
-                <div class="btn-group">
-                    <a class="btn btn-default" href="orderDetail.html" target="mainFrame" >詳情</a>
-                    <a class="btn btn-default" href="successOfOrderManager.html" target="mainFrame" onclick="onedelete()">刪除</a>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td><input type="checkbox" name="checkBox"></td>
-            <td class="text-center">12344</td>
-            <td class="text-center">旺角餐廳</td>
-            <td class="text-center">0102</td>
-            <td class="text-center">2017-11-18 20:45:01</td>
-            <td class="text-center">否</td>
-            <td class="text-center">
-                <div class="btn-group">
-                    <a class="btn btn-default" href="orderDetail.html" target="mainFrame" >詳情</a>
-                    <a class="btn btn-default" href="successOfOrderManager.html" target="mainFrame" onclick="onedelete()">刪除</a>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td><input type="checkbox" name="checkBox"/></td>
-            <td class="text-center">12345</td>
-            <td class="text-center">旺角餐廳</td>
-            <td class="text-center">0103</td>
-            <td class="text-center">2017-11-18 20:45:01</td>
-            <td class="text-center">是</td>
-            <td class="text-center">
-                <div class="btn-group">
-                    <a class="btn btn-default" href="orderDetail.html" target="mainFrame" >詳情</a>
-                    <a class="btn btn-default" href="successOfOrderManager.html" target="mainFrame" onclick="onedelete()">刪除</a>
-                </div>
-            </td>
-        </tr>
+        <c:forEach items="${orderList }" var="orderList">
+            <tr>
+                <td><input type="checkbox" name="checkBox"/></td>
+                <td class="text-center">${orderList.id}</td>
+                <td class="text-center">${orderList.restName}</td>
+                <td class="text-center">${orderList.waitNo}</td>
+                <td class="text-center">${orderList.createDate}</td>
+                <td class="text-center">${orderList.isUsage}</td>
+                <td class="text-center">
+                    <div class="btn-group">
+                        <a class="btn btn-default" href="order/queryOrderById?id=${orderList.id }" target="mainFrame" >詳情</a>
+                        <a STYLE="display: none" class="btn btn-default" href="successOfOrderManager.html" target="mainFrame" onclick="onedelete()">刪除</a>
+                    </div>
+                </td>
+            </tr>
+        </c:forEach>
 
         <tfoot>
         <tr>
             <th colspan="7" class="text-center">
-                <input type="submit" class="btn btn-danger" value="批量删除" onclick="checkdelete()" >
+                <input STYLE="display: none" type="submit" class="btn btn-danger" value="批量删除" onclick="checkdelete()" >
             </th>
         </tr>
         </tfoot>
     </table>
 </form>
 </body>
-<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
-<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
     $(function(){
         function initTableCheckbox() {

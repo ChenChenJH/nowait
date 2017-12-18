@@ -71,7 +71,7 @@
 			<a href="user/list" target="mainFrame"
 				class="list-group-item">商家管理</a>
 		</c:if>
-		<a href="mainFrame/restaurantManager/restaurantList.jsp"
+		<a href="restaurant/queryRestaurantList"
 			target="mainFrame" class="list-group-item"> 餐廳管理</a>
 
 		<c:if test="${sessionScope.type =='管理員' }">

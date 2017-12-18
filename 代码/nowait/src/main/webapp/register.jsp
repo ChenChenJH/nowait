@@ -95,6 +95,10 @@ function check() {
                 validators: {
                     notEmpty: {
                         message: '真实姓名不能为空'
+                    },
+                    regexp: {
+                        regexp: /^[\u4e00-\u9fa5]+$/,
+                        message: '真实姓名只能是汉字'
                     }
                 }
             },

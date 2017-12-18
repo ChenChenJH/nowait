@@ -19,7 +19,6 @@
     <!-- jQuery文件 -->
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    
 
 </head>
 <body>

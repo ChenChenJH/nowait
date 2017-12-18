@@ -90,4 +90,8 @@ public class UserServiceImpl implements UserService {
 		queryMap.put("pwd", newPwd);
 		this.userMapper.updateAdminPwd(queryMap);
 	}
+	//使用mybatis分页插件查询
+	public List<User> userList() {
+		return userMapper.userList();
+	}
 }

@@ -39,5 +39,7 @@ public interface UserService {
 	
 	//修改用户密码
 	public void updateUserPwd(String userName, String pwd)throws Exception;
+	
+	public List<User> userList();
 
 }
