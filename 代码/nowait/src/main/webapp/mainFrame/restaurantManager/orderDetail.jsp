@@ -1,5 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -12,12 +11,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>餐廳訂單詳情頁面</title>
-     <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/bootstrapValidator.min.js"></script>
 	<link href="css/bootstrapValidator.min.css" rel="stylesheet" />
+    <!-- 日期控件 -->
+     <link href=css/bootstrap-datetimepicker.css" rel="stylesheet">
+    <script src="js/bootstrap-datetimepicker.js"></script>
+    <script src="js/bootstrap-datetimepicker.zh-CN.js"></script>
 </head>
 <script type="text/javascript">
     $(function () {
@@ -44,7 +47,7 @@
 <body>
 <ol class="breadcrumb">
     管理員：
-    <li><a href="../../index/mainFrame.html">首頁</a></li>
+    <li><a href="index/mainFrame.jsp">首頁</a></li>
     <li class="active">餐廳信息管理</li>
     <li ><a href="restaurantList.html">餐廳列表</a></li>
     <li><a href="orderList.html">餐廳排隊列表</a></li>

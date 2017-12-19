@@ -15,16 +15,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>餐廳門店列表頁面</title>
     <!-- 新 Bootstrap 核心 CSS 文件 -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <!-- jQuery文件 -->
     <script src="js/jquery.js"></script>
-	<script src="js/bootstrap.min.js"></script>
 
 </head>
 
 <body>
 <ol class="breadcrumb">
     管理員：
-    <li><a href="index/mainFrame.html">首頁</a></li>
+    <li><a href="index/mainFrame.jsp">首頁</a></li>
     <li class="active">餐廳信息管理</li>
     <li class="active">餐廳列表</li>
 </ol>
@@ -55,8 +55,8 @@
                 <td class="text-center"><a href="order/queryOrderList?id=${item.id}">查看<a></td>
                 <td class="text-center">
                     <div class="btn-group">
-                        <a class="btn btn-default" href="restaurant/queryRestaurantById?id=${item.id }" target="mainFrame" >詳情</a>
-                        <a class="btn btn-default" href="restaurant/delete?id=${item.id }" target="mainFrame" onclick="onedelete()">刪除</a>
+                        <a class="btn btn-default" href="restaurant/queryRestaurantById?id=${item.id }&pageNumber=${page.pageNum}" target="mainFrame" >詳情</a>
+                        <a class="btn btn-default" href="restaurant/delete?id=${item.id }&pageNumber=${page.pageNum}" target="mainFrame" onclick="onedelete()">刪除</a>
                     </div>
                 </td>
             </tr>
@@ -100,7 +100,7 @@
 
                     </div>
                     <span class="input-group-btn">
-                        <a id="jump" class="btn btn-default" href="javascript:location.href='${pageContext.request.contextPath}/restaurant/queryRestaurantList?page='+$('#row').val();" target="mainFrame" >跳轉</a>
+                        <a id="jump" class="btn btn-default" href="javascript:location.href='${pageContext.request.contextPath }/restaurant/queryRestaurantList?page='+$('#row').val();" target="mainFrame" >跳轉</a>
 	                </span>
                 </div>
             </th>

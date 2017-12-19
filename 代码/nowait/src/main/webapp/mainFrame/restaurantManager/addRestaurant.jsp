@@ -1,10 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-    String path = request.getContextPath();
-    String basePath = request.getScheme() + "://"
-            + request.getServerName() + ":" + request.getServerPort()
-            + path + "/";
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
 %>
 <html>
 <head>
@@ -12,12 +12,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>添加餐廳門店頁面</title>
-	 <!-- 新 Bootstrap 核心 CSS 文件 -->
+	<!-- 新 Bootstrap 核心 CSS 文件 -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/bootstrapValidator.min.js"></script>
 	<link href="css/bootstrapValidator.min.css" rel="stylesheet" />
+    <!-- 日期控件 -->
+     <link href=css/bootstrap-datetimepicker.css" rel="stylesheet">
+    <script src="js/bootstrap-datetimepicker.js"></script>
+    <script src="js/bootstrap-datetimepicker.zh-CN.js"></script>
+     <script src="js/jquery.uploadify.js"></script>
+	<link href="js/uploadify.css" rel="stylesheet">
+
 </head>
 <script>
 	function add() {
@@ -85,10 +92,10 @@
     $(function () {
         $('form').bootstrapValidator({
             message: 'This value is not valid',
-			feedbackIcons: {                
+			feedbackIcons: {               
                 valid: 'glyphicon glyphicon-ok',              
 				invalid: 'glyphicon glyphicon-remove',
-				validating: 'glyphicon glyphicon-refresh'  },
+				validating: 'glyphicon glyphicon-refresh' },
             live: 'enabled',
             fields: {
                 name: {
@@ -98,9 +105,9 @@
                             message: '店名不能为空'
                         },
                         stringLength: {
-                            min: 6,
+                            min: 2,
                             max: 18,
-                            message: '用户名长度必须在6到18位之间'
+                            message: '用户名长度必须在2到18位之间'
                         }
                     }
                 },
@@ -193,7 +200,7 @@ fieldset{margin-top:10px}
 <body>
 	<ol class="breadcrumb">
 		管理員：
-		<li><a href="../../index/mainFrame.html">首頁</a></li>
+		<li><a href="index/mainFrame.jsp">首頁</a></li>
 		<li class="active">餐廳信息管理</li>
 		<li><a href="restaurantList.html">餐廳門店列表</a></li>
 		<li class="active">添加餐廳</li>
@@ -277,8 +284,6 @@ fieldset{margin-top:10px}
 								  <option>大桌</option>
 								  <option>小桌</option>
 								  <option>中桌</option>
-								  <option>中小桌</option>
-								  <option>大中桌</option>
 								</select>
 							</div>
 							<div class="col-sm-4">
@@ -292,11 +297,25 @@ fieldset{margin-top:10px}
 						</div>
 					</fieldset>
 					<div class="form-group">
+						<label for="chainName" class="col-sm-2 control-label">是否过号不取消</label>
+						<div class="col-sm-4">
+							<select class="form-control" name="isOverdue">
+								<option value="1">是</option>
+								<option value="0">否</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
 						<label for="chainName" class="col-sm-2 control-label">连锁店名称</label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control" id="chainName" name="chainName"
-								placeholder="请输入连锁店名称">
-						</div>
+						<select id="chainName" name="chainName" class="form-control" style="width: auto;">
+							<option value="null">无</option>
+							<c:forEach items="${listChainShop}" var="list">
+								<option value="${list.name}">${list.name}</option>
+							</c:forEach>
+
+						</select>
+					</div>
 					</div>
 					<div class="form-group">
 						<label for="coverPicFile" class="col-sm-2 control-label">餐厅门面图</label>
@@ -322,7 +341,7 @@ fieldset{margin-top:10px}
 						<p >
 							<lable style="color:red;font-size:16px;font-weight:bold;">上传餐厅的位置信息(必填)</lable>
 						</p>
-						<div id="r-result">请输入：<input type="text" id="suggestId" size="20" name="suggestId" value="百度" style="width:500px;"></div>
+						<div id="r-result">请输入地址：<input type="text" id="suggestId" size="20" name="suggestId" value="百度" style="width:500px;"></div>
 					<div id="searchResultPanel" style="border:1px solid #C0C0C0;width:500px;height:auto;display:none;"></div>
 					</br>
 						经度:<input id="longitude" type="text"  name="lng"

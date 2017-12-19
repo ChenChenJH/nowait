@@ -2,13 +2,11 @@ package com.yjg.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.yjg.entity.ChainShop;
 import com.yjg.entity.Desk;
 import com.yjg.entity.Restaurant;
 import com.yjg.entity.User;
-import com.yjg.service.DeskService;
-import com.yjg.service.RestaurantAndUserService;
-import com.yjg.service.RestaurantService;
-import com.yjg.service.UserService;
+import com.yjg.service.*;
 import com.yjg.tools.JSchUtil;
 import com.yjg.vo.RestaurantAndUser;
 import org.apache.commons.lang3.StringUtils;
@@ -36,6 +34,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/restaurant")
 public class RestaurantController {
+    @Autowired
+    private ChainShopService chainShopService;
 
     @Resource
     private JSchUtil jSchUtil;
@@ -62,7 +62,7 @@ public class RestaurantController {
 
     //添加餐厅信息
     @RequestMapping("/addRestaurant")
-    public void addRestaurant(Restaurant restaurant, HttpServletRequest request,
+    public String addRestaurant(Restaurant restaurant, HttpServletRequest request,
                               HttpServletResponse response, Desk desk, HttpSession session,@RequestParam("coverPicFile") MultipartFile coverPic,@RequestParam("navPicFile") MultipartFile[] navPic) throws Exception {
         response.setContentType("text/html;charset=utf-8");
         if(restaurant.getUserId()==null) {
@@ -70,7 +70,7 @@ public class RestaurantController {
             Session shiroSession = currentUser.getSession();
             restaurant.setUserId((int) shiroSession.getAttribute("userId"));
         }
-        restaurant.setIsOverdue("1");
+
         String coverFileName="";
         if(StringUtils.isNoneBlank(coverPic.getOriginalFilename())) {
             coverFileName = jSchUtil.uploadFile(coverPic);
@@ -102,7 +102,7 @@ public class RestaurantController {
         System.out.println(desk.getRestId());
         deskService.addDesk(desk);
 
-        response.sendRedirect("/restaurant/queryRestaurantList");
+        return "/mainFrame/restaurantManager/successOfResManager.jsp";
 
 
 
@@ -143,7 +143,7 @@ public class RestaurantController {
     }
     //根据id查询餐厅信息
     @RequestMapping("/queryRestaurantById")
-    public String queryOrderById(int id,Model model){
+    public String queryOrderById(int id,Model model,int pageNumber){
 
         //从request中获取请求值
 //        String sid=request.getParameter("id");
@@ -152,21 +152,22 @@ public class RestaurantController {
         RestaurantAndUser restauant=restaurantAndUserService.listByRsId(id);
 
         model.addAttribute("restaurant",restauant);
+        model.addAttribute("pageNumber",pageNumber);
         return "/mainFrame/restaurantManager/restaurantDetail.jsp";
 
     }
     //根据id删除餐厅信息
     @RequestMapping("/delete")
-    public void deleteOrder(int id, HttpServletResponse response) throws IOException {
+    public String deleteOrder(int id, HttpServletResponse response,int pageNumber,Model model) throws Exception {
         restaurantService.deleteRestaurant(id);
-        response.sendRedirect("restaurant/queryRestaurantList");
+        return queryRestaurantList(pageNumber,model);
 
 
 
     }
     //根据id修改餐厅信息
     @RequestMapping("/update")
-    public void update(HttpServletRequest request, HttpServletResponse response, Restaurant restaurant, int id, @RequestParam("pictureFile1") MultipartFile pictureFile1, @RequestParam("pictureFile2")MultipartFile[] pictureFile2) throws Exception {
+    public String update(HttpServletRequest request, HttpServletResponse response, Restaurant restaurant, int id, @RequestParam("pictureFile1") MultipartFile pictureFile1, @RequestParam("pictureFile2")MultipartFile[] pictureFile2) throws Exception {
 
         String coverFileName="";
         if(StringUtils.isNoneBlank(pictureFile1.getOriginalFilename()))
@@ -209,7 +210,7 @@ public class RestaurantController {
         navShuJukus=navShuJukus.substring(0,navShuJukus.length()-1);
         restaurant.setNavPic(navShuJukus);
         restaurantService.update(restaurant);
-        response.sendRedirect("/restaurant/queryRestaurantList");
+        return "/mainFrame/restaurantManager/successOfResManager.jsp" ;
 
 
 
@@ -229,7 +230,7 @@ public class RestaurantController {
 
     //批量删除
     @RequestMapping("/deleteAll")
-    public void deleteALL(HttpServletResponse response,Integer[] ids) throws IOException {
+    public String deleteALL(HttpServletResponse response,Integer[] ids) throws IOException {
 
         //System.out.println(queryPojo.getItem().getId());
         //System.out.println(queryPojo.getItem().getName());
@@ -237,7 +238,7 @@ public class RestaurantController {
         for(int id:ids){
             restaurantService.deleteRestaurant(id);
         }
-        response.sendRedirect("/restaurant/queryRestaurantList");
+        return "/mainFrame/restaurantManager/successOfResManager.jsp";
 
 
     }
@@ -249,12 +250,16 @@ public class RestaurantController {
         if(uId==0)
         {
             List<User> listUser=userService.userList();
+            List<ChainShop> listChainShop=chainShopService.chainShopList();
+            model.addAttribute("listChainShop",listChainShop);
             model.addAttribute("uid",uId);
             model.addAttribute("listUser",listUser);
             return "/mainFrame/restaurantManager/addRestaurant.jsp";
 
         }
         else {
+            List<ChainShop> listChainShop=chainShopService.chainShopList();
+            model.addAttribute("listChainShop",listChainShop);
             model.addAttribute("uid",uId);
             return "/mainFrame/restaurantManager/addRestaurant.jsp";
         }

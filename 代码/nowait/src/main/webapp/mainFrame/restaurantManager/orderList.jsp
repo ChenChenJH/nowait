@@ -12,16 +12,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>餐廳訂單列表頁面</title>
-    <!-- 新 Bootstrap 核心 CSS 文件 -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+   <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <!-- jQuery文件 -->
     <script src="js/jquery.js"></script>
-	<script src="js/bootstrap.min.js"></script>
 </head>
 
 <body>
 <ol class="breadcrumb">
     管理員：
-    <li><a href="../../index/mainFrame.html">首頁</a></li>
+    <li><a href="index/mainFrame.jsp">首頁</a></li>
     <li class="active">餐廳信息管理</li>
     <li ><a href="restaurantList.html">餐廳列表</a></li>
     <li class="active">餐廳排隊列表</li>
@@ -55,7 +55,7 @@
                 </td>
             </tr>
         </c:forEach>
-
+        
         <tfoot>
         <tr>
             <th colspan="7" class="text-center">

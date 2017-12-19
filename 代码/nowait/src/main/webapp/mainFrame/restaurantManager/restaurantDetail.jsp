@@ -8,14 +8,22 @@
 %>
 <html>
 <head>
-<base href="<%=basePath%>">
+	<base href="<%=basePath%>">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>餐廳門店詳情頁面</title>
-   <!-- 新 Bootstrap 核心 CSS 文件 -->
+  <!-- 新 Bootstrap 核心 CSS 文件 -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+	<script src="js/bootstrapValidator.min.js"></script>
+	<link href="css/bootstrapValidator.min.css" rel="stylesheet" />
+    <!-- 日期控件 -->
+     <link href=css/bootstrap-datetimepicker.css" rel="stylesheet">
+    <script src="js/bootstrap-datetimepicker.js"></script>
+    <script src="js/bootstrap-datetimepicker.zh-CN.js"></script>
+     <script src="js/jquery.uploadify.js"></script>
+	<link href="js/uploadify.css" rel="stylesheet">
 </head>
 <script type="text/javascript">
     $(function () {
@@ -100,7 +108,7 @@
 <body>
 <ol class="breadcrumb">
     管理員：
-    <li><a href="../../index/mainFrame.html">首頁</a></li>
+    <li><a href="index/mainFrame.jsp">首頁</a></li>
     <li class="active">餐廳信息管理</li>
     <li><a href="restaurantList.html">餐廳門店列表</a></li>
     <li class="active">詳情</li>
@@ -196,7 +204,7 @@
         <tr>
             <th colspan="2" class="text-center">
                 <input type="submit" class="btn btn-success" value="修改">
-                <a class="btn btn-danger" href="restaurant/delete?id=${restaurant.id }" target="mainFrame" onclick="onedelete()">刪除該餐廳</a>
+                <a class="btn btn-danger" href="restaurant/delete?id=${restaurant.id }&pageNumber=${pageNumber}" target="mainFrame" onclick="onedelete()">刪除該餐廳</a>
                 <a class="btn btn-info" href="javascript:history.back(-1)"
                    target="mainFrame">返回列表</a>
             </th>
