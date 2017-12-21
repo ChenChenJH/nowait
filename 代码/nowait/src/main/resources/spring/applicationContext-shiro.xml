@@ -93,11 +93,9 @@
         <property name="filterChainDefinitions">
             <value>
                 /login.jsp = anon
-                /index.jsp = user
-                /register-success.jsp = anon
+                /register_success.jsp = anon
                 /user/isExist = anon
                 /user/register = anon
-                /index/** = user
                 /register.jsp = anon
                 /user/login = anon              
                 /user/louginout = logout

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.yjg.entity.LoginDTO;
 import com.yjg.entity.User;
 import com.yjg.service.UserService;
+import com.yjg.tools.AddCookie;
 import com.yjg.tools.MD5Encryption;
 
 @Controller
@@ -66,6 +67,9 @@ public class UserController {
 				// 保存该用户的userId
 				session.setAttribute("userId", (int)shiroSession.getAttribute("userId")); 
 			}
+			//处理cookie,保存login.jsp的登录信息
+			AddCookie.addCookie(loginDTO.getName(), loginDTO.getPwd(), 
+					loginDTO.getIsReadme(), loginDTO.getType(),response, request);
 		}
 		return result;
 		
@@ -94,9 +98,8 @@ public class UserController {
 	@RequestMapping(value = "/register")
 	public String registerUser(User user) throws Exception {
 		this.userService.insert(user);
-		return "/register_success.jsp";
+		return "redirect:/register_success.jsp";
 	}
-	
 	
 	//查询全部
 	@RequestMapping(value="/list")
