@@ -28,11 +28,11 @@
     <li class="active">餐廳信息管理</li>
     <li class="active">餐廳列表</li>
 </ol>
-<form action="restaurant/deleteAll"  method="post" target="mainFrame" >
+<form action="restaurant/deleteAll?pageNumber=${page.pageNum}&size=${page.size}"  method="post" target="mainFrame" >
     <table class="table table-hover">
         <thead>
         <tr>
-            <th><input type="checkbox" id="checAll" name="ids" />全選</th>
+            <th><input type="checkbox" id="checAll"/>全選</th>
             <th class="text-center">餐厅名</th>
 
             <th class="text-center">商家姓名</th>
@@ -52,11 +52,11 @@
                 <td class="text-center">${item.priceInfo}</td>
                 <td class="text-center">${item.phone}</td>
                 <td class="text-center">${item.shopTime}</td>
-                <td class="text-center"><a href="order/queryOrderList?id=${item.id}">查看<a></td>
+                <td class="text-center"><a href="order/queryOrderList?restid=${item.id}">查看<a></td>
                 <td class="text-center">
                     <div class="btn-group">
                         <a class="btn btn-default" href="restaurant/queryRestaurantById?id=${item.id }&pageNumber=${page.pageNum}" target="mainFrame" >詳情</a>
-                        <a class="btn btn-default" href="restaurant/delete?id=${item.id }&pageNumber=${page.pageNum}" target="mainFrame" onclick="onedelete()">刪除</a>
+                        <a class="btn btn-default" href="restaurant/delete?id=${item.id }&pageNumber=${page.pageNum}&size=${page.size}" target="mainFrame" onclick="onedelete()">刪除</a>
                     </div>
                 </td>
             </tr>
@@ -153,10 +153,10 @@
                 $(this).find('input').click();
             });
             /*点击按钮 不选中复选框*/
-            var $a = $('table tr td a');
-            $a.click(function(){
-                $(this).parent().parent().parent().find('input').click();
-            });
+//            var $a = $('table tr td a');
+//            $a.click(function(){
+//                $(this).parent().parent().parent().find('input').click();
+//            });
         }
         initTableCheckbox();
         /* 按钮删除操作 */
@@ -167,10 +167,7 @@
 
     function checkdelete(){
 
-        if (confirm("確認刪除所有被選項？")==true) {
-
-//       }
-//       else{
+        if (confirm("確認刪除所有被選項？")) {
             var checkflag = false; //false:未选中复选框  true:选中至少一个
             var checkboxs = document.getElementsByName("ids");
             for(var i=0;i<checkboxs.length;i++){
@@ -184,6 +181,9 @@
                 window.event.returnValue = false;
             }
            // location.href("restaurant/deleteAll?ids="+ids);
+        }else
+        {
+            window.event.returnValue = false;
         }
     }
 </script>

@@ -99,7 +99,7 @@
             live: 'enabled',
             fields: {
                 name: {
-                    message: '点名验证失败',
+                    message: '店名验证失败',
                     validators: {
                         notEmpty: {
                             message: '店名不能为空'
@@ -202,7 +202,7 @@ fieldset{margin-top:10px}
 		管理員：
 		<li><a href="index/mainFrame.jsp">首頁</a></li>
 		<li class="active">餐廳信息管理</li>
-		<li><a href="restaurantList.html">餐廳門店列表</a></li>
+		<li><a href="restaurant/queryRestaurantList">餐廳門店列表</a></li>
 		<li class="active">添加餐廳</li>
 	</ol>
 	<div class="formBox">
@@ -269,32 +269,47 @@ fieldset{margin-top:10px}
 								placeholder="請輸入營業時間">
 						</div>
 					</div>
-					<div class="form-group">
+					<div class="form-group" style="display: none" >
 						<label for="chainName" class="col-sm-2 control-label">餐厅状况</label>
 						<div class="col-sm-9">
 							<input type="text" class="form-control" id="chainName" name="status"
-								placeholder="请输入餐厅状况">
+								placeholder="请输入餐厅状况" value="餐廳暫停取號">
 						</div>
 					</div>
 					<fieldset id="additional">
 						<div class="form-group">
 							<label for="chainName" class="col-sm-2 control-label">桌子類型</label>
 							<div class="col-sm-2">
-								<select class="form-control" name="style">
-								  <option>大桌</option>
-								  <option>小桌</option>
-								  <option>中桌</option>
-								</select>
+								<input type="text" class="form-control" name="desks[0].style" value="大桌">
 							</div>
 							<div class="col-sm-4">
-								<input type="number" class="form-control" id="info" name="info"
-									placeholder="請輸入桌子的容坐人數">
-							</div>
-							<div class="col-sm-3">
-								<button id="addDesk" type="button" class="btn btn-default col-sm-4 create">新增</button>
-								<button id="removeDesk" type="button" class="btn btn-default col-sm-4 remove">移除</button>
+								<input type="text" class="form-control" id="info1" name="desks[0].info" placeholder="至少选择一种桌子类型">
 							</div>
 						</div>
+							<div class="form-group">
+								<label for="chainName" class="col-sm-2 control-label">桌子類型</label>
+								<div class="col-sm-2">
+									<input type="text" class="form-control" name="desks[1].style" value="中桌">
+								</div>
+								<div class="col-sm-4">
+									<input type="text" class="form-control" id="info2" name="desks[1].info"
+										   placeholder="請輸入桌子的容坐人數">
+								</div>
+							</div>
+								<div class="form-group">
+									<label for="chainName" class="col-sm-2 control-label">桌子類型</label>
+									<div class="col-sm-2">
+										<input type="text" class="form-control" name="desks[2].style" value="小桌">
+									</div>
+									<div class="col-sm-4">
+										<input type="text" class="form-control" id="info" name="desks[2].info"
+											   placeholder="請輸入桌子的容坐人數">
+									</div>
+							<%--<div class="col-sm-3">--%>
+								<%--<button id="addDesk" type="button" class="btn btn-default col-sm-4 create">新增</button>--%>
+							<%--</div>--%>
+						</div>
+
 					</fieldset>
 					<div class="form-group">
 						<label for="chainName" class="col-sm-2 control-label">是否过号不取消</label>
@@ -542,18 +557,26 @@ fieldset{margin-top:10px}
 	}
 	
 	
-	$(function () { 
-		$("#removeDesk").hide();
-        $("#addDesk").click(function(){
-        	$("#additional").after($(this).parent().parent().clone(true));
-        	$("button:gt(1)").show();
-        });
-        $("#removeDesk").click(function(){
-        	$(this).parent().parent().remove();
-        });
+//	$(function () {
+//		$("#removeDesk").hide();
+//        $("#addDesk").click(function(){
+//
+//        	$("#additional").after($(this).parent().parent().clone(true).attr(
+//                {
+//                    $:nodeName($("select"),name).nodeValue("style"),
+//                    $:nodeName($("input"),name).nodeValue("info")
+//                }
+//				)
+//
+//            );
+//        	$("button:gt(1)").show();
+//        });
+//        $("#removeDesk").click(function(){
+//        	$(this).parent().parent().remove();
+//        });
         
         
-    });
+//    });
 	
 	
 	

@@ -49,8 +49,8 @@
     管理員：
     <li><a href="index/mainFrame.jsp">首頁</a></li>
     <li class="active">餐廳信息管理</li>
-    <li ><a href="restaurantList.html">餐廳列表</a></li>
-    <li><a href="orderList.html">餐廳排隊列表</a></li>
+    <li ><a href="restaurant/queryRestaurantList">餐廳列表</a></li>
+    <li><a href="order/queryOrderList?id=${order.wxuserId}">餐廳排隊列表</a></li>
     <li class="active">詳情</li>
 </ol>
 <table class="table">
@@ -63,7 +63,7 @@
     <form class="form-horizontal" role="form" action="successOfOrderManager.html" target="mainFrame" onsubmit="update()">
         <tr>
             <th  class="col-sm-3 text-center">微信用戶id</th>
-            <td  class="col-sm-9 text-center"><input type="text" class="form-control"  readonly= "true" value="${order.wxuserId}" style="width: 220px;margin-left: 30%"></td>
+            <td  class="col-sm-9 text-center"><input type="text" class="form-control"  readonly= "true" value="${order.openId}" style="width: 220px;margin-left: 30%"></td>
         </tr>
         <tr>
             <th  class="col-sm-3 text-center">餐廳名</th>
@@ -107,7 +107,6 @@
         <tfoot>
         <tr>
             <th colspan="2" class="text-center">
-                <a STYLE="display: none" class="btn btn-danger" href="/delete?id=${order.id}"  target="mainFrame" onclick="onedelete()">刪除該訂單</a>
                 <a class="btn btn-info" href="javascript:history.back(-1)"
                    target="mainFrame">返回列表</a>
             </th>

@@ -11,24 +11,33 @@
 		SELECT * FROM tb_admin WHERE adminName = #{adminName}
 	</select>
 
-	<!-- 插入 -->
+	<!-- 插入餐厅 -->
 	<insert id="insert" parameterType="restaurant" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO tb_restaurant(name,priceInfo,warnInfo,address,phone,shopTime,status,userId,chainName,coverPic,navPic,lng,lat,createDate,isOverdue)
 		VALUES(#{name},#{priceInfo},#{warnInfo},#{address},#{phone},#{shopTime},#{status},#{userId},#{chainName},#{coverPic},#{navPic},#{lng},#{lat},now(),#{isOverdue})
 	</insert>
+	<!--查询所有餐厅信息-->
 	<select id="listAll" resultType="restaurant">
 		SELECT * FROM tb_restaurant
 	</select>
+	<!--根据用户id查询对应的餐厅信息-->
 	<select id="listAllByUserId" resultType="restaurant" parameterType="java.lang.Integer">
 		SELECT * FROM tb_restaurant WHERE userId=#{id }
 	</select>
+	<!--根据餐厅id查询餐厅信息-->
 	<select id="queryRestaurantById" resultType="restaurant" parameterType="java.lang.Integer">
 		SELECT * FROM tb_restaurant WHERE id=#{id }
 	</select>
+	<!--根据餐厅id删除餐厅信息-->
 	<delete id="deleteById" parameterType="java.lang.Integer">
 		DELETE FROM tb_restaurant WHERE id=#{id }
 	</delete>
+	<!--修改餐厅信息-->
 	<update id="update" parameterType="restaurant">
 		UPDATE tb_restaurant SET name=#{name},priceInfo=#{priceInfo},warnInfo=#{warnInfo},address=#{address},phone=#{phone},shopTime=#{shopTime},status=#{status},userId=#{userId},chainName=#{chainName},coverPic=#{coverPic},navPic=#{navPic},lng=#{lng},lat=#{lat},createDate=now() WHERE id=#{id}
 	</update>
+	<!--根据userid删除该用户所有餐厅信息-->
+	<delete id="deleteByUserId" parameterType="java.lang.Integer">
+		delete FROM tb_restaurant WHERE userId=#{id}
+	</delete>
 </mapper>

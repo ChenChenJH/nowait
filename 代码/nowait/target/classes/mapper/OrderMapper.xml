@@ -5,14 +5,15 @@
 	<!-- 根据餐厅信息查询该餐厅所有订单 -->
 
 	<select id="orderList" resultType="order" parameterType="java.lang.Integer">
-		SELECT * FROM tb_order WHERE restId = #{id}
+		SELECT * FROM tb_order WHERE restId = #{id} and isUsage='是'
 	</select>
 	<!--根据订单id查询订单-->
 	<select id="orderById" resultType="order" parameterType="java.lang.Integer">
 		SELECT * FROM tb_order WHERE id = #{id}
 	</select>
+	<!--根据餐厅id删除订单-->
 	<delete id="deleteOrder" parameterType="java.lang.Integer">
-		DELETE FROM tb_order WHERE id=#{id}
+		DELETE FROM tb_order WHERE restId=#{id}
 	</delete>
 
 </mapper>

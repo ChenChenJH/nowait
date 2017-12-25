@@ -28,5 +28,10 @@ public class DeskServiceImpl implements DeskService {
         deskMapper.insert(desk);
     }
 
+    @Override
+    public void update(Desk desk) {
+        deskMapper.update(desk);
+    }
+
 
 }

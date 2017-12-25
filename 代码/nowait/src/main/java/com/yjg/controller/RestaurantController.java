@@ -8,6 +8,7 @@ import com.yjg.entity.Restaurant;
 import com.yjg.entity.User;
 import com.yjg.service.*;
 import com.yjg.tools.JSchUtil;
+import com.yjg.vo.DeskList;
 import com.yjg.vo.RestaurantAndUser;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
@@ -34,6 +35,9 @@ import java.util.List;
 @Controller
 @RequestMapping("/restaurant")
 public class RestaurantController {
+
+    @Autowired
+    private OrderService orderService;
     @Autowired
     private ChainShopService chainShopService;
 
@@ -61,9 +65,11 @@ public class RestaurantController {
     }
 
     //添加餐厅信息
+
+
     @RequestMapping("/addRestaurant")
     public String addRestaurant(Restaurant restaurant, HttpServletRequest request,
-                              HttpServletResponse response, Desk desk, HttpSession session,@RequestParam("coverPicFile") MultipartFile coverPic,@RequestParam("navPicFile") MultipartFile[] navPic) throws Exception {
+                                HttpServletResponse response, DeskList desks, HttpSession session, @RequestParam("coverPicFile") MultipartFile coverPic, @RequestParam("navPicFile") MultipartFile[] navPic) throws Exception {
         response.setContentType("text/html;charset=utf-8");
         if(restaurant.getUserId()==null) {
             Subject currentUser = SecurityUtils.getSubject();
@@ -88,7 +94,7 @@ public class RestaurantController {
                     navFileName=jSchUtil.uploadFile(navPicFiles)+",";
                 }
                 navFileNames=navFileNames+navFileName;
-                System.out.println(navFileNames);
+
             }
             if(StringUtils.isNoneBlank(navFileNames))
             {
@@ -97,10 +103,19 @@ public class RestaurantController {
             }
         }
         restaurantService.addRestaurant(restaurant);
-        desk.setRestId(restaurant.getId());
+        System.out.println(restaurant.getId());
+        List<Desk> deskList=desks.getDesks();
+        for (Desk desk:deskList) {
+            desk.setRestId(restaurant.getId());
+            if(StringUtils.isBlank(desk.getInfo())){
+                desk.setInfo("0");
+            }
 
-        System.out.println(desk.getRestId());
-        deskService.addDesk(desk);
+                deskService.addDesk(desk);
+
+
+        }
+
 
         return "/mainFrame/restaurantManager/successOfResManager.jsp";
 
@@ -150,7 +165,8 @@ public class RestaurantController {
 //        Integer id=Integer.valueOf(sid);
         //根据id查询所有订单
         RestaurantAndUser restauant=restaurantAndUserService.listByRsId(id);
-
+        List<Desk> desklists=deskService.queryDeskAll(id);
+        model.addAttribute("desklists",desklists);
         model.addAttribute("restaurant",restauant);
         model.addAttribute("pageNumber",pageNumber);
         return "/mainFrame/restaurantManager/restaurantDetail.jsp";
@@ -158,59 +174,82 @@ public class RestaurantController {
     }
     //根据id删除餐厅信息
     @RequestMapping("/delete")
-    public String deleteOrder(int id, HttpServletResponse response,int pageNumber,Model model) throws Exception {
+    public String deleteOrder(int size,int id, HttpServletResponse response,int pageNumber,Model model) throws Exception {
         restaurantService.deleteRestaurant(id);
-        return queryRestaurantList(pageNumber,model);
+        orderService.deleteOrder(id);
+        if(size==1)
+        {
+            return queryRestaurantList(pageNumber-1,model);
+        }
+        else
+        {
+            return queryRestaurantList(pageNumber,model);
+        }
+
 
 
 
     }
     //根据id修改餐厅信息
     @RequestMapping("/update")
-    public String update(HttpServletRequest request, HttpServletResponse response, Restaurant restaurant, int id, @RequestParam("pictureFile1") MultipartFile pictureFile1, @RequestParam("pictureFile2")MultipartFile[] pictureFile2) throws Exception {
+    public String update(DeskList desks,String newadress,HttpServletRequest request, HttpServletResponse response, Restaurant restaurant, int id, @RequestParam("pictureFile1") MultipartFile pictureFile1, @RequestParam("pictureFile2")MultipartFile[] pictureFile2) throws Exception {
 
-        String coverFileName="";
-        if(StringUtils.isNoneBlank(pictureFile1.getOriginalFilename()))
+        if(StringUtils.isNoneBlank(newadress)){
+            restaurant.setAddress(newadress);
+
+        }else
         {
-            coverFileName=jSchUtil.uploadFile(pictureFile1);
-            restaurant.setCoverPic(coverFileName);
+            restaurant.setAddress(restaurant.getAddress());
 
         }
 
+            String coverFileName = "";
+            if (StringUtils.isNoneBlank(pictureFile1.getOriginalFilename())) {
+                coverFileName = jSchUtil.uploadFile(pictureFile1);
+                restaurant.setCoverPic(coverFileName);
 
-        String navShuJukus="";
-        String navFileNames=restaurant.getNavPic();
-        String[] navFileName=new String[3];
-        String array[]=navFileNames.split(",");
-        if(array.length<3){
-        for(int k=0;k<array.length;k++)
-        {
-            navFileName[k]=array[k];
-
-        }}
-        else{
-            navFileName=array;
-        }
-        for(int i=0;i<3;i++)
-        {
-            String navShuJuku="";
-            MultipartFile navFile=pictureFile2[i];
-            if(StringUtils.isNoneBlank(navFile.getOriginalFilename()))
-            {
-                navShuJuku=jSchUtil.uploadFile(navFile)+",";
-            }else
-            {
-                if(StringUtils.isNoneBlank(navFileName[i])){
-                navShuJuku=navFileName[i]+",";
-                }
             }
-            navShuJukus=navShuJukus+navShuJuku;
 
-        }
-        navShuJukus=navShuJukus.substring(0,navShuJukus.length()-1);
-        restaurant.setNavPic(navShuJukus);
-        restaurantService.update(restaurant);
-        return "/mainFrame/restaurantManager/successOfResManager.jsp" ;
+
+            String navShuJukus = "";
+            String navFileNames = restaurant.getNavPic();
+            String[] navFileName = new String[3];
+            String array[] = navFileNames.split(",");
+            if (array.length < 3) {
+                for (int k = 0; k < array.length; k++) {
+                    navFileName[k] = array[k];
+
+                }
+            } else {
+                navFileName = array;
+            }
+            for (int i = 0; i < 3; i++) {
+                String navShuJuku = "";
+                MultipartFile navFile = pictureFile2[i];
+                if (StringUtils.isNoneBlank(navFile.getOriginalFilename())) {
+                    navShuJuku = jSchUtil.uploadFile(navFile) + ",";
+                } else {
+                    if (StringUtils.isNoneBlank(navFileName[i])) {
+                        navShuJuku = navFileName[i] + ",";
+                    }
+                }
+                navShuJukus = navShuJukus + navShuJuku;
+
+            }
+            navShuJukus = navShuJukus.substring(0, navShuJukus.length() - 1);
+            restaurant.setNavPic(navShuJukus);
+            restaurantService.update(restaurant);
+            List<Desk> deskList=desks.getDesks();
+            for(Desk desk:deskList){
+                if(desk.getInfo()=="")
+                {
+                    desk.setInfo("0");
+                }
+                deskService.update(desk);
+
+            }
+
+            return "/mainFrame/restaurantManager/successOfResManager.jsp";
 
 
 
@@ -230,15 +269,21 @@ public class RestaurantController {
 
     //批量删除
     @RequestMapping("/deleteAll")
-    public String deleteALL(HttpServletResponse response,Integer[] ids) throws IOException {
+    public String deleteALL(int size,int pageNumber,Integer[] ids,Model model) throws Exception {
 
-        //System.out.println(queryPojo.getItem().getId());
-        //System.out.println(queryPojo.getItem().getName());
-        //System.out.println(queryPojo.getIds().length);
         for(int id:ids){
             restaurantService.deleteRestaurant(id);
+            orderService.deleteOrder(id);
+
         }
-        return "/mainFrame/restaurantManager/successOfResManager.jsp";
+        if(ids.length==size)
+        {
+            return queryRestaurantList(pageNumber-1,model);
+        }else
+        {
+            return queryRestaurantList(pageNumber,model);
+        }
+
 
 
     }

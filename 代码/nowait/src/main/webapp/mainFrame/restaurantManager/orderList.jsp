@@ -23,7 +23,7 @@
     管理員：
     <li><a href="index/mainFrame.jsp">首頁</a></li>
     <li class="active">餐廳信息管理</li>
-    <li ><a href="restaurantList.html">餐廳列表</a></li>
+    <li ><a href="restaurant/queryRestaurantList">餐廳列表</a></li>
     <li class="active">餐廳排隊列表</li>
 </ol>
 <form action="successOfOrderManager.html" target="mainFrame" >
@@ -42,7 +42,7 @@
         <c:forEach items="${orderList }" var="orderList">
             <tr>
                 <td><input type="checkbox" name="checkBox"/></td>
-                <td class="text-center">${orderList.id}</td>
+                <td class="text-center">${orderList.openId}</td>
                 <td class="text-center">${orderList.restName}</td>
                 <td class="text-center">${orderList.waitNo}</td>
                 <td class="text-center">${orderList.createDate}</td>
@@ -55,11 +55,54 @@
                 </td>
             </tr>
         </c:forEach>
-        
         <tfoot>
         <tr>
+            <th colspan="8" class="text-center">
+                <div class="btn-group col-6 ">
+                    <c:choose>
+                        <c:when test="${page.pageNum != 1}">
+                            <a class="btn btn-default" href="<%=request.getContextPath()%>/restaurant/queryRestaurantList?page=${page.firstPage}" target="mainFrame">首頁</a>
+                            <a class="btn btn-default" href="<%=request.getContextPath()%>/restaurant/queryRestaurantList?page=${page.prePage}" target="mainFrame">上一頁</a>
+                        </c:when>
+                        <c:otherwise>
+                            <b class="btn btn-default" style="background-color:#D4D4D4;">首頁</b>
+                            <b class="btn btn-default" style="background-color:#D4D4D4;">上一頁</b>
+                        </c:otherwise>
+                    </c:choose>
+                    <c:choose>
+                        <c:when test="${page.pageNum != page.pages}">
+                            <a class="btn btn-default" href="<%=request.getContextPath()%>/restaurant/queryRestaurantList?page=${page.nextPage}" target="mainFrame">下一頁</a>
+                            <a class="btn btn-default" href="<%=request.getContextPath()%>/restaurant/queryRestaurantList?page=${page.lastPage}" target="mainFrame">尾頁</a>
+                        </c:when>
+                        <c:otherwise>
+                            <b class="btn btn-default" style="background-color:#D4D4D4;">下一頁</b>
+                            <b class="btn btn-default" style="background-color:#D4D4D4;">尾頁</b>
+                        </c:otherwise>
+                    </c:choose>
+
+                </div>
+
+                <div class="btn-group col-6">
+                    <div class="input-group-btn">
+                        <select id="row" class="form-control" style="width: auto;">
+                            <c:forEach var = "li" begin="1" end="${page.pages}">
+                                <option <c:if test='${page.pageNum == li}'>  selected='selected'  </c:if> value="${li}" id="select" name="select">${li}</option>
+                            </c:forEach>
+
+                        </select>
+
+
+                    </div>
+                    <span class="input-group-btn">
+                        <a id="jump" class="btn btn-default" href="javascript:location.href='${pageContext.request.contextPath }/restaurant/queryRestaurantList?page='+$('#row').val();" target="mainFrame" >跳轉</a>
+	                </span>
+                </div>
+            </th>
+        </tr>
+        <tr>
             <th colspan="7" class="text-center">
-                <input STYLE="display: none" type="submit" class="btn btn-danger" value="批量删除" onclick="checkdelete()" >
+                <a class="btn btn-info" href="javascript:history.back(-1)"
+                   target="mainFrame">返回列表</a>
             </th>
         </tr>
         </tfoot>

@@ -9,10 +9,13 @@
 		VALUES(#{style},#{info},#{restId})
 	</insert>
 	<!-- 根据餐厅id查询该餐厅所有餐桌类型 -->
-
 	<select id="deskList" resultType="desk" parameterType="java.lang.Integer">
 		SELECT * FROM tb_desk WHERE restId = #{id}
 	</select>
+	<!--修改对应桌子信息-->
+	<update id="update" parameterType="desk">
+		update tb_desk set info = #{info} where id=#{id}
+	</update>
 
 
 </mapper>

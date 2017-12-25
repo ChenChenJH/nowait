@@ -10,4 +10,5 @@ import java.util.List;
 public interface DeskMapper {
     List<Desk> deskList(int id);
     public int insert(Desk desk);
+    public void  update(Desk desk);
 }

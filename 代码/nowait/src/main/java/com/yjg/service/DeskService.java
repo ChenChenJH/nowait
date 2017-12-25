@@ -10,5 +10,6 @@ import java.util.List;
 public interface DeskService {
     List<Desk> queryDeskAll(int id);
     public void addDesk(Desk desk) throws Exception;
+    public void update(Desk desk);
 
 }

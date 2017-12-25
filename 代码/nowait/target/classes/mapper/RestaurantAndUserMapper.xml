@@ -3,13 +3,15 @@
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.yjg.mapper.RestaurantAndUserMapper">
 
+	<!--联合查询所有餐厅信息,包括用户真实姓名-->
 	<select id="listRU" resultType="com.yjg.vo.RestaurantAndUser">
 		SELECT tb_restaurant.*,tb_user.trueName UserTureName FROM tb_restaurant,tb_user WHERE tb_restaurant.userid=tb_user.id
 	</select>
+	<!--根据用户id联合查询所有餐厅信息,包括用户真实姓名-->
 	<select id="listRuById" resultType="com.yjg.vo.RestaurantAndUser" parameterType="java.lang.Integer">
 		SELECT tb_restaurant.*,tb_user.trueName UserTureName FROM tb_restaurant,tb_user WHERE tb_restaurant.userid=tb_user.id AND tb_restaurant.userid=#{id}
 	</select>
-
+	<!--根据餐厅id联合查询所有餐厅信息,包括用户真实姓名-->
 	<select id="listByRsId" resultType="com.yjg.vo.RestaurantAndUser" parameterType="java.lang.Integer">
 		SELECT tb_restaurant.*,tb_user.trueName UserTureName FROM tb_restaurant,tb_user WHERE tb_restaurant.userid=tb_user.id AND tb_restaurant.id=#{id}
 	</select>
