@@ -15,11 +15,10 @@ public class AddCookie {
 	        Cookie nameCookie=new Cookie("name",URLEncoder.encode(name,"utf-8"));  
 	        Cookie pswCookie=new Cookie("pwd",password);
 	        Cookie typeCookie=null;
-	        
 	        if(type.equals("商家")){
-	        	 typeCookie=new Cookie("user","user");
+	        	 typeCookie=new Cookie("type","user");
 	        }else{
-	        	 typeCookie=new Cookie("admin","admin");  
+	        	 typeCookie=new Cookie("type","admin");  
 	        }
 	        
 	        //设置Cookie的父路径  

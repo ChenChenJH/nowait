@@ -235,10 +235,10 @@ fieldset{margin-top:10px}
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="chainName" class="col-sm-2 control-label">价格简介</label>
+						<label for="chainName" class="col-sm-2 control-label">人均消费</label>
 						<div class="col-sm-9">
 							<input type="text" class="form-control" id="chainName" name="priceInfo"
-								placeholder="請輸入价格简介">
+								placeholder="請输入均价，如40元每人，请输入40">
 						</div>
 					</div>
 					<div class="form-group">
@@ -248,13 +248,13 @@ fieldset{margin-top:10px}
 								placeholder="請輸入取號公示">
 						</div>
 					</div>
-					<div class="form-group">
-						<label for="chainName" class="col-sm-2 control-label">地址</label>
-						<div class="col-sm-9">
-							<input type="text" class="form-control" id="chainName" name="address"
-								placeholder="請輸入餐廳地址">
-						</div>
-					</div>
+					<%--<div class="form-group">--%>
+						<%--<label for="chainName" class="col-sm-2 control-label">地址</label>--%>
+						<%--<div class="col-sm-9">--%>
+							<%--<input type="text" class="form-control" id="chainName" name="address"--%>
+								<%--placeholder="請輸入餐廳地址">--%>
+						<%--</div>--%>
+					<%--</div>--%>
 					<div class="form-group">
 						<label for="chainName" class="col-sm-2 control-label">客服电话</label>
 						<div class="col-sm-9">
@@ -266,7 +266,7 @@ fieldset{margin-top:10px}
 						<label for="chainName" class="col-sm-2 control-label">营业时间</label>
 						<div class="col-sm-9">
 							<input type="text" class="form-control" id="chainName"  name="shopTime"
-								placeholder="請輸入營業時間">
+								placeholder="請輸入營業時間，如9:00-12:00">
 						</div>
 					</div>
 					<div class="form-group" style="display: none" >
@@ -293,7 +293,7 @@ fieldset{margin-top:10px}
 								</div>
 								<div class="col-sm-4">
 									<input type="text" class="form-control" id="info2" name="desks[1].info"
-										   placeholder="請輸入桌子的容坐人數">
+										   placeholder="請輸入桌子的容坐人數，如8-10人">
 								</div>
 							</div>
 								<div class="form-group">
@@ -303,7 +303,7 @@ fieldset{margin-top:10px}
 									</div>
 									<div class="col-sm-4">
 										<input type="text" class="form-control" id="info" name="desks[2].info"
-											   placeholder="請輸入桌子的容坐人數">
+											   placeholder="請輸入桌子的容坐人數，如4-6人">
 									</div>
 							<%--<div class="col-sm-3">--%>
 								<%--<button id="addDesk" type="button" class="btn btn-default col-sm-4 create">新增</button>--%>
@@ -321,10 +321,10 @@ fieldset{margin-top:10px}
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="chainName" class="col-sm-2 control-label">连锁店名称</label>
+						<label for="chainName" class="col-sm-2 control-label">所属连锁店</label>
 						<div class="col-sm-9">
 						<select id="chainName" name="chainName" class="form-control" style="width: auto;">
-							<option value="null">无</option>
+							<option value="无">无</option>
 							<c:forEach items="${listChainShop}" var="list">
 								<option value="${list.name}">${list.name}</option>
 							</c:forEach>
@@ -356,7 +356,7 @@ fieldset{margin-top:10px}
 						<p >
 							<lable style="color:red;font-size:16px;font-weight:bold;">上传餐厅的位置信息(必填)</lable>
 						</p>
-						<div id="r-result">请输入地址：<input type="text" id="suggestId" size="20" name="suggestId" value="百度" style="width:500px;"></div>
+						<div id="r-result">请输入地址：<input type="text" id="suggestId" size="20" name="address"  style="width:500px;"></div>
 					<div id="searchResultPanel" style="border:1px solid #C0C0C0;width:500px;height:auto;display:none;"></div>
 					</br>
 						经度:<input id="longitude" type="text"  name="lng"

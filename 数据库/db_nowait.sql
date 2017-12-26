@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50556
 File Encoding         : 65001
 
-Date: 2017-12-18 15:53:19
+Date: 2017-12-26 09:50:52
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -66,7 +66,7 @@ CREATE TABLE `tb_desk` (
   `info` varchar(40) DEFAULT NULL,
   `restId` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_desk
@@ -103,9 +103,9 @@ INSERT INTO `tb_desk` VALUES ('29', '中桌', '3-4人', '10');
 INSERT INTO `tb_desk` VALUES ('30', '小桌', '1-2人', '10');
 INSERT INTO `tb_desk` VALUES ('32', '中桌', '3-4人', '11');
 INSERT INTO `tb_desk` VALUES ('33', '小桌', '1-2人', '11');
-INSERT INTO `tb_desk` VALUES ('34', '大桌', '5-8人', '15');
-INSERT INTO `tb_desk` VALUES ('35', '中桌', '3-4人', '15');
-INSERT INTO `tb_desk` VALUES ('36', '小桌', '1-2人', '15');
+INSERT INTO `tb_desk` VALUES ('34', '大桌', '5-8人,1', '15');
+INSERT INTO `tb_desk` VALUES ('35', '中桌', '3-4人,', '15');
+INSERT INTO `tb_desk` VALUES ('36', '小桌', '1-2人,', '15');
 INSERT INTO `tb_desk` VALUES ('37', '大桌', '5-8人', '14');
 INSERT INTO `tb_desk` VALUES ('38', '中桌', '3-4人', '14');
 INSERT INTO `tb_desk` VALUES ('39', '小桌', '1-2人', '14');
@@ -118,6 +118,18 @@ INSERT INTO `tb_desk` VALUES ('45', '小桌', '1-2人', '12');
 INSERT INTO `tb_desk` VALUES ('46', '大桌', '5-8人', '16');
 INSERT INTO `tb_desk` VALUES ('47', '中桌', '3-4人', '16');
 INSERT INTO `tb_desk` VALUES ('48', '小桌', '1-2人', '16');
+INSERT INTO `tb_desk` VALUES ('51', '大桌', '1', '15');
+INSERT INTO `tb_desk` VALUES ('52', '中桌', '0', '15');
+INSERT INTO `tb_desk` VALUES ('53', '小桌', '0', '15');
+INSERT INTO `tb_desk` VALUES ('57', '大桌', '5-8人', '17');
+INSERT INTO `tb_desk` VALUES ('58', '中桌', '0', '17');
+INSERT INTO `tb_desk` VALUES ('59', '小桌', '0', '17');
+INSERT INTO `tb_desk` VALUES ('63', '大桌', '2到3人', '19');
+INSERT INTO `tb_desk` VALUES ('64', '中桌', '0', '19');
+INSERT INTO `tb_desk` VALUES ('65', '小桌', '0', '19');
+INSERT INTO `tb_desk` VALUES ('66', '大桌', '5-8人', '20');
+INSERT INTO `tb_desk` VALUES ('67', '中桌', '', '20');
+INSERT INTO `tb_desk` VALUES ('68', '小桌', '', '20');
 
 -- ----------------------------
 -- Table structure for `tb_feedback`
@@ -136,9 +148,9 @@ CREATE TABLE `tb_feedback` (
 -- Records of tb_feedback
 -- ----------------------------
 INSERT INTO `tb_feedback` VALUES ('1', '1', '还行，下次再来', '2017-11-14 12:14:15', '已讀');
-INSERT INTO `tb_feedback` VALUES ('2', '2', 'haha', '2017-11-21 10:37:18', '未讀');
+INSERT INTO `tb_feedback` VALUES ('2', '2', 'haha', '2017-11-21 10:37:18', '已讀');
 INSERT INTO `tb_feedback` VALUES ('3', '2', '哈哈', '2017-11-22 13:31:53', '已讀');
-INSERT INTO `tb_feedback` VALUES ('4', '1', '这是测试', '2017-12-07 20:38:02', '未讀');
+INSERT INTO `tb_feedback` VALUES ('4', '1', '这是测试', '2017-12-07 20:38:02', '已讀');
 INSERT INTO `tb_feedback` VALUES ('5', '1', '这是测试', '2017-12-07 20:38:21', '已讀');
 INSERT INTO `tb_feedback` VALUES ('6', '1', '这是测试', '2017-12-07 20:38:21', '已讀');
 INSERT INTO `tb_feedback` VALUES ('7', '1', '这是测试', '2017-12-07 20:38:21', '未讀');
@@ -260,7 +272,7 @@ CREATE TABLE `tb_restaurant` (
   `createDate` datetime NOT NULL,
   `isOverdue` char(2) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_restaurant
@@ -274,11 +286,11 @@ INSERT INTO `tb_restaurant` VALUES ('6', '圣鼎记自助美食汇(红旗店)', 
 INSERT INTO `tb_restaurant` VALUES ('7', '岳阳烧烤(红旗店)', '30', '测试', '广东省珠海市金湾区岳阳烧烤', '(010)1234-1234', '19:00-23:00', '餐廳暫停取號', '3', '岳阳烧烤', 'http://120.78.182.217/images/1513216871120.jpg', 'http://120.78.182.217/images/1513216982125.jpg,http://120.78.182.217/images/1513216907599.jpg,http://120.78.182.217/images/1513216998410.jpg', '113.347690', '22.135850', '2017-11-19 13:20:32', '1');
 INSERT INTO `tb_restaurant` VALUES ('8', '甜之心(湾仔沙店)', '25', '测试', '广东省珠海市香洲区凤凰南路1009号', '(010)1234-1234', '8:00-20:00', '前方正在等待', '3', '甜之心', 'http://120.78.182.217/images/1513216915810.jpg', 'http://120.78.182.217/images/1513216890359.jpg', '113.577930', '22.271500', '2017-11-16 08:34:17', '0');
 INSERT INTO `tb_restaurant` VALUES ('10', '不夜天柴火烤鱼火锅店(科干店)', '35', '测试', '广东省珠海市金湾区红旗虹晖一路中珠花园旁', '(010)1234-1236', '8:00-20:00', '當前排隊狀況', '3', '不夜天柴火烤鱼火锅店', 'http://120.78.182.217/images/1513216880935.jpg', 'http://120.78.182.217/images/1513216860516.jpg,http://120.78.182.217/images/1513216899772.jpg,http://120.78.182.217/images/1513216880935.jpg', '113.347690', '22.135850', '2017-12-18 15:46:37', '0');
-INSERT INTO `tb_restaurant` VALUES ('11', '阿甘甜品(科干店)', '20', '测试', '广东省珠海市金湾区世纪名城商业街156号(世纪名城08Bar斜对面)', '(010)1234-1237', '8:00-20:00', '前方正在等待', '3', '阿甘甜品', 'http://120.78.182.217/images/1513216890359.jpg', 'http://120.78.182.217/images/1513216915810.jpg,http://120.78.182.217/images/1513216959179.jpg,http://120.78.182.217/images/1513216982125.jpg', '113.348200', '22.134010', '2017-11-16 08:35:21', '1');
-INSERT INTO `tb_restaurant` VALUES ('12', '和亭日本料理(科干店)', '50', '测试', '广东省珠海市金湾区虹晖一路232', '(010)1234-1238', '8:00-20:00', '餐廳暫停取號', '4', '和亭日本料理', 'http://120.78.182.217/images/1513216899772.jpg', 'http://120.78.182.217/images/1513216998410.jpg,http://120.78.182.217/images/1513216990416.jpg,http://120.78.182.217/images/1513216967608.jpg', '113.341310', '22.133200', '2017-11-16 08:35:32', '1');
-INSERT INTO `tb_restaurant` VALUES ('13', '圣鼎记自助美食汇(科干店)', '40', '测试', '广东省珠海市金湾区益百家1楼', '(010)1234-1239', '8:00-20:00', '前方正在等待', '4', '圣鼎记自助美食汇', 'http://120.78.182.217/images/1513216907599.jpg', 'http://120.78.182.217/images/1513216951269.jpg,http://120.78.182.217/images/1513216907599.jpg', '113.343180', '22.135410', '2017-11-16 08:35:55', '0');
 INSERT INTO `tb_restaurant` VALUES ('14', '岳阳烧烤(科干店)', '30', '测试', '广东省珠海市金湾区岳阳烧烤', '(010)1234-1234', '19:00-23:00', '前方正在等待', '4', '岳阳烧烤', 'http://120.78.182.217/images/1513216871120.jpg', 'http://120.78.182.217/images/1513216982125.jpg,http://120.78.182.217/images/1513216907599.jpg,http://120.78.182.217/images/1513216998410.jpg', '113.347690', '22.135850', '2017-11-19 13:20:32', '1');
-INSERT INTO `tb_restaurant` VALUES ('16', 'K立方量贩式KTV(科干店)', '30', '测试', '广东省珠海市金湾区南翔路111号', '(010)1234-1235', '8:00-20:00', '餐廳暫停取號', '4', 'K立方量贩式KTV', 'http://120.78.182.217/images/1513216860516.jpg', 'http://120.78.182.217/images/1513216982125.jpg,http://120.78.182.217/images/1513216951269.jpg,http://120.78.182.217/images/1513216899772.jpg', '113.343470', '22.129130', '2017-11-16 08:35:02', '0');
+INSERT INTO `tb_restaurant` VALUES ('16', '测试餐厅', '20', 'dfd', 'dsfsd', '13420156214', 'sdfd', '餐廳暫停取號', '1', '无', 'http://120.78.182.217/images/1514187495374.png', 'http://120.78.182.217/images/1514187495698.png', '113.553944', '22.105303', '2017-12-25 15:38:16', '1');
+INSERT INTO `tb_restaurant` VALUES ('17', '餐厅添加', 'dsfd', 'dsfds', '广东省珠海市金湾区南翔路111号', '13420152134', 'sdfds', '餐廳暫停取號', '1', '无', 'http://120.78.182.217/images/1514188167187.png', 'http://120.78.182.217/images/1514188167503.png', '113.360493', '22.132428', '2017-12-25 15:49:27', '1');
+INSERT INTO `tb_restaurant` VALUES ('19', '测试餐厅3号', 'dfds', 'dsf', 'dsfsd', '13420156214', 'sdfds', '餐廳暫停取號', '1', '无', 'http://120.78.182.217/images/1514188659549.png', 'http://120.78.182.217/images/1514188659878.png', '116.447238', '39.947750', '2017-12-25 15:57:40', '1');
+INSERT INTO `tb_restaurant` VALUES ('20', '测试餐厅2号', '20', 'hello', '珠海市金湾区珠海长隆国际海洋度假区', '13420156214', '8:00-20:00', '餐廳暫停取號', '2', '无', 'http://120.78.182.217/images/1514249477568.png', 'http://120.78.182.217/images/1514249478008.png', '113.553944', '22.105303', '2017-12-26 09:14:52', '1');
 
 -- ----------------------------
 -- Table structure for `tb_user`
@@ -294,7 +306,7 @@ CREATE TABLE `tb_user` (
   `createDate` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_userName` (`userName`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_user
@@ -324,6 +336,11 @@ INSERT INTO `tb_user` VALUES ('29', 'test26', '156650ad747cfb25fcb9a7a2f8a02bdc'
 INSERT INTO `tb_user` VALUES ('30', 'test36', '156650ad747cfb25fcb9a7a2f8a02bdc', '测试', '440883199606011235', '13420156347', '2017-12-08 08:43:24');
 INSERT INTO `tb_user` VALUES ('31', 'test112', '53387f9299e3455b9b7510d4127d385b', '小小鸟', '440883199606011235', '13420156346', '2017-12-08 10:09:39');
 INSERT INTO `tb_user` VALUES ('32', 'test0104', '53387f9299e3455b9b7510d4127d385b', '测试1号', '440883199601231245', '13536401298', '2017-12-08 15:27:15');
+INSERT INTO `tb_user` VALUES ('33', 'chen1', '53387f9299e3455b9b7510d4127d385b', '陈', '440883199502015421', '13536401235', '2017-12-21 11:19:46');
+INSERT INTO `tb_user` VALUES ('34', 'chen12', '53387f9299e3455b9b7510d4127d385b', '陈', '440883199502015421', '13536401235', '2017-12-21 11:21:18');
+INSERT INTO `tb_user` VALUES ('35', 'chen124', '53387f9299e3455b9b7510d4127d385b', '陈', '440883199502015421', '13536401235', '2017-12-21 11:22:14');
+INSERT INTO `tb_user` VALUES ('36', 'chen1245', '53387f9299e3455b9b7510d4127d385b', '陈', '440883199502015421', '13536401235', '2017-12-21 11:23:33');
+INSERT INTO `tb_user` VALUES ('37', 'chen12456', '53387f9299e3455b9b7510d4127d385b', '陈', '440883199502015421', '13536401235', '2017-12-21 11:27:28');
 
 -- ----------------------------
 -- Table structure for `tb_wxuser`

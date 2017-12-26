@@ -52,7 +52,11 @@
                 <td class="text-center">${item.priceInfo}</td>
                 <td class="text-center">${item.phone}</td>
                 <td class="text-center">${item.shopTime}</td>
-                <td class="text-center"><a href="order/queryOrderList?restid=${item.id}">查看<a></td>
+                <td class="text-center">
+                    <div class="btn-group">
+                        <a class="btn btn-default" href="order/queryOrderList?restid=${item.id}">查看</a>
+                    </div>
+                </td>
                 <td class="text-center">
                     <div class="btn-group">
                         <a class="btn btn-default" href="restaurant/queryRestaurantById?id=${item.id }&pageNumber=${page.pageNum}" target="mainFrame" >詳情</a>
@@ -153,10 +157,10 @@
                 $(this).find('input').click();
             });
             /*点击按钮 不选中复选框*/
-//            var $a = $('table tr td a');
-//            $a.click(function(){
-//                $(this).parent().parent().parent().find('input').click();
-//            });
+            var $a = $('table tr td a');
+            $a.click(function(){
+                $(this).parent().parent().parent().find('input').click();
+            });
         }
         initTableCheckbox();
         /* 按钮删除操作 */

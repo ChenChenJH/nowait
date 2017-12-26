@@ -223,7 +223,7 @@
             <td  class="col-sm-3 text-center" colspan="2"><input type="text" class="form-control" name="name" value="${restaurant.name}" style="width: 220px;margin-left: 30%"></td>
         </tr>
         <tr>
-            <th  class="col-sm-3 text-center" colspan="2">价格简介</th>
+            <th  class="col-sm-3 text-center" colspan="2">人均消费</th>
             <td  class="col-sm-9 text-center" colspan="2"><input type="text" class="form-control" name="priceInfo" value="${restaurant.priceInfo}" style="width: 220px;margin-left: 30%"></td>
         </tr>
         <tr>
@@ -232,7 +232,7 @@
         </tr>
         <tr>
             <th  class="col-sm-3 text-center" colspan="2">地址</th>
-            <td  class="col-sm-9 text-center" colspan="2"><input  type="text" class="form-control" name="address" value="${restaurant.address}" style="width: 220px;margin-left: 30%"></td>
+            <td  class="col-sm-9 text-center" colspan="2"><input  type="text" class="form-control" name="address" value="${restaurant.address}" style="width: 500px;margin-left: 30%"></td>
 
         </tr>
         <tr>
@@ -246,21 +246,28 @@
         <tr>
             <th  class="col-sm-3 text-center" colspan="2">餐厅状况</th>
             <td  class="col-sm-9 text-center" colspan="2"><select class="form-control" name="status"  style="width: 220px;margin-left: 30%" >
-                <
-                <option>${restaurant.status}</option>
-                <option>前方正在等待</option>
-                <option>餐廳暫停取號</option>
-                <option>當前排隊狀況</option>
+                <option value="前方正在等待" <c:if test='${restaurant.status == "前方正在等待"}'>  selected='selected'  </c:if>>可以排隊</option>
+                <option value="餐廳暫停取號" <c:if test='${restaurant.status == "餐廳暫停取號"}'>  selected='selected'  </c:if>>暫停取號</option>
+                <option value="當前排隊狀況" <c:if test='${restaurant.status == "當前排隊狀況"}'>  selected='selected'  </c:if>>无需排隊</option>
             </select></td>
         </tr>
         <tr>
             <th  class="col-sm-3 text-center" colspan="2">用户真实名称</th>
-            <td  class="col-sm-9 text-center" colspan="2"><input type="text" class="form-control" name="userTureName" value="${restaurant.userTureName}" style="width: 220px;margin-left: 30%"></td>
+            <td  class="col-sm-9 text-center" colspan="2"><input readonly= "true " type="text" class="form-control" name="userTureName" value="${restaurant.userTureName}" style="width: 220px;margin-left: 30%"></td>
         <input type="text" id="userId" name="userId" style="display: none" value="${restaurant.userId}">
         </tr>
         <tr>
-            <th  class="col-sm-3 text-center" colspan="2">连锁店名称</th>
-            <td  class="col-sm-9 text-center" colspan="2"><input type="text" class="form-control" name="chainName" value="${restaurant.chainName}" style="width: 220px;margin-left: 30%"></td>
+            <th  class="col-sm-3 text-center" colspan="2">所属连锁店</th>
+            <td  class="col-sm-9 text-center" colspan="2">
+                <select id="chainName" name="chainName" class="form-control" style="width: 220px;margin-left: 30%" >
+                    <option value="无" <c:if test='${restaurant.chainName == "无"}'>  selected='selected'  </c:if>>无</option>
+                    <c:forEach items="${listChainShop}" var="list">
+                        <option value="${list.name}" <c:if test='${restaurant.chainName == list.name}'>  selected='selected'  </c:if>>${list.name}</option>
+                    </c:forEach>
+
+                </select>
+            </td>
+                <%--<input type="text" class="form-control" name="chainName" value="${restaurant.chainName}" style="width: 220px;margin-left: 30%"></td>--%>
         </tr>
         <c:forEach var="desk" items="${desklists}">
 
@@ -270,7 +277,7 @@
 
             <tr >
                 <th  class="col-sm-3 text-center" colspan="2">桌子类型</th>
-                <td class="col-sm-3 text-center" colspan="1" ><input type="text" class="form-control" id="style0" name="desks[0].style" value="大桌" style="width: 220px;margin-left: 30%"></td>
+                <td class="col-sm-3 text-center" colspan="1" ><input readonly= "true " type="text" class="form-control" id="style0" name="desks[0].style" value="大桌" style="width: 220px;margin-left: 30%"></td>
                 <c:choose>
                     <c:when test='${desk.info=="0"}'>
                         <td class="col-sm-3 text-center" colspan="1"><input type="text" class="form-control" id="info0" name="desks[0].info" placeholder="请输入用餐人数" style="width: 220px;margin-left: 30%"></td>
@@ -287,7 +294,7 @@
 
                 <tr >
                     <th  class="col-sm-3 text-center" colspan="2">桌子类型</th>
-                    <td class="col-sm-3 text-center" colspan="1" ><input type="text" class="form-control" id="style1" name="desks[1].style" value="中桌" style="width: 220px;margin-left: 30%"></td>
+                    <td class="col-sm-3 text-center" colspan="1" ><input readonly= "true " type="text" class="form-control" id="style1" name="desks[1].style" value="中桌" style="width: 220px;margin-left: 30%"></td>
                     <c:choose>
                         <c:when test='${desk.info=="0"}'>
                             <td class="col-sm-3 text-center" colspan="1"><input type="text" class="form-control" id="info1" name="desks[1].info" placeholder="请输入用餐人数" style="width: 220px;margin-left: 30%"></td>
@@ -304,7 +311,7 @@
                 <input style="display: none" name="desks[2].restId" value="${desk.restId}">
                 <tr >
                     <th  class="col-sm-3 text-center" colspan="2">桌子类型</th>
-                    <td class="col-sm-3 text-center" colspan="1" ><input type="text" class="form-control" id="style0" name="desks[2].style" value="小桌" style="width: 220px;margin-left: 30%"></td>
+                    <td class="col-sm-3 text-center" colspan="1" ><input readonly= "true " type="text" class="form-control" id="style0" name="desks[2].style" value="小桌" style="width: 220px;margin-left: 30%"></td>
                     <c:choose>
                         <c:when test='${desk.info=="0"}'>
                             <td class="col-sm-3 text-center" colspan="1"><input type="text" class="form-control" id="info0" name="desks[2].info" placeholder="请输入用餐人数" style="width: 220px;margin-left: 30%"></td>

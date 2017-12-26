@@ -169,6 +169,8 @@ public class RestaurantController {
         model.addAttribute("desklists",desklists);
         model.addAttribute("restaurant",restauant);
         model.addAttribute("pageNumber",pageNumber);
+        List<ChainShop> listChainShop=chainShopService.chainShopList();
+        model.addAttribute("listChainShop",listChainShop);
         return "/mainFrame/restaurantManager/restaurantDetail.jsp";
 
     }
@@ -177,6 +179,7 @@ public class RestaurantController {
     public String deleteOrder(int size,int id, HttpServletResponse response,int pageNumber,Model model) throws Exception {
         restaurantService.deleteRestaurant(id);
         orderService.deleteOrder(id);
+        deskService.delete(id);
         if(size==1)
         {
             return queryRestaurantList(pageNumber-1,model);

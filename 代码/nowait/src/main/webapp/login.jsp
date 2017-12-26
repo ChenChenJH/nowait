@@ -10,7 +10,6 @@
     String name="";  
     String pwd="";  
     String checked="";  
-    String selectUser="";
     String selectAdmin="";
     Cookie[] cookies=request.getCookies();  
     if(cookies!=null&&cookies.length>0){   
@@ -26,12 +25,11 @@
             if("pwd".equals(cookie.getName())){  
                 pwd=cookie.getValue();  
             } 
-            //选中身份类型
-            if("user".equals(cookie.getName())){  
-                selectUser="selected"; 
-            } 
-            if("admin".equals(cookie.getName())){  
-            	selectAdmin="selected"; 
+            //选中身份类型          
+            if("type".equals(cookie.getName())){  
+            	if(cookie.getValue().equals("admin")){
+            		selectAdmin="selected";            	
+            	}
             }  
         }  
     }  
@@ -117,7 +115,7 @@
 				<span class="input-group-addon "><img
 					src="images/identity.png" width="12px"></span> <select id="usertype"
 					name="type" class="form-control">
-					<option <%=selectUser%>>商家</option>
+					<option >商家</option>
 					<option <%=selectAdmin%>>管理員</option>
 				</select>
 			</div>
