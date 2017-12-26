@@ -277,7 +277,7 @@
 
             <tr >
                 <th  class="col-sm-3 text-center" colspan="2">桌子类型</th>
-                <td class="col-sm-3 text-center" colspan="1" ><input readonly= "true " type="text" class="form-control" id="style0" name="desks[0].style" value="大桌" style="width: 220px;margin-left: 30%"></td>
+                <td class="col-sm-3 text-center" colspan="1" ><input readonly= "true" type="text" class="form-control" id="style0" name="desks[0].style" value="大桌" style="width: 220px;margin-left: 30%"></td>
                 <c:choose>
                     <c:when test='${desk.info=="0"}'>
                         <td class="col-sm-3 text-center" colspan="1"><input type="text" class="form-control" id="info0" name="desks[0].info" placeholder="请输入用餐人数" style="width: 220px;margin-left: 30%"></td>

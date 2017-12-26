@@ -266,7 +266,7 @@ fieldset{margin-top:10px}
 						<label for="chainName" class="col-sm-2 control-label">营业时间</label>
 						<div class="col-sm-9">
 							<input type="text" class="form-control" id="chainName"  name="shopTime"
-								placeholder="請輸入營業時間，如9:00-12:00">
+								placeholder="請輸入營業時間，格式为:xx:xx-xx:xx,如9:00-12:00">
 						</div>
 					</div>
 					<div class="form-group" style="display: none" >
@@ -280,30 +280,30 @@ fieldset{margin-top:10px}
 						<div class="form-group">
 							<label for="chainName" class="col-sm-2 control-label">桌子類型</label>
 							<div class="col-sm-2">
-								<input type="text" class="form-control" name="desks[0].style" value="大桌">
+								<input type="text" readonly= "true" class="form-control" name="desks[0].style" value="大桌">
 							</div>
-							<div class="col-sm-4">
-								<input type="text" class="form-control" id="info1" name="desks[0].info" placeholder="至少选择一种桌子类型">
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="info1" name="desks[0].info" placeholder="至少填写一种桌子类型,格式如下所示">
 							</div>
 						</div>
 							<div class="form-group">
 								<label for="chainName" class="col-sm-2 control-label">桌子類型</label>
 								<div class="col-sm-2">
-									<input type="text" class="form-control" name="desks[1].style" value="中桌">
+									<input type="text" readonly= "true" class="form-control" name="desks[1].style" value="中桌">
 								</div>
-								<div class="col-sm-4">
+								<div class="col-sm-6">
 									<input type="text" class="form-control" id="info2" name="desks[1].info"
-										   placeholder="請輸入桌子的容坐人數，如8-10人">
+										   placeholder="請輸入桌子的容坐人數，格式为:x-x人,如4-6人">
 								</div>
 							</div>
 								<div class="form-group">
 									<label for="chainName" class="col-sm-2 control-label">桌子類型</label>
 									<div class="col-sm-2">
-										<input type="text" class="form-control" name="desks[2].style" value="小桌">
+										<input type="text" readonly= "true" class="form-control" name="desks[2].style" value="小桌">
 									</div>
-									<div class="col-sm-4">
+									<div class="col-sm-6">
 										<input type="text" class="form-control" id="info" name="desks[2].info"
-											   placeholder="請輸入桌子的容坐人數，如4-6人">
+											   placeholder="請輸入桌子的容坐人數，格式为:x-x人,如8-10人">
 									</div>
 							<%--<div class="col-sm-3">--%>
 								<%--<button id="addDesk" type="button" class="btn btn-default col-sm-4 create">新增</button>--%>

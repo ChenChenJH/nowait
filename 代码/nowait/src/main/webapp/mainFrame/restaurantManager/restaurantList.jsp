@@ -54,7 +54,7 @@
                 <td class="text-center">${item.shopTime}</td>
                 <td class="text-center">
                     <div class="btn-group">
-                        <a class="btn btn-default" href="order/queryOrderList?restid=${item.id}">查看</a>
+                        <a class="btn btn-info" href="order/queryOrderList?restid=${item.id}">查看</a>
                     </div>
                 </td>
                 <td class="text-center">

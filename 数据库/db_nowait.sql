@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50556
 File Encoding         : 65001
 
-Date: 2017-12-26 09:50:52
+Date: 2017-12-26 15:57:01
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -66,7 +66,7 @@ CREATE TABLE `tb_desk` (
   `info` varchar(40) DEFAULT NULL,
   `restId` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_desk
@@ -103,9 +103,9 @@ INSERT INTO `tb_desk` VALUES ('29', '中桌', '3-4人', '10');
 INSERT INTO `tb_desk` VALUES ('30', '小桌', '1-2人', '10');
 INSERT INTO `tb_desk` VALUES ('32', '中桌', '3-4人', '11');
 INSERT INTO `tb_desk` VALUES ('33', '小桌', '1-2人', '11');
-INSERT INTO `tb_desk` VALUES ('34', '大桌', '5-8人,1', '15');
-INSERT INTO `tb_desk` VALUES ('35', '中桌', '3-4人,', '15');
-INSERT INTO `tb_desk` VALUES ('36', '小桌', '1-2人,', '15');
+INSERT INTO `tb_desk` VALUES ('34', '大桌', '5-8人', '15');
+INSERT INTO `tb_desk` VALUES ('35', '中桌', '3-4人', '15');
+INSERT INTO `tb_desk` VALUES ('36', '小桌', '1-2人', '15');
 INSERT INTO `tb_desk` VALUES ('37', '大桌', '5-8人', '14');
 INSERT INTO `tb_desk` VALUES ('38', '中桌', '3-4人', '14');
 INSERT INTO `tb_desk` VALUES ('39', '小桌', '1-2人', '14');
@@ -118,18 +118,21 @@ INSERT INTO `tb_desk` VALUES ('45', '小桌', '1-2人', '12');
 INSERT INTO `tb_desk` VALUES ('46', '大桌', '5-8人', '16');
 INSERT INTO `tb_desk` VALUES ('47', '中桌', '3-4人', '16');
 INSERT INTO `tb_desk` VALUES ('48', '小桌', '1-2人', '16');
-INSERT INTO `tb_desk` VALUES ('51', '大桌', '1', '15');
+INSERT INTO `tb_desk` VALUES ('51', '大桌', '5-8人', '15');
 INSERT INTO `tb_desk` VALUES ('52', '中桌', '0', '15');
 INSERT INTO `tb_desk` VALUES ('53', '小桌', '0', '15');
 INSERT INTO `tb_desk` VALUES ('57', '大桌', '5-8人', '17');
 INSERT INTO `tb_desk` VALUES ('58', '中桌', '0', '17');
 INSERT INTO `tb_desk` VALUES ('59', '小桌', '0', '17');
-INSERT INTO `tb_desk` VALUES ('63', '大桌', '2到3人', '19');
+INSERT INTO `tb_desk` VALUES ('63', '大桌', '2-3人', '19');
 INSERT INTO `tb_desk` VALUES ('64', '中桌', '0', '19');
 INSERT INTO `tb_desk` VALUES ('65', '小桌', '0', '19');
 INSERT INTO `tb_desk` VALUES ('66', '大桌', '5-8人', '20');
-INSERT INTO `tb_desk` VALUES ('67', '中桌', '', '20');
-INSERT INTO `tb_desk` VALUES ('68', '小桌', '', '20');
+INSERT INTO `tb_desk` VALUES ('67', '中桌', '0', '20');
+INSERT INTO `tb_desk` VALUES ('68', '小桌', '0', '20');
+INSERT INTO `tb_desk` VALUES ('72', '大桌', '5-8人', '22');
+INSERT INTO `tb_desk` VALUES ('73', '中桌', '3-4人', '22');
+INSERT INTO `tb_desk` VALUES ('74', '小桌', '', '22');
 
 -- ----------------------------
 -- Table structure for `tb_feedback`
@@ -272,7 +275,7 @@ CREATE TABLE `tb_restaurant` (
   `createDate` datetime NOT NULL,
   `isOverdue` char(2) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_restaurant
@@ -291,6 +294,7 @@ INSERT INTO `tb_restaurant` VALUES ('16', '测试餐厅', '20', 'dfd', 'dsfsd', 
 INSERT INTO `tb_restaurant` VALUES ('17', '餐厅添加', 'dsfd', 'dsfds', '广东省珠海市金湾区南翔路111号', '13420152134', 'sdfds', '餐廳暫停取號', '1', '无', 'http://120.78.182.217/images/1514188167187.png', 'http://120.78.182.217/images/1514188167503.png', '113.360493', '22.132428', '2017-12-25 15:49:27', '1');
 INSERT INTO `tb_restaurant` VALUES ('19', '测试餐厅3号', 'dfds', 'dsf', 'dsfsd', '13420156214', 'sdfds', '餐廳暫停取號', '1', '无', 'http://120.78.182.217/images/1514188659549.png', 'http://120.78.182.217/images/1514188659878.png', '116.447238', '39.947750', '2017-12-25 15:57:40', '1');
 INSERT INTO `tb_restaurant` VALUES ('20', '测试餐厅2号', '20', 'hello', '珠海市金湾区珠海长隆国际海洋度假区', '13420156214', '8:00-20:00', '餐廳暫停取號', '2', '无', 'http://120.78.182.217/images/1514249477568.png', 'http://120.78.182.217/images/1514249478008.png', '113.553944', '22.105303', '2017-12-26 09:14:52', '1');
+INSERT INTO `tb_restaurant` VALUES ('22', '测试餐厅1号', '20', '这是测试', '珠海市金湾区广东科学技术职业学院', '13436201545', '8:00-20:00', '前方正在等待', '1', '岳阳烧烤', 'http://120.78.182.217/images/1514272853806.png', 'http://120.78.182.217/images/1514272854251.png,http://120.78.182.217/images/1514272854573.png,http://120.78.182.217/images/1514272854920.png', '113.360493', '22.132428', '2017-12-26 15:54:17', '1');
 
 -- ----------------------------
 -- Table structure for `tb_user`
