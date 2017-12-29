@@ -8,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yjg.entity.Admin;
+import com.yjg.entity.Restaurant;
 import com.yjg.entity.User;
+import com.yjg.mapper.RestaurantMapper;
 import com.yjg.mapper.UserMapper;
+import com.yjg.service.RestaurantService;
 import com.yjg.service.UserService;
 import com.yjg.tools.MD5Encryption;
 
@@ -17,6 +20,9 @@ import com.yjg.tools.MD5Encryption;
 public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserMapper userMapper;
+	
+	@Autowired
+	private RestaurantService restaurantService;
 
 	// 查询用户能否登录
 	@Override
@@ -71,6 +77,12 @@ public class UserServiceImpl implements UserService {
 
 	//删除某个用户
 	public void deleteUser(Integer id) throws Exception {
+		//根据用户id查询该用户对应所有的餐厅
+		List<Restaurant> listRest=restaurantService.queryRestaurantByUserId(id);
+		for(Restaurant rest:listRest){
+			//根据获取的餐厅id删除餐厅
+			restaurantService.deleteRestaurant(rest.getId());
+		}
 		this.userMapper.delete(id);
 		
 	}

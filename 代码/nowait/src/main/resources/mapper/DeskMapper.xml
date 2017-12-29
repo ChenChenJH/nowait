@@ -17,8 +17,8 @@
 		update tb_desk set info = #{info} where id=#{id}
 	</update>
 	<!--根据餐厅id删除桌子类型-->
-	<delete id="delete" parameterType="java.lang.Integer">
-		DELETE FROM tb_desk WHERE restId=#{id}
+	<delete id="deleteByRestId" parameterType="java.lang.Integer">
+		DELETE FROM tb_desk WHERE restId=#{restId}
 	</delete>
 
 

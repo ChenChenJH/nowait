@@ -19,7 +19,7 @@
 	<script src="js/bootstrapValidator.min.js"></script>
 	<link href="css/bootstrapValidator.min.css" rel="stylesheet" />
     <!-- 日期控件 -->
-     <link href=css/bootstrap-datetimepicker.css" rel="stylesheet">
+     <link href="css/bootstrap-datetimepicker.css" rel="stylesheet">
     <script src="js/bootstrap-datetimepicker.js"></script>
     <script src="js/bootstrap-datetimepicker.zh-CN.js"></script>
      <script src="js/jquery.uploadify.js"></script>
@@ -232,8 +232,7 @@
         </tr>
         <tr>
             <th  class="col-sm-3 text-center" colspan="2">地址</th>
-            <td  class="col-sm-9 text-center" colspan="2"><input  type="text" class="form-control" name="address" value="${restaurant.address}" style="width: 500px;margin-left: 30%"></td>
-
+            <td  class="col-sm-9 text-center" colspan="2"><input  type="text" class="form-control" name="address" value="${restaurant.address}" style="width: 220px;margin-left: 30%"></td>
         </tr>
         <tr>
             <th  class="col-sm-3 text-center" colspan="2">客服电话</th>
@@ -267,7 +266,6 @@
 
                 </select>
             </td>
-                <%--<input type="text" class="form-control" name="chainName" value="${restaurant.chainName}" style="width: 220px;margin-left: 30%"></td>--%>
         </tr>
         <c:forEach var="desk" items="${desklists}">
 
@@ -366,7 +364,7 @@
 
         <tr><th  class="col-sm-3 text-center" colspan="2">如需更改地址请输入新地址</th>
             <td  class="col-sm-9 text-center" id="r-result"  colspan="2">
-                <input class="form-control" type="text" id="suggestId" size="20" name="newadress" style="width:500px;">
+                <input class="form-control" type="text" id="suggestId" size="20" name="newadress" style="width:500px;" >
             </td>
             <td id="searchResultPanel"  style="border:1px solid #C0C0C0;width:500px;height:auto;display: none"></td></tr>
         <tr>
@@ -377,7 +375,7 @@
             <th colspan="4" class="text-center">
 
            <button type="submit" class="btn btn-success" onclick="return confirm('确定要修改吗？')">修改</button>
-                <a class="btn btn-danger" href="restaurant/delete?id=${restaurant.id }&pageNumber=${pageNumber}" target="mainFrame" onclick="onedelete()">刪除該餐廳</a>
+                <a class="btn btn-danger" href="restaurant/deleteOne?id=${restaurant.id }&pageNumber=${pageNumber}" target="mainFrame" onclick="onedelete()">刪除該餐廳</a>
                 <a class="btn btn-info" href="javascript:history.back(-1)"
                    target="mainFrame">返回列表</a>
             </th>
@@ -566,8 +564,19 @@
         local.search(myValue);
     }
 
+    // 用经纬度设置地图中心点
+    function theLocation(){
+        if($("#longitude").val() != "" && $("#latitude").val() != ""){
+            map.clearOverlays();
+            var new_point = new BMap.Point($("#longitude").val(),$("#latitude").val());
+            var marker = new BMap.Marker(new_point);  // 创建标注
+            map.addOverlay(marker);              // 将标注添加到地图中
+            map.panTo(new_point);
+        }
+    }
 
     $(function () {
+        theLocation();
         $("#removeDesk").hide();
         $("#addDesk").click(function(){
             $("#additional").after($(this).parent().parent().clone(true));

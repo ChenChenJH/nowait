@@ -9,16 +9,16 @@ import java.util.List;
  */
 public interface RestaurantMapper {
 
-    //添加餐厅信息
-    public int insert(Restaurant restaurant) throws Exception;
-    public List<Restaurant> listAll() throws Exception;
+	// 添加餐厅信息
+	public int insert(Restaurant restaurant) throws Exception;
 
-    public List<Restaurant> listAllByUserId(int id) throws Exception;
+	public List<Restaurant> listAll() throws Exception;
 
+	public List<Restaurant> listAllByUserId(int id) throws Exception;
 
-    public Restaurant queryRestaurantById(int id);
+	public Restaurant queryRestaurantById(int id);
 
-    public void deleteById(int id);
+	public void deleteById(int id);
 
-    void update(Restaurant restaurant);
+	void update(Restaurant restaurant);
 }

@@ -27,11 +27,4 @@ public class OrderServiceImpl implements OrderService {
         return  order;
     }
 
-    @Override
-    public void deleteOrder(int id) {
-        orderMapper.deleteOrder(id);
-
-    }
-
-
 }

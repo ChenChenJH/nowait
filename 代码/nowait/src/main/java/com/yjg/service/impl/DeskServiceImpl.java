@@ -33,10 +33,4 @@ public class DeskServiceImpl implements DeskService {
         deskMapper.update(desk);
     }
 
-    @Override
-    public void delete(Integer id) {
-        deskMapper.delete(id);
-    }
-
-
 }

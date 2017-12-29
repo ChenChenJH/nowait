@@ -12,8 +12,8 @@
 		SELECT * FROM tb_order WHERE id = #{id}
 	</select>
 	<!--根据餐厅id删除订单-->
-	<delete id="deleteOrder" parameterType="java.lang.Integer">
-		DELETE FROM tb_order WHERE restId=#{id}
+	<delete id="deleteByRestId" parameterType="java.lang.Integer">
+		DELETE FROM tb_order WHERE restId=#{restId}
 	</delete>
 
 </mapper>
