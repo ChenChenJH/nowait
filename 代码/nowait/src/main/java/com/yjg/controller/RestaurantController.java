@@ -1,15 +1,12 @@
 package com.yjg.controller;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import com.yjg.entity.ChainShop;
-import com.yjg.entity.Desk;
-import com.yjg.entity.Restaurant;
-import com.yjg.entity.User;
-import com.yjg.service.*;
-import com.yjg.tools.JSchUtil;
-import com.yjg.vo.DeskList;
-import com.yjg.vo.RestaurantAndUser;
+import java.util.List;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
@@ -21,13 +18,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.util.List;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.yjg.entity.ChainShop;
+import com.yjg.entity.Desk;
+import com.yjg.entity.Restaurant;
+import com.yjg.entity.User;
+import com.yjg.service.ChainShopService;
+import com.yjg.service.DeskService;
+import com.yjg.service.OrderService;
+import com.yjg.service.RestaurantAndUserService;
+import com.yjg.service.RestaurantService;
+import com.yjg.service.UserService;
+import com.yjg.tools.JSchUtil;
+import com.yjg.vo.DeskList;
+import com.yjg.vo.RestaurantAndUser;
 
 /**
  * Created by ljh on 2017/11/21.
@@ -103,7 +108,6 @@ public class RestaurantController {
             }
         }
         restaurantService.addRestaurant(restaurant);
-        System.out.println(restaurant.getId());
         List<Desk> deskList=desks.getDesks();
         for (Desk desk:deskList) {
             desk.setRestId(restaurant.getId());
@@ -244,7 +248,7 @@ public class RestaurantController {
             restaurantService.update(restaurant);
             List<Desk> deskList=desks.getDesks();
             for(Desk desk:deskList){
-                if(desk.getInfo()=="")
+                if(desk.getInfo().equals(""))
                 {
                     desk.setInfo("0");
                 }

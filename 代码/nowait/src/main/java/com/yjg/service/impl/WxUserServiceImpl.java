@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.yjg.entity.WxUser;
+import com.yjg.mapper.FeedbackMapper;
 import com.yjg.mapper.WxUserMapper;
 import com.yjg.service.WxUserService;
 
@@ -15,6 +16,9 @@ public class WxUserServiceImpl implements WxUserService {
 
     @Resource
     private WxUserMapper wxUserMapper;
+    
+    @Resource
+    private FeedbackMapper feedbackMapper;
     
     /**
      * 根據起始行獲得7個微信用戶
@@ -56,7 +60,8 @@ public class WxUserServiceImpl implements WxUserService {
      * @param openid
      */
     public void deleteWxUserById(int id) throws Exception{
-        // TODO Auto-generated method stub
+        //同时也删除该微信用户对应的反馈信息
+    	feedbackMapper.deleteFeedbackByWxuserId(id);
         wxUserMapper.deleteWxUserById(id);
     }
 
@@ -66,6 +71,10 @@ public class WxUserServiceImpl implements WxUserService {
      */
     public void deleteWxUserByIds(int[] id) throws Exception{
         // TODO Auto-generated method stub
+    	for(int i = 0;i<id.length;i++){
+    		 //同时也删除微信用户对应的反馈信息
+        	feedbackMapper.deleteFeedbackByWxuserId(id[i]);
+    	}
         wxUserMapper.deleteWxUserByIds(id);
     }
 

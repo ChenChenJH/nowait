@@ -66,6 +66,11 @@
 	<delete id="deleteFeedbackById" parameterType="java.lang.Integer">
 	   DELETE FROM tb_feedback WHERE id = #{id}
 	</delete>
+	
+	<!-- 根據wxuserid刪除用戶反饋 -->
+	<delete id="deleteFeedbackByWxuserId" parameterType="java.lang.Integer">
+	   DELETE FROM tb_feedback WHERE wxuserId = #{wxuserId}
+	</delete>
     
     <!-- 根據多個id刪除多個對應的用戶反饋 -->
     <delete id="deleteFeedbackByIds" parameterType="Integer[]">

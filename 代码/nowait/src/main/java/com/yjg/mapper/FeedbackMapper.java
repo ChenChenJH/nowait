@@ -62,6 +62,12 @@ public interface FeedbackMapper {
     void deleteFeedbackById(int id) throws Exception;
     
     /**
+     * 根據wxuserId刪除用戶反饋
+     * @param wxuserId
+     */
+    void deleteFeedbackByWxuserId(int wxuserId) throws Exception;
+    
+    /**
      * 根據多個id刪除多個對應的用戶反饋
      * @param id 
      */
