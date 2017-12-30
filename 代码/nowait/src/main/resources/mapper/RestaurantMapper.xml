@@ -34,7 +34,10 @@
 	</delete>
 	<!--修改餐厅信息-->
 	<update id="update" parameterType="restaurant">
-		UPDATE tb_restaurant SET name=#{name},priceInfo=#{priceInfo},warnInfo=#{warnInfo},address=#{address},phone=#{phone},shopTime=#{shopTime},status=#{status},userId=#{userId},chainName=#{chainName},coverPic=#{coverPic},navPic=#{navPic},lng=#{lng},lat=#{lat},createDate=now() WHERE id=#{id}
+		UPDATE tb_restaurant SET name=#{name},priceInfo=#{priceInfo},warnInfo=#{warnInfo},
+		address=#{address},phone=#{phone},shopTime=#{shopTime},status=#{status},userId=#{userId},
+		chainName=#{chainName},coverPic=#{coverPic},navPic=#{navPic},lng=#{lng},lat=#{lat},
+		createDate=now(),isOverdue=#{isOverdue} WHERE id=#{id}
 	</update>
 	<!--根据userid删除该用户所有餐厅信息-->
 	<delete id="deleteByUserId" parameterType="java.lang.Integer">

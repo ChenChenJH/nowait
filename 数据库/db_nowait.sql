@@ -1,29 +1,29 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
-Source Server Version : 50556
+Source Server         : mysql
+Source Server Version : 50045
 Source Host           : localhost:3306
 Source Database       : db_nowait
 
 Target Server Type    : MYSQL
-Target Server Version : 50556
+Target Server Version : 50045
 File Encoding         : 65001
 
-Date: 2017-12-26 15:57:01
+Date: 2017-12-28 15:52:48
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for `tb_admin`
+-- Table structure for tb_admin
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_admin`;
 CREATE TABLE `tb_admin` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL auto_increment,
   `adminName` varchar(20) NOT NULL,
   `pwd` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY  (`id`),
   UNIQUE KEY `uk_adminName` (`adminName`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
@@ -34,14 +34,14 @@ INSERT INTO `tb_admin` VALUES ('1', 'admin', '156650ad747cfb25fcb9a7a2f8a02bdc')
 INSERT INTO `tb_admin` VALUES ('2', 'boss', '156650ad747cfb25fcb9a7a2f8a02bdc');
 
 -- ----------------------------
--- Table structure for `tb_chainshop`
+-- Table structure for tb_chainshop
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_chainshop`;
 CREATE TABLE `tb_chainshop` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL auto_increment,
   `name` varchar(50) NOT NULL,
-  `pic` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`id`),
+  `pic` varchar(200) default NULL,
+  PRIMARY KEY  (`id`),
   UNIQUE KEY `uk_chainshop_name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
@@ -57,15 +57,15 @@ INSERT INTO `tb_chainshop` VALUES ('6', '圣鼎记自助美食汇', 'http://120.
 INSERT INTO `tb_chainshop` VALUES ('7', '甜之心', 'http://120.78.182.217/images/1513216915810.jpg');
 
 -- ----------------------------
--- Table structure for `tb_desk`
+-- Table structure for tb_desk
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_desk`;
 CREATE TABLE `tb_desk` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL auto_increment,
   `style` varchar(40) NOT NULL,
-  `info` varchar(40) DEFAULT NULL,
-  `restId` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `info` varchar(40) default NULL,
+  `restId` int(11) default NULL,
+  PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -132,19 +132,18 @@ INSERT INTO `tb_desk` VALUES ('67', '中桌', '0', '20');
 INSERT INTO `tb_desk` VALUES ('68', '小桌', '0', '20');
 INSERT INTO `tb_desk` VALUES ('72', '大桌', '5-8人', '22');
 INSERT INTO `tb_desk` VALUES ('73', '中桌', '3-4人', '22');
-INSERT INTO `tb_desk` VALUES ('74', '小桌', '', '22');
 
 -- ----------------------------
--- Table structure for `tb_feedback`
+-- Table structure for tb_feedback
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_feedback`;
 CREATE TABLE `tb_feedback` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL auto_increment,
   `wxuserId` int(11) NOT NULL,
-  `info` varchar(200) DEFAULT NULL,
+  `info` varchar(200) default NULL,
   `createDate` datetime NOT NULL,
   `isRead` char(2) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -187,22 +186,22 @@ INSERT INTO `tb_feedback` VALUES ('41', '2', '这是测试', '2017-12-08 08:37:3
 INSERT INTO `tb_feedback` VALUES ('42', '2', '这是测试', '2017-12-08 08:37:38', '未讀');
 
 -- ----------------------------
--- Table structure for `tb_order`
+-- Table structure for tb_order
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_order`;
 CREATE TABLE `tb_order` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL auto_increment,
   `wxuserId` int(11) NOT NULL,
   `restId` int(11) NOT NULL,
   `restName` varchar(50) NOT NULL,
-  `style` varchar(40) DEFAULT NULL,
-  `info` varchar(40) DEFAULT NULL,
-  `waitNo` varchar(40) DEFAULT NULL,
+  `style` varchar(40) default NULL,
+  `info` varchar(40) default NULL,
+  `waitNo` varchar(40) default NULL,
   `createDate` datetime NOT NULL,
   `isUsage` char(2) NOT NULL,
-  `warnInfo` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8;
+  `warnInfo` varchar(100) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_order
@@ -252,29 +251,31 @@ INSERT INTO `tb_order` VALUES ('58', '21', '14', '岳阳烧烤(科干店)', '大
 INSERT INTO `tb_order` VALUES ('59', '32', '14', '岳阳烧烤(科干店)', '小桌', '1-2人', 'C04', '2017-12-12 08:58:38', '否', '過號不作廢');
 INSERT INTO `tb_order` VALUES ('60', '32', '14', '岳阳烧烤(科干店)', '小桌', '1-2人', 'C04', '2017-12-12 09:22:30', '否', '過號不作廢');
 INSERT INTO `tb_order` VALUES ('61', '32', '14', '岳阳烧烤(科干店)', '小桌', '1-2人', 'C04', '2017-12-12 09:23:20', '是', '過號不作廢');
+INSERT INTO `tb_order` VALUES ('62', '34', '22', '测试餐厅1号', '大桌', '5-8人', 'A01', '2017-12-28 15:31:42', '是', '過號不作廢');
+INSERT INTO `tb_order` VALUES ('63', '35', '22', '测试餐厅1号', '中桌', '3-4人', 'B01', '2017-12-28 15:45:03', '是', '過號不作廢');
 
 -- ----------------------------
--- Table structure for `tb_restaurant`
+-- Table structure for tb_restaurant
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_restaurant`;
 CREATE TABLE `tb_restaurant` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL auto_increment,
   `name` varchar(50) NOT NULL,
-  `priceInfo` varchar(50) DEFAULT NULL,
-  `warnInfo` varchar(100) DEFAULT NULL,
+  `priceInfo` varchar(50) default NULL,
+  `warnInfo` varchar(100) default NULL,
   `address` varchar(140) NOT NULL,
   `phone` varchar(15) NOT NULL,
   `shopTime` varchar(50) NOT NULL,
-  `status` varchar(20) DEFAULT NULL,
+  `status` varchar(20) default NULL,
   `userId` int(11) NOT NULL,
-  `chainName` varchar(50) DEFAULT NULL,
-  `coverPic` varchar(200) DEFAULT NULL,
-  `navPic` varchar(200) DEFAULT NULL,
-  `lng` decimal(10,6) DEFAULT NULL,
-  `lat` decimal(10,6) DEFAULT NULL,
+  `chainName` varchar(50) default NULL,
+  `coverPic` varchar(200) default NULL,
+  `navPic` varchar(200) default NULL,
+  `lng` decimal(10,6) default NULL,
+  `lat` decimal(10,6) default NULL,
   `createDate` datetime NOT NULL,
   `isOverdue` char(2) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -297,18 +298,18 @@ INSERT INTO `tb_restaurant` VALUES ('20', '测试餐厅2号', '20', 'hello', '�
 INSERT INTO `tb_restaurant` VALUES ('22', '测试餐厅1号', '20', '这是测试', '珠海市金湾区广东科学技术职业学院', '13436201545', '8:00-20:00', '前方正在等待', '1', '岳阳烧烤', 'http://120.78.182.217/images/1514272853806.png', 'http://120.78.182.217/images/1514272854251.png,http://120.78.182.217/images/1514272854573.png,http://120.78.182.217/images/1514272854920.png', '113.360493', '22.132428', '2017-12-26 15:54:17', '1');
 
 -- ----------------------------
--- Table structure for `tb_user`
+-- Table structure for tb_user
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_user`;
 CREATE TABLE `tb_user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL auto_increment,
   `userName` varchar(20) NOT NULL,
   `pwd` varchar(50) NOT NULL,
   `trueName` varchar(40) NOT NULL,
   `card` varchar(18) NOT NULL,
   `phone` varchar(11) NOT NULL,
   `createDate` datetime NOT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY  (`id`),
   UNIQUE KEY `uk_userName` (`userName`)
 ) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
 
@@ -347,22 +348,21 @@ INSERT INTO `tb_user` VALUES ('36', 'chen1245', '53387f9299e3455b9b7510d4127d385
 INSERT INTO `tb_user` VALUES ('37', 'chen12456', '53387f9299e3455b9b7510d4127d385b', '陈', '440883199502015421', '13536401235', '2017-12-21 11:27:28');
 
 -- ----------------------------
--- Table structure for `tb_wxuser`
+-- Table structure for tb_wxuser
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_wxuser`;
 CREATE TABLE `tb_wxuser` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL auto_increment,
   `openid` varchar(50) NOT NULL,
   `phone` varchar(11) NOT NULL,
   `createDate` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_wxuser
 -- ----------------------------
 INSERT INTO `tb_wxuser` VALUES ('1', 'gh_1564612sd', '13420156345', '2017-10-12 12:45:41');
-INSERT INTO `tb_wxuser` VALUES ('2', 'oyYPs0EGJw3rK0vVXXZ-dWgHxv-s', '60147891', '2017-11-27 17:11:49');
 INSERT INTO `tb_wxuser` VALUES ('3', 'test123', '13536403516', '2017-12-07 20:32:32');
 INSERT INTO `tb_wxuser` VALUES ('4', 'test1234', '13536403516', '2017-12-07 20:33:22');
 INSERT INTO `tb_wxuser` VALUES ('5', 'test1235', '13536403516', '2017-12-07 20:33:22');
@@ -385,4 +385,5 @@ INSERT INTO `tb_wxuser` VALUES ('25', 'test3235', '13536403516', '2017-12-07 20:
 INSERT INTO `tb_wxuser` VALUES ('26', 'test3236', '13536403516', '2017-12-07 20:35:49');
 INSERT INTO `tb_wxuser` VALUES ('30', 'test0012', '13536403518', '2017-12-08 14:44:48');
 INSERT INTO `tb_wxuser` VALUES ('31', 'aa0104', '13536403519', '2017-12-08 14:48:06');
-INSERT INTO `tb_wxuser` VALUES ('32', 'oXWki0bwAlqY-LOiGG5EEhmW4gw0', '66494498', '2017-12-12 08:56:37');
+INSERT INTO `tb_wxuser` VALUES ('33', 'undefined', '60147892', '2017-12-28 15:25:58');
+INSERT INTO `tb_wxuser` VALUES ('35', 'oyYPs0EGJw3rK0vVXXZ-dWgHxv-s', '60147891', '2017-12-28 15:44:46');

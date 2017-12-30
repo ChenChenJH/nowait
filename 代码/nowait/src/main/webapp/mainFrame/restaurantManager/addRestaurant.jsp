@@ -312,7 +312,7 @@ fieldset{margin-top:10px}
 
 					</fieldset>
 					<div class="form-group">
-						<label for="chainName" class="col-sm-2 control-label">是否过号不取消</label>
+						<label for="chainName" class="col-sm-2 control-label">过号不取消</label>
 						<div class="col-sm-4">
 							<select class="form-control" name="isOverdue">
 								<option value="1">是</option>
@@ -555,31 +555,6 @@ fieldset{margin-top:10px}
 				);
 		local.search(myValue);
 	}
-	
-	
-//	$(function () {
-//		$("#removeDesk").hide();
-//        $("#addDesk").click(function(){
-//
-//        	$("#additional").after($(this).parent().parent().clone(true).attr(
-//                {
-//                    $:nodeName($("select"),name).nodeValue("style"),
-//                    $:nodeName($("input"),name).nodeValue("info")
-//                }
-//				)
-//
-//            );
-//        	$("button:gt(1)").show();
-//        });
-//        $("#removeDesk").click(function(){
-//        	$(this).parent().parent().remove();
-//        });
-        
-        
-//    });
-	
-	
-	
 	
 </script>
 </html>

@@ -232,7 +232,7 @@
         </tr>
         <tr>
             <th  class="col-sm-3 text-center" colspan="2">地址</th>
-            <td  class="col-sm-9 text-center" colspan="2"><input  type="text" class="form-control" name="address" value="${restaurant.address}" style="width: 220px;margin-left: 30%"></td>
+            <td  class="col-sm-9 text-center" colspan="2"><input  type="text" class="form-control" name="address" value="${restaurant.address}" style="width: 400px;margin-left: 30%"></td>
         </tr>
         <tr>
             <th  class="col-sm-3 text-center" colspan="2">客服电话</th>
@@ -254,6 +254,15 @@
             <th  class="col-sm-3 text-center" colspan="2">用户真实名称</th>
             <td  class="col-sm-9 text-center" colspan="2"><input readonly= "true " type="text" class="form-control" name="userTureName" value="${restaurant.userTureName}" style="width: 220px;margin-left: 30%"></td>
         <input type="text" id="userId" name="userId" style="display: none" value="${restaurant.userId}">
+        </tr>
+        <tr>
+            <th  class="col-sm-3 text-center" colspan="2">过号不取消</th>
+            <td  class="col-sm-9 text-center" colspan="2">
+                <select id="isOverdue" name="isOverdue" class="form-control" style="width: 220px;margin-left: 30%" >
+                    <option value="1" <c:if test='${restaurant.isOverdue == "1"}'>  selected='selected'  </c:if>>是</option>
+					<option value="0" <c:if test='${restaurant.isOverdue == "0"}'>  selected='selected'  </c:if>>否</option>
+                </select>
+            </td>
         </tr>
         <tr>
             <th  class="col-sm-3 text-center" colspan="2">所属连锁店</th>

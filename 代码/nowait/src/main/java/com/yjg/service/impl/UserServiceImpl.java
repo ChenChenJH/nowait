@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import com.yjg.entity.Admin;
 import com.yjg.entity.Restaurant;
 import com.yjg.entity.User;
-import com.yjg.mapper.RestaurantMapper;
 import com.yjg.mapper.UserMapper;
 import com.yjg.service.RestaurantService;
 import com.yjg.service.UserService;

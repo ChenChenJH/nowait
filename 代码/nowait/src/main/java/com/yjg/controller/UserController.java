@@ -157,6 +157,7 @@ public class UserController {
 	public String updatePwd(HttpSession session,String newPwd)throws Exception{
 		String name = (String) session.getAttribute("name");
 		String type = (String) session.getAttribute("type");
+		//对密码进行加密
 		String pwd = MD5Encryption.encrypt(newPwd);
 		if(type.equals("商家")){
 			userService.updateUserPwd(name, pwd);
