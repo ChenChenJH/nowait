@@ -24,7 +24,34 @@
     <script src="js/bootstrap-datetimepicker.zh-CN.js"></script>
      <script src="js/jquery.uploadify.js"></script>
 	<link href="js/uploadify.css" rel="stylesheet">
-
+<style type="text/css">
+	.file {
+    position: relative;
+    display: inline-block;
+    background: #D0EEFF;
+    border: 1px solid #99D3F5;
+    border-radius: 4px;
+    padding: 4px 12px;
+    overflow: hidden;
+    color: #1E88C7;
+    text-decoration: none;
+    text-indent: 0;
+    line-height: 20px;
+}
+.file input {
+    position: absolute;
+    font-size: 100px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+}
+.file:hover {
+    background: #AADFFD;
+    border-color: #78C3F3;
+    color: #004974;
+    text-decoration: none;
+}
+</style>
 </head>
 <script>
 	function add() {
@@ -336,18 +363,30 @@ fieldset{margin-top:10px}
 						<label for="coverPicFile" class="col-sm-2 control-label">餐厅门面图</label>
 
 						<div class="col-sm-9">
-							<input type="file" id="coverPicFile" name="coverPicFile" onchange="previewFile()" >
+							<a href="javascript:;" class="file">选择图片
+								<input type="file" id="coverPicFile" name="coverPicFile" onchange="previewFile()" >
+							</a>
 							<img name="cover" src="" height="200" width="200" alt="未选择图片"/>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="navPicture1" class="col-sm-2 control-label">餐厅导航图</label>
 						<div class="col-sm-9">
-							<input type="file" id="navPicture1" name="navPicFile" onchange="previewFile1()" >
+							<div>
+							<a href="javascript:;" class="file">选择图片1
+								<input type="file" id="navPicture1" name="navPicFile" onchange="previewFile1()" >
+							</a>
 							<img name="nav1" src="" height="200" width="200" alt="至少选择一张图片作为导航图"/>
-							<input type="file" id="navPicture2" name="navPicFile" onchange="previewFile2()">
+							</div><br/>
+							<div>
+							<a href="javascript:;" class="file">选择图片2
+								<input type="file" id="navPicture2" name="navPicFile" onchange="previewFile2()">
+							</a>
 							<img name="nav2" src="" height="200" width="200" alt="未选择图片"/>
-							<input type="file" id="navPicture3" name="navPicFile" onchange="previewFile3()">
+							</div><br/>
+							<a href="javascript:;" class="file">选择图片3
+								<input type="file" id="navPicture3" name="navPicFile" onchange="previewFile3()">
+							</a>
 							<img name="nav3" src="" height="200" width="200" alt="未选择图片"/>
 						</div>
 					</div>

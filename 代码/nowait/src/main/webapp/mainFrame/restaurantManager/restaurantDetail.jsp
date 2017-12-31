@@ -24,34 +24,43 @@
     <script src="js/bootstrap-datetimepicker.zh-CN.js"></script>
      <script src="js/jquery.uploadify.js"></script>
 	<link href="js/uploadify.css" rel="stylesheet">
+	<style type="text/css">
+	.file {
+	    position: relative;
+	    left:-50px;
+	    display: inline-block;
+	    background: #D0EEFF;
+	    border: 1px solid #99D3F5;
+	    border-radius: 4px;
+	    padding: 4px 12px;
+	    overflow: hidden;
+	    color: #1E88C7;
+	    text-decoration: none;
+	    text-indent: 0;
+	    line-height: 20px;
+	}
+	.file input {
+	    position: absolute;
+	     left:-100px;
+	    font-size: 100px;
+	    right: 0;
+	    top: 0;
+	    opacity: 0;
+	}
+	.file:hover {
+	    background: #AADFFD;
+	    border-color: #78C3F3;
+	    color: #004974;
+	    text-decoration: none;
+	}
+</style>
 </head>
 
-
-<script type="text/javascript">
-//    $(function () {
-////        $("#datetimepicker").datetimepicker({
-////            format: "yyyy-mm-dd",
-////            autoclose: true,
-////            todayBtn: true,
-////            todayHighlight: true,
-////            showMeridian: true,
-////            pickerPosition: "bottom-left",
-////            language: 'zh-CN',//中文，需要引用zh-CN.js包
-////            startView: 2,//月视图
-////            minView: 2//日期时间选择器所能够提供的最精确的时间选择视图
-////        });
-//
-//    });
-    function onedelete(){
-        if (!confirm("确认要删除？")) {  window.event.returnValue = false;  }
-    }
-
-
-
-
-</script>
-
 <script>
+	function onedelete(){
+	    if (!confirm("确认要删除？")) {  window.event.returnValue = false;  }
+	}
+
     function previewFile() {
         var preview = document.querySelector("img[name=cover]");
         var file  = document.querySelector('input[name=pictureFile1]').files[0];
@@ -253,7 +262,7 @@
         <tr>
             <th  class="col-sm-3 text-center" colspan="2">用户真实名称</th>
             <td  class="col-sm-9 text-center" colspan="2"><input readonly= "true " type="text" class="form-control" name="userTureName" value="${restaurant.userTureName}" style="width: 220px;margin-left: 30%"></td>
-        <input type="text" id="userId" name="userId" style="display: none" value="${restaurant.userId}">
+        <input type="text" id="userId" name="userId" style="display: none" value="${restaurant.userId}" />
         </tr>
         <tr>
             <th  class="col-sm-3 text-center" colspan="2">过号不取消</th>
@@ -284,13 +293,13 @@
 
             <tr >
                 <th  class="col-sm-3 text-center" colspan="2">桌子类型</th>
-                <td class="col-sm-3 text-center" colspan="1" ><input readonly= "true" type="text" class="form-control" id="style0" name="desks[0].style" value="大桌" style="width: 220px;margin-left: 30%"></td>
+                <td class="col-sm-3 text-center" colspan="1" ><input readonly= "true" type="text" class="form-control" id="style0" name="desks[0].style" value="大桌" style="width: 220px;margin-left: 10%"></td>
                 <c:choose>
                     <c:when test='${desk.info=="0"}'>
-                        <td class="col-sm-3 text-center" colspan="1"><input type="text" class="form-control" id="info0" name="desks[0].info" placeholder="请输入用餐人数" style="width: 220px;margin-left: 30%"></td>
+                        <td class="col-sm-3 text-center" colspan="1"><input type="text" class="form-control" id="info0" name="desks[0].info" placeholder="请输入用餐人数" style="width: 220px;margin-left: 10%"></td>
                     </c:when>
                 <c:otherwise >
-                    <td class="col-sm-3 text-center" colspan="1"><input type="text" class="form-control" id="info0" name="desks[0].info" value="${desk.info}" style="width: 220px;margin-left: 30%"></td>
+                    <td class="col-sm-3 text-center" colspan="1"><input type="text" class="form-control" id="info0" name="desks[0].info" value="${desk.info}" style="width: 220px;margin-left: 10%"></td>
                 </c:otherwise>
                 </c:choose>
             </tr>
@@ -301,13 +310,13 @@
 
                 <tr >
                     <th  class="col-sm-3 text-center" colspan="2">桌子类型</th>
-                    <td class="col-sm-3 text-center" colspan="1" ><input readonly= "true " type="text" class="form-control" id="style1" name="desks[1].style" value="中桌" style="width: 220px;margin-left: 30%"></td>
+                    <td class="col-sm-3 text-center" colspan="1" ><input readonly= "true " type="text" class="form-control" id="style1" name="desks[1].style" value="中桌" style="width: 220px;margin-left: 10%"></td>
                     <c:choose>
                         <c:when test='${desk.info=="0"}'>
-                            <td class="col-sm-3 text-center" colspan="1"><input type="text" class="form-control" id="info1" name="desks[1].info" placeholder="请输入用餐人数" style="width: 220px;margin-left: 30%"></td>
+                            <td class="col-sm-3 text-center" colspan="1"><input type="text" class="form-control" id="info1" name="desks[1].info" placeholder="请输入用餐人数" style="width: 220px;margin-left: 10%"></td>
                         </c:when>
                         <c:otherwise >
-                            <td class="col-sm-3 text-center" colspan="1"><input type="text" class="form-control" id="info1" name="desks[1].info" value="${desk.info}" style="width: 220px;margin-left: 30%"></td>
+                            <td class="col-sm-3 text-center" colspan="1"><input type="text" class="form-control" id="info1" name="desks[1].info" value="${desk.info}" style="width: 220px;margin-left: 10%"></td>
                         </c:otherwise>
                     </c:choose>
                 </tr>
@@ -318,13 +327,13 @@
                 <input style="display: none" name="desks[2].restId" value="${desk.restId}">
                 <tr >
                     <th  class="col-sm-3 text-center" colspan="2">桌子类型</th>
-                    <td class="col-sm-3 text-center" colspan="1" ><input readonly= "true " type="text" class="form-control" id="style0" name="desks[2].style" value="小桌" style="width: 220px;margin-left: 30%"></td>
+                    <td class="col-sm-3 text-center" colspan="1" ><input readonly= "true " type="text" class="form-control" id="style0" name="desks[2].style" value="小桌" style="width: 220px;margin-left: 10%"></td>
                     <c:choose>
                         <c:when test='${desk.info=="0"}'>
-                            <td class="col-sm-3 text-center" colspan="1"><input type="text" class="form-control" id="info0" name="desks[2].info" placeholder="请输入用餐人数" style="width: 220px;margin-left: 30%"></td>
+                            <td class="col-sm-3 text-center" colspan="1"><input type="text" class="form-control" id="info0" name="desks[2].info" placeholder="请输入用餐人数" style="width: 220px;margin-left: 10%"></td>
                         </c:when>
                         <c:otherwise >
-                            <td class="col-sm-3 text-center" colspan="1"><input type="text" class="form-control" id="info0" name="desks[2].info" value="${desk.info}" style="width: 220px;margin-left: 30%"></td>
+                            <td class="col-sm-3 text-center" colspan="1"><input type="text" class="form-control" id="info0" name="desks[2].info" value="${desk.info}" style="width: 220px;margin-left: 10%"></td>
                         </c:otherwise>
                     </c:choose>
                 </tr>
@@ -334,15 +343,17 @@
 
         <tr>
             <th  class="col-sm-3 text-center" colspan="2">餐厅门面图</th>
-            <td  class="col-sm-9 text-center" colspan="2">
+            <td  class="col-sm-9 left" colspan="2">
                     <input style="display: none" name="coverPic" id="coverPic" value="${restaurant.coverPic}">
+                    <a href="javascript:;" class="file">选择图片
+              		 <input type="file" value="${restaurant.coverPic}" name="pictureFile1" onchange="previewFile()">
+                	</a>
                     <img src="${restaurant.coverPic}" width="200px" height="200px" name="cover">
-                <input type="file" value="${restaurant.coverPic}" name="pictureFile1" onchange="previewFile()">
                 </td>
         </tr>
         <tr>
             <th  class="col-sm-3 text-center" colspan="2">餐厅导航图</th>
-        <td  class="col-sm-9 text-center" colspan="2">
+        <td  class="col-sm-9 text-left" colspan="2">
             <input name="navPic" id="navPic" style="display: none" value="${restaurant.navPic}">
 
             <script type="text/javascript">
@@ -350,8 +361,12 @@
                 nav=a.split(",");
                 for(i=0;i<3;i++)
                 {
-                    document.write("<img src="+nav[i]+" width='200px' height='200px' name='nav'>");
-                    document.write("<input type='file' value="+nav[i]+" name='pictureFile2'onchange='previewFile"+(i+1)+"()' >");
+                	document.write("<div>");
+                	document.write("<a href='javascript:;' class='file'>选择图片"+(i+1));
+                	document.write("<input type='file' value="+nav[i]+" name='pictureFile2'onchange='previewFile"+(i+1)+"()' >");
+                    document.write("</a>");
+                	document.write("<img src="+nav[i]+" width='200px' height='200px' name='nav'>");
+                	document.write("</div><br/>");
                 }
 
             </script>
